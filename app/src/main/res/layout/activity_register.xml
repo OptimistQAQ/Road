@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginbk"
+    tools:context=".activity.SignInActivity">
+
+    <ImageView
+        android:id="@+id/iv_title1"
+        android:layout_width="505px"
+        android:layout_height="249px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/title1" />
+
+    <ImageView
+        android:id="@+id/iv_title2"
+        android:layout_width="610px"
+        android:layout_height="80px"
+        android:layout_below="@+id/iv_title1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/title2" />
+
+
+    <ImageView
+        android:layout_width="65px"
+        android:layout_height="70px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="385dp"
+        android:background="@drawable/user1" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lr_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_title2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="50dp"
+        android:padding="30px">
+
+
+        <EditText
+            android:id="@+id/eusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:layout_weight="4"
+            android:background="@null"
+            android:hint="      输入用户名"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="300dp"
+        android:layout_height="3px"
+        android:layout_below="@+id/lr_1"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="80dp"
+        android:background="#f2f4f0f0" />
+
+    <ImageView
+        android:layout_width="67px"
+        android:layout_height="69px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="435dp"
+        android:background="@drawable/password1" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lr_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="50dp"
+        android:padding="30px">
+
+
+        <EditText
+            android:id="@+id/epassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40px"
+            android:layout_weight="4"
+            android:background="@null"
+            android:hint="       输入密码"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp" />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="300dp"
+        android:layout_height="3px"
+        android:layout_below="@+id/lr_2"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="50dp"
+        android:background="#f2f4f0f0" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/lr_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="50dp"
+        android:padding="30px">
+
+
+        <EditText
+            android:id="@+id/repassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="130dp"
+            android:layout_weight="4"
+            android:background="@null"
+            android:hint="     再次输入密码"
+            android:textColorHint="#ffffff"
+            android:textSize="20sp" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="300dp"
+        android:layout_height="3px"
+        android:layout_below="@+id/lr_3"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="50dp"
+        android:background="#f2f4f0f0" />
+
+    <ImageButton
+        android:id="@+id/bt_register"
+        android:layout_width="540px"
+        android:layout_height="110px"
+        android:layout_below="@+id/line3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100px"
+        android:background="@drawable/button_circle_shape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/login" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

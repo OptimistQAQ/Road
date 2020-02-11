@@ -29,4 +29,6 @@ dependencies {
     //注册用到的依赖
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     implementation 'com.zhy:autolayout:1.4.5'
+
+    implementation 'com.chen.wakehao.library:bottom-navigation-bar:1.0.0'
 }
