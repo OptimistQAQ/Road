@@ -26,6 +26,7 @@
                 android:src="#309153"/>
 
             <TextView
+                android:id="@+id/tv_data"
                 android:layout_width="50dp"
                 android:layout_height="12dp"
                 android:text="12月31日"

@@ -37,7 +37,6 @@ public class MineFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -49,37 +48,30 @@ public class MineFragment extends Fragment {
     }
 
     private void initView(){
-        List<String> startList = new ArrayList<>();
-        List<String> endList = new ArrayList<>();
+        List<String> dataTime = new ArrayList<>();
         List<String> lastTime = new ArrayList<>();
         List<String> holeCount = new ArrayList<>();
         List<String> crackCount = new ArrayList<>();
 
+        dataTime.add("12月31日");
+        lastTime.add("96分钟");
+        holeCount.add("16.3公里");
+        crackCount.add("10条");
 
-        startList.add("开始: 2019年11月10日 18:02");
-        endList.add("结束: 2019年11月10日 18:27");
-        lastTime.add("时长:25分钟");
-        holeCount.add("坑数:8个");
-        crackCount.add("缝数42条");
+        dataTime.add("1月9号");
+        lastTime.add("80分钟");
+        holeCount.add("13.9公里");
+        crackCount.add("12条");
 
+        dataTime.add("1月20号");
+        lastTime.add("105分钟");
+        holeCount.add("19.4公里");
+        crackCount.add("8条");
 
-        startList.add("开始: 2019年10月6日 15:46");
-        endList.add("结束: 2019年10月6日 16:42");
-        lastTime.add("时长:56分钟");
-        holeCount.add("坑数:4个");
-        crackCount.add("缝数:11条");
-
-        startList.add("开始: 2019年10月5日 11:43");
-        endList.add("结束: 2019年10月5日 12:07");
-        lastTime.add("时长:24分钟");
-        holeCount.add("坑数:1个");
-        crackCount.add("缝数:13条");
-
-        startList.add("开始: 2019年10月5日 9:13");
-        endList.add("结束: 2019年10月5日 9:27");
-        lastTime.add("时长:14分钟");
-        holeCount.add("坑数:3个");
-        crackCount.add("缝数:21条");
+        dataTime.add("2月4号");
+        lastTime.add("96分钟");
+        holeCount.add("16.3公里");
+        crackCount.add("10条");
 
         recyclerView = root.findViewById(R.id.rv_mine);
         mAdaper = new MultiTypeAdapter();
@@ -88,10 +80,9 @@ public class MineFragment extends Fragment {
         recyclerView.setAdapter(mAdaper);
         mItems = new Items();
         mItems.add(new MineTopItem());
-        for (int i = 0; i < startList.size(); i++) {
+        for (int i = 0; i < lastTime.size(); i++) {
             MineRecordItem mineRecordItem = new MineRecordItem();
-            mineRecordItem.setStartTime(startList.get(i));
-            mineRecordItem.setEndTime(endList.get(i));
+            mineRecordItem.setDataTime(dataTime.get(i));
             mineRecordItem.setLastTime(lastTime.get(i));
             mineRecordItem.setHoleCount(holeCount.get(i));
             mineRecordItem.setCrackCount(crackCount.get(i));

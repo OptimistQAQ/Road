@@ -1,11 +1,20 @@
 package com.example.a65667.road.Item;
 
 public class MineRecordItem {
+    private String dataTime;
     private String startTime;
     private String endTime;
     private String lastTime;
     private String holeCount;
     private String crackCount;
+
+    public String getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(String dataTime) {
+        this.dataTime = dataTime;
+    }
 
     public String getStartTime() {
         return startTime;
