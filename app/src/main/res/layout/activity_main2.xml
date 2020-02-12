@@ -21,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="120px"
         android:layout_alignParentBottom="true"
-        android:background="#fde4f900"
         app:fragmentContainerId="@id/fragment_container"
         app:menu="@menu/bottom_menu"
         app:selectedColor="@color/green"

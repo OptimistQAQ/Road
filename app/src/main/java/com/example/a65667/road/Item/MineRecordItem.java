@@ -2,11 +2,10 @@ package com.example.a65667.road.Item;
 
 public class MineRecordItem {
     private String dataTime;
-    private String startTime;
-    private String endTime;
     private String lastTime;
     private String holeCount;
     private String crackCount;
+    private String travel;
 
     public String getDataTime() {
         return dataTime;
@@ -14,22 +13,6 @@ public class MineRecordItem {
 
     public void setDataTime(String dataTime) {
         this.dataTime = dataTime;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public String getLastTime() {
@@ -54,5 +37,13 @@ public class MineRecordItem {
 
     public void setCrackCount(String crackCount) {
         this.crackCount = crackCount;
+    }
+
+    public String getTravel() {
+        return travel;
+    }
+
+    public void setTravel(String travel) {
+        this.travel = travel;
     }
 }

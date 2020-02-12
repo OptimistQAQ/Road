@@ -52,26 +52,31 @@ public class MineFragment extends Fragment {
         List<String> lastTime = new ArrayList<>();
         List<String> holeCount = new ArrayList<>();
         List<String> crackCount = new ArrayList<>();
+        List<String> travelWay = new ArrayList<>();
 
         dataTime.add("12月31日");
         lastTime.add("96分钟");
         holeCount.add("16.3公里");
         crackCount.add("10条");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         dataTime.add("1月9号");
         lastTime.add("80分钟");
         holeCount.add("13.9公里");
         crackCount.add("12条");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         dataTime.add("1月20号");
         lastTime.add("105分钟");
         holeCount.add("19.4公里");
         crackCount.add("8条");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         dataTime.add("2月4号");
         lastTime.add("96分钟");
         holeCount.add("16.3公里");
         crackCount.add("10条");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         recyclerView = root.findViewById(R.id.rv_mine);
         mAdaper = new MultiTypeAdapter();
@@ -86,6 +91,7 @@ public class MineFragment extends Fragment {
             mineRecordItem.setLastTime(lastTime.get(i));
             mineRecordItem.setHoleCount(holeCount.get(i));
             mineRecordItem.setCrackCount(crackCount.get(i));
+            mineRecordItem.setTravel(travelWay.get(i));
             mItems.add(mineRecordItem);
         }
 

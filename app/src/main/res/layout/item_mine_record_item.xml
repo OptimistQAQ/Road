@@ -29,6 +29,8 @@
                 android:id="@+id/tv_data"
                 android:layout_width="50dp"
                 android:layout_height="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
                 android:text="12月31日"
                 android:textColor="#ffffffff"
                 android:textSize="13sp"
@@ -74,12 +76,13 @@
             android:layout_below="@id/re_7">
 
             <TextView
+                android:id="@+id/tv_travel"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginBottom="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="途径：G228  >  G94  >  建设南路  >  横琴大桥"/>
+                android:text="途经：G228  >  G94  >  建设南路  >  横琴大桥"/>
 
         </RelativeLayout>
 

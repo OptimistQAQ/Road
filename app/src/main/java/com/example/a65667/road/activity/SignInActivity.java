@@ -26,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                 Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
                 startActivity(main2Activity);
+                finish();
             }
         });
 

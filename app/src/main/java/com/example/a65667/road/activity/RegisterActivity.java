@@ -26,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
             Intent signInActivity = new Intent(RegisterActivity.this, SignInActivity.class);
             startActivity(signInActivity);
+            finish();
         }
         });
     }

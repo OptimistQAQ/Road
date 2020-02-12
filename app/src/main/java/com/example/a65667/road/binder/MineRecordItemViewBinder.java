@@ -15,7 +15,7 @@ import me.drakeet.multitype.ItemViewBinder;
 public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, MineRecordItemViewBinder.ViewHolder> {
     private MineRecordItem mineRecordItem;
     private View root;
-    private TextView tvData, tvLast, tvHole, tvCrack;
+    private TextView tvData, tvLast, tvHole, tvCrack, tvTravel;
 
     @NonNull
     @Override
@@ -35,10 +35,12 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
         tvLast = root.findViewById(R.id.tv_last_time);
         tvHole = root.findViewById(R.id.tv_hole_count);
         tvCrack = root.findViewById(R.id.tv_crack_count);
+        tvTravel = root.findViewById(R.id.tv_travel);
         tvData.setText(mineRecordItem.getDataTime());
         tvLast.setText(mineRecordItem.getLastTime());
         tvHole.setText(mineRecordItem.getHoleCount());
         tvCrack.setText(mineRecordItem.getCrackCount());
+        tvTravel.setText(mineRecordItem.getTravel());
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
