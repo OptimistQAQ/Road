@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -217,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
             mapLocationClient.setLocationOption(mLocationOption);
             mapLocationClient.startLocation();//启动定位
         }
+
     }
 
     @Override
