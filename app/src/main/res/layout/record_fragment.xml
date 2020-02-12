@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.RecordFragment">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="#08e5f9" />
+
+    <ImageView
+        android:layout_width="173dp"
+        android:layout_height="173dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/common_circle_shape" />
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="123.33dp"
+        android:layout_height="119.67dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/ic_cam" />
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="92.67dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="177dp"
+        android:background="@drawable/common_rectangle_shape">
+
+        <RelativeLayout
+            android:id="@+id/re_8"
+            android:layout_width="148dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/tv_power"
+                android:layout_width="67dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_power" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_power"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:text="权限管理"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="3px"
+            android:layout_height="60dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/re_8"
+            android:background="#868a8b" />
+
+        <RelativeLayout
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/re_8"
+            android:layout_marginStart="3dp">
+
+            <ImageView
+                android:id="@+id/tv_video"
+                android:layout_width="56.33dp"
+                android:layout_height="47dp"
+                android:src="@drawable/ic_video"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="68.33dp"
+                android:layout_height="15dp"
+                android:layout_centerHorizontal="true"
+                android:text="视频管理"
+                android:layout_below="@+id/tv_video"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+        
+    </RelativeLayout>
+</com.zhy.autolayout.AutoRelativeLayout>

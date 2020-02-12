@@ -57,25 +57,25 @@ public class MineFragment extends Fragment {
         dataTime.add("12月31日");
         lastTime.add("96分钟");
         holeCount.add("16.3公里");
-        crackCount.add("10条");
+        crackCount.add("10个大问题");
         travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         dataTime.add("1月9号");
         lastTime.add("80分钟");
         holeCount.add("13.9公里");
-        crackCount.add("12条");
+        crackCount.add("12个大问题");
         travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         dataTime.add("1月20号");
         lastTime.add("105分钟");
         holeCount.add("19.4公里");
-        crackCount.add("8条");
+        crackCount.add("8个大问题");
         travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         dataTime.add("2月4号");
         lastTime.add("96分钟");
         holeCount.add("16.3公里");
-        crackCount.add("10条");
+        crackCount.add("10个大问题");
         travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
 
         recyclerView = root.findViewById(R.id.rv_mine);
