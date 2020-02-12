@@ -32,6 +32,9 @@ dependencies {
     implementation 'com.zhy:autolayout:1.4.5'
 
     implementation 'com.chen.wakehao.library:bottom-navigation-bar:1.0.0'
-
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'me.drakeet.multitype:multitype:3.4.4'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
 }

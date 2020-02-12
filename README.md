@@ -7,5 +7,6 @@
 
 | --                                                | --                                                |
 | ------------------------------------------------- | ------------------------------------------------- |
-| <img src="./pictures/01.jpg" style="zoom:50%;" /> | <img src="./pictures/02.jpg" style="zoom:50%;" /> |
+| <img src="./pictures/01.jpg" style="zoom:33%;" /> | <img src="./pictures/02.jpg" style="zoom:33%;" /> |
+| <img src="./pictures/03.jpg" style="zoom:33%;" /> | <img src="./pictures/04.jpg" style="zoom:33%;" /> |
 
