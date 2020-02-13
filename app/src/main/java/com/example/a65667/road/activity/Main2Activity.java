@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.MapView;
 import com.example.a65667.road.R;
 
 public class Main2Activity extends AppCompatActivity {
+
+    MapView mMapView = null;
+    AMap aMap;   //地图对象
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

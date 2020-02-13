@@ -8,4 +8,6 @@
     <color name="green">#5ea116</color>
     <color name="text_dark">#262929</color>
     <color name="top_background">#504e4e</color>
+    <color name="base_dark">#252b2c</color>
+    <color name="press_dark">#252929</color>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,4 +8,133 @@
     android:layout_height="match_parent"
     tools:context=".fragment.CameraFragment">
 
-</android.support.constraint.ConstraintLayout>
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/re_9"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/top_background">
+
+        <Spinner
+            android:id="@+id/top_spiner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:entries="@array/spingarr" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/alr_1"
+            android:layout_width="wrap_content"
+            android:layout_height="81px"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"
+            android:layout_toEndOf="@+id/top_spiner"
+            android:layout_toRightOf="@+id/top_spiner"
+            android:background="@drawable/common_rectangle_shape"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="48px"
+                android:layout_height="54px"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_search_mini" />
+
+            <EditText
+                android:id="@+id/ed_top_search"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginStart="15dp"
+                android:hint="@string/hint_editor_search" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/alr_1"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:text="搜索"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_view1"
+        android:layout_width="335.33dp"
+        android:layout_height="162dp"
+        android:layout_below="@+id/re_9"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/map_view1"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu_red"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        fab:menu_backgroundColor="#ccffffff"
+        fab:menu_colorNormal="@color/base_dark"
+        fab:menu_colorPressed="@color/press_dark"
+        fab:menu_colorRipple="@color/press_dark"
+        fab:menu_fab_label="菜单"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/ic_start_record"
+            fab:fab_colorNormal="@color/base_dark"
+            fab:fab_colorPressed="@color/press_dark"
+            fab:fab_label="开始推流"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/ic_stop_record"
+            fab:fab_colorNormal="@color/base_dark"
+            fab:fab_colorPressed="@color/press_dark"
+            fab:fab_label="停止推流"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_save_local"
+            fab:fab_colorNormal="@color/base_dark"
+            fab:fab_colorPressed="@color/press_dark"
+            fab:fab_label="图片上报"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</com.zhy.autolayout.AutoRelativeLayout>
