@@ -3,6 +3,8 @@ package com.example.a65667.road.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.a65667.road.Item.IdRecordItem;
 import com.example.a65667.road.R;
@@ -20,15 +22,27 @@ public class AuthorityManageActivity extends AppCompatActivity {
     private MultiTypeAdapter mAdapter;
     private Items mItems;
 
+    private ImageView ic_arrow_left_w;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authority_manage);
         init();
+
+        ic_arrow_left_w.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
 
     private void init(){
+
+        ic_arrow_left_w = (ImageView)findViewById(R.id.ic_arrow_left_w);
 
         List<String> nameList = new ArrayList<>();
         List<String> idList = new ArrayList<>();
