@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AuthorityManageActivity">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/re_1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/top_background">
+
+        <ImageView
+            android:id="@+id/ic_arrow_left_w"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_left_w"/>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/alr_1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/ic_arrow_left_w"
+            android:background="#fcfbfb"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="48px"
+                android:layout_height="54px"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_search_mini" />
+
+            <EditText
+                android:id="@+id/ed_top_search"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/hint_editor_top" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <TextView
+            android:id="@+id/iv_research"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/alr_1"
+            android:layout_marginStart="15dp"
+            android:textColor="#ffffff"/>
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/re_1"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</com.zhy.autolayout.AutoRelativeLayout>

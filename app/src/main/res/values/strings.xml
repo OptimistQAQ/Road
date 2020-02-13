@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Road</string>
+
+    <string name="hint_editor_top">搜索用户ID/名字</string>
 </resources>
