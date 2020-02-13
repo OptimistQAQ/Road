@@ -58,7 +58,8 @@
         <activity android:name=".fragment.CameraFragment" />
         <activity android:name=".fragment.RecordFragment" />
         <activity android:name=".fragment.MineFragment" />
-        <activity android:name=".activity.AuthorityManageActivity"></activity>
+        <activity android:name=".activity.AuthorityManageActivity" />
+        <activity android:name=".activity.AuthorityActivity"></activity>
     </application>
 
 </manifest>
