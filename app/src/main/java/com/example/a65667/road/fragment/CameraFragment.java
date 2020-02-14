@@ -1,5 +1,6 @@
 package com.example.a65667.road.fragment;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.a65667.road.Item.MineRecordItem;
+import com.example.a65667.road.MainActivity;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.MineRecordItemViewBinder;
 
@@ -26,6 +29,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
     private MultiTypeAdapter mAdapter;
     private Items mItems;
+
+    private ImageView img_map;
 
     public CameraFragment(){
         // Required empty public constructor
@@ -45,6 +50,15 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(){
+
+        img_map = root.findViewById(R.id.map_view1);
+        img_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(root.getContext(), MainActivity.class));
+            }
+        });
+
         List<String> dataTime = new ArrayList<>();
         List<String> lastTime = new ArrayList<>();
         List<String> holeCount = new ArrayList<>();
@@ -80,7 +94,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         mAdapter.register(MineRecordItem.class, new MineRecordItemViewBinder());
         recyclerView.setAdapter(mAdapter);
         mItems = new Items();
-        mItems.add(new MineRecordItem());
+
         for (int i = 0; i < lastTime.size(); i++) {
             MineRecordItem mineRecordItem = new MineRecordItem();
             mineRecordItem.setDataTime(dataTime.get(i));

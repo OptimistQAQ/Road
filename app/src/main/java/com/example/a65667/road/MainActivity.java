@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
-        mapLocationClient.stopLocation();  //停止定位
-        mapLocationClient.onDestroy();  //销毁定位客户端
+//        mapLocationClient.stopLocation();  //停止定位
+//        mapLocationClient.onDestroy();  //销毁定位客户端
     }
 
     @Override

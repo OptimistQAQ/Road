@@ -63,25 +63,21 @@
 
     </com.zhy.autolayout.AutoRelativeLayout>
 
-    <com.amap.api.maps.MapView
+    <ImageView
         android:id="@+id/map_view1"
         android:layout_width="335.33dp"
         android:layout_height="162dp"
         android:layout_below="@+id/re_9"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginTop="13dp"
+        android:background="@drawable/ic_map" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/map_view1"
+        android:layout_marginTop="10dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager">
 
     </android.support.v7.widget.RecyclerView>
@@ -92,6 +88,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
