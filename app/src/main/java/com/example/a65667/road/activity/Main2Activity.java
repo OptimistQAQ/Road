@@ -16,9 +16,6 @@ import com.example.a65667.road.R;
 
 public class Main2Activity extends AppCompatActivity {
 
-    MapView mMapView = null;
-    AMap aMap;   //地图对象
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -12,6 +12,7 @@ import com.example.a65667.road.R;
 import me.drakeet.multitype.ItemViewBinder;
 
 public class MineTopItemViewBinder extends ItemViewBinder<MineTopItem, MineTopItemViewBinder.ViewHolder> {
+
     private View root;
 
     @NonNull
@@ -23,8 +24,9 @@ public class MineTopItemViewBinder extends ItemViewBinder<MineTopItem, MineTopIt
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull MineTopItem mineTopItem) {
-
     }
+
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
