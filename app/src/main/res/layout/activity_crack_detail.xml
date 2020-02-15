@@ -117,7 +117,7 @@
             android:src="@drawable/ic_level"
             fab:fab_colorNormal="@color/base_dark"
             fab:fab_colorPressed="@color/press_dark"
-            fab:fab_label="状态更改"
+            fab:fab_label="详细信息"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:src="#fff0f0f0"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_night"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/rc_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/rc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="南大桥附近"
+            android:textColor="#242424"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/rc_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rc_name"
+            android:text="距离：1.8公里"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#242424"/>
+        
+    </RelativeLayout>
+    
+</LinearLayout>

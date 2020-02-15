@@ -1,6 +1,7 @@
 package com.example.a65667.road.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +22,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.a65667.road.R;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +38,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private OnLocationChangedListener mListener = null;
 
     private ImageView tc_re;
+    private FloatingActionButton fab2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +79,18 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private void init(){
 
         tc_re = (ImageView)findViewById(R.id.tc_re);
+        fab2 = (FloatingActionButton)findViewById(R.id.fab2);
         tc_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CrackDetailActivity.this, CrackListActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -132,8 +143,12 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             case R.id.tc_re:
                 finish();
                 break;
+            case R.id.fab2:
+            {
+                Intent intent = new Intent(CrackDetailActivity.this, CrackListActivity.class);
+                startActivity(intent);
+            }
         }
-
     }
 
     @Override
