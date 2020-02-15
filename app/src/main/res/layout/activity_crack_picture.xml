@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.CrackPictureActivity">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="#fff0f0f0"/>
+
+        <ImageView
+            android:id="@+id/rc_return"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/rc_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="南大桥附近"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"/>
+        
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="   原图"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:id="@+id/rc_yuan_tu"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="#BFBFBF"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="   分割图"
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:id="@+id/rc_fen_ge_tu"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="#BFBFBF"/>
+
+</LinearLayout>
