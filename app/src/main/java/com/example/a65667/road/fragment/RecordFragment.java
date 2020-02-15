@@ -14,11 +14,12 @@ import android.widget.ImageView;
 
 import com.example.a65667.road.R;
 import com.example.a65667.road.activity.AuthorityManageActivity;
+import com.example.a65667.road.activity.VideoManageActivity;
 
 public class RecordFragment extends Fragment {
 
     private View root;
-    private ImageView tv_power;
+    private ImageView tv_power, tvVideo;
 
     public RecordFragment() {
         // Required empty public constructor
@@ -43,6 +44,13 @@ public class RecordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(root.getContext(), AuthorityManageActivity.class));
+            }
+        });
+        tvVideo = root.findViewById(R.id.tv_video);
+        tvVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(root.getContext(), VideoManageActivity.class));
             }
         });
     }

@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.github.clans:fab:1.6.4'
 
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 }

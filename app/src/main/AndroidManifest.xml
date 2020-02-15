@@ -67,7 +67,8 @@
         <activity android:name=".activity.AuthorityActivity" />
         <activity android:name=".activity.CrackDetailActivity" />
         <activity android:name=".activity.CrackListActivity" />
-        <activity android:name=".activity.CrackPictureActivity"></activity>
+        <activity android:name=".activity.CrackPictureActivity" />
+        <activity android:name=".activity.VideoManageActivity"></activity>
     </application>
 
 </manifest>
