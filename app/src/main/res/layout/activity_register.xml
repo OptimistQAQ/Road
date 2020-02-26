@@ -47,7 +47,7 @@
 
 
         <EditText
-            android:id="@+id/eusername"
+            android:id="@+id/eusername1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40px"

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a65667.road.Item.VideoItem;
@@ -17,6 +18,7 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     private View root;
     private VideoItem videoItem;
     private TextView fileName;
+    private Button btnDelete;
 
     @NonNull
     @Override
@@ -34,6 +36,14 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     private void initView(){
         fileName = root.findViewById(R.id.file_name);
         fileName.setText(videoItem.getFileName());
+        btnDelete = root.findViewById(R.id.btnDelete);
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

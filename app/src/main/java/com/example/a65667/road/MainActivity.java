@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
     private double distance;
     private Marker markerOwner;  //自己的位置
     private List<Marker> list;//存放共享位置的list
+    private List<Double> gpsx;
+    private List<Double> gpsy;
+    private List<String> time;
+    private List<String> roadList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
         mMapView.onResume();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -176,8 +181,6 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                     aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                     //点击定位按钮 能够将地图的中心移动到定位点
                     mListener.onLocationChanged(aMapLocation);
-                    //添加图钉
-                    //  aMap.addMarker(getMarkerOptions(amapLocation));
                     //获取定位信息
                     StringBuffer buffer = new StringBuffer();
                     buffer.append(aMapLocation.getCountry() + ""

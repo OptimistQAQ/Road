@@ -45,4 +45,7 @@ dependencies {
 
     implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
     implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+
+    implementation 'com.alibaba:fastjson:1.1.71.android'
+    implementation 'com.lzy.net:okgo:3.0.4'
 }

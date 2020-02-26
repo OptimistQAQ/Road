@@ -60,6 +60,7 @@ public class AuthorityManageActivity extends AppCompatActivity {
         mAdapter = new MultiTypeAdapter();
         mAdapter.register(IdRecordItem.class, new IdRecordItemViewBinder());
         recyclerView.setAdapter(mAdapter);
+
         mItems = new Items();
         for(int i=0; i<nameList.size(); i++){
             IdRecordItem idRecordItem = new IdRecordItem();

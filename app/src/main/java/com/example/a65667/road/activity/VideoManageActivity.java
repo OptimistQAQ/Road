@@ -2,12 +2,16 @@ package com.example.a65667.road.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.a65667.road.Item.VideoItem;
 import com.example.a65667.road.R;
+import com.example.a65667.road.adapter.VideoItemAdapter;
+import com.example.a65667.road.bean.SwipeBean;
 import com.example.a65667.road.binder.VideoItemViewBinder;
 
 import java.util.ArrayList;
@@ -23,6 +27,11 @@ public class VideoManageActivity extends AppCompatActivity {
     private Items mItems;
 
     private ImageView vm_return;
+
+
+//    private VideoItemAdapter videoItemAdapter;
+//    private List<SwipeBean> mDatas;
+//    private LinearLayoutManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +73,25 @@ public class VideoManageActivity extends AppCompatActivity {
 
         mAdapter.setItems(mItems);
         mAdapter.notifyDataSetChanged();
+
+
+//        recyclerView = (RecyclerView)findViewById(R.id.vm_video_manage);
+//        mDatas = new ArrayList<>();
+//        for(int i=0; i < 20; i++){
+//            mDatas.add(new SwipeBean("" + i));
+//        }
+//        videoItemAdapter = new VideoItemAdapter(this, mDatas);
+//        videoItemAdapter.setOnDelListener(new VideoItemAdapter.onSwipeListener() {
+//            @Override
+//            public void onDel(int pos) {
+//                if(pos >= 0 && pos < mDatas.size()){
+//                    mDatas.remove(pos);
+//                    videoItemAdapter.notifyItemRemoved(pos);
+//                }
+//            }
+//        });
+//        recyclerView.setAdapter(videoItemAdapter);
+//        recyclerView.setLayoutManager(manager = new GridLayoutManager(this, 2));
+
     }
 }
