@@ -21,7 +21,7 @@ public class CrackPictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crack_picture);
 
-//        ductIntent();
+        ductIntent();
         init();
 
     }
@@ -29,7 +29,7 @@ public class CrackPictureActivity extends AppCompatActivity {
     private void init(){
         rc_return = (ImageView)findViewById(R.id.rc_return);
         rcTotal = (TextView)findViewById(R.id.rc_total);
-//        rcTotal.setText(rc_Name);
+        rcTotal.setText(rc_Name);
         rc_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +39,7 @@ public class CrackPictureActivity extends AppCompatActivity {
     }
 
     private void ductIntent(){
-        Intent recordIntent = new Intent();
+        Intent recordIntent = getIntent();
         rc_Name = recordIntent.getStringExtra("rcName");
     }
 }

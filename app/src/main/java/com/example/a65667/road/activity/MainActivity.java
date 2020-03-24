@@ -1,4 +1,4 @@
-package com.example.a65667.road;
+package com.example.a65667.road.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -28,6 +28,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
+import com.example.a65667.road.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -117,8 +118,10 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
+
 //        mapLocationClient.stopLocation();  //停止定位
 //        mapLocationClient.onDestroy();  //销毁定位客户端
     }

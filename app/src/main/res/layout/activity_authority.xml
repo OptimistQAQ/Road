@@ -46,6 +46,7 @@
                 android:layout_marginStart="60dp"/>
 
             <ImageView
+                android:id="@+id/permission_base"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -69,6 +70,7 @@
                 android:layout_marginStart="60dp"/>
 
             <ImageView
+                android:id="@+id/permission_photo"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -92,6 +94,7 @@
                 android:layout_marginStart="60dp"/>
 
             <ImageView
+                android:id="@+id/permission_video"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -115,6 +118,7 @@
                 android:layout_marginStart="60dp"/>
 
             <ImageView
+                android:id="@+id/permission_info"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -138,6 +142,7 @@
                 android:layout_marginStart="60dp"/>
 
             <ImageView
+                android:id="@+id/permission_admin"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"

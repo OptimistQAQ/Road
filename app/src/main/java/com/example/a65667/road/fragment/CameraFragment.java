@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.LocationSource;
 import com.example.a65667.road.Item.MineRecordItem;
-import com.example.a65667.road.MainActivity;
+import com.example.a65667.road.activity.MainActivity;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.MineRecordItemViewBinder;
 
@@ -22,7 +25,7 @@ import java.util.List;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
-public class CameraFragment extends Fragment implements View.OnClickListener {
+public class CameraFragment extends Fragment implements View.OnClickListener, LocationSource, AMapLocationListener {
 
     private View root;
     private RecyclerView recyclerView;
@@ -32,13 +35,16 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
     private ImageView img_map;
 
+//    MapView mMapView = null;
+//    AMap aMap;   //地图对象
+//    MyLocationStyle myLocationStyle;  //定位蓝点
+//    private AMapLocationClient mapLocationClient = null;  //定位发起
+//    private AMapLocationClientOption mLocationOption = null;  //定位参数
+//    //声明mListener对象，定位监听器
+//    private OnLocationChangedListener mListener = null;
+
     public CameraFragment(){
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -47,6 +53,15 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
         root = inflater.inflate(R.layout.camera_fragment, container, false);
         initView();
         return root;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        mMapView = (MapView) root.findViewById(R.id.map_view1);
+//        mMapView.onCreate(savedInstanceState);
+//
+//        aMap = mMapView.getMap();
     }
 
     private void initView(){
@@ -111,6 +126,21 @@ public class CameraFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+
+    }
+
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+
+    }
+
+    @Override
+    public void deactivate() {
 
     }
 }

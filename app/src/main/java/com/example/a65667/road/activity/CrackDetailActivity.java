@@ -225,4 +225,5 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             e.printStackTrace();
         }
     }
+
 }

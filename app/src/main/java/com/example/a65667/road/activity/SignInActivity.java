@@ -35,7 +35,11 @@ public class SignInActivity extends AppCompatActivity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initView();
+                //initView();
+
+                Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
+                startActivity(main2Activity);
+                finish();
             }
         });
 
