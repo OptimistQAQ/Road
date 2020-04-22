@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
     private PolylineOptions mPolyoptions, tracePolytion;
     private Polyline mPolyline;
     private double distance;
-    private Marker markerOwner;  //自己的位置
-    private List<Marker> list;//存放共享位置的list
+     private Marker markerOwner;  //自己的位置
+
     private List<Double> gpsx;
     private List<Double> gpsy;
     private List<String> time;
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         aMap.setMyLocationEnabled(true);    //显示定位蓝点
         //连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);
+
         aMap.getUiSettings().setCompassEnabled(true); //显示指南针
 
         //设置显示定位按钮 并且可以点击
@@ -109,21 +110,15 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         mLocationOption.setNeedAddress(true);
         //设置是否允许模拟位置，默认为false
         mLocationOption.setMockEnable(true);
-        mLocationOption.setInterval(2000);
-
+        mLocationOption.setInterval(1000);
         mapLocationClient.startLocation();
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();
-
-//        mapLocationClient.stopLocation();  //停止定位
-//        mapLocationClient.onDestroy();  //销毁定位客户端
     }
 
     @Override
@@ -157,33 +152,10 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
 
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
-
-                //可在其中解析amapLocation获取相应内容。
-                aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
-                aMapLocation.getLatitude();//获取纬度
-                aMapLocation.getLongitude();//获取 经度
-                aMapLocation.getAccuracy();//获取精度信息
-                aMapLocation.getSpeed();
-                aMapLocation.getBearing();
-
-                drawLines(aMapLocation);
-                distance += distance;
-//                Toast.makeText(MainActivity.this,"经纬度" + distance + "KM", Toast.LENGTH_SHORT).show();
-
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date = new Date(aMapLocation.getTime());
-                df.format(date);//定位时间
-
-                priLocation = aMapLocation;
-
                 // 如果不设置标志位，此时再拖动地图时，它会不断将地图移动到当前的位置
                 if (isFirstLoc) {
-                    //设置缩放级别
+                     //设置缩放级别
                     aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
-                    //将地图移动到定位点
-                    aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
-                    //点击定位按钮 能够将地图的中心移动到定位点
-                    mListener.onLocationChanged(aMapLocation);
                     //获取定位信息
                     StringBuffer buffer = new StringBuffer();
                     buffer.append(aMapLocation.getCountry() + ""
@@ -196,7 +168,28 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                     Toast.makeText(getApplicationContext(), buffer.toString(), Toast.LENGTH_LONG).show();
                     isFirstLoc = false;
                 }
-            }else {
+
+                //将地图移动到定位点
+                aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
+                //点击定位按钮 能够将地图的中心移动到定位点
+                mListener.onLocationChanged(aMapLocation);
+
+                priLocation = aMapLocation;
+                drawLines(aMapLocation);
+                distance += distance;
+                //Toast.makeText(MainActivity.this,"经纬度" + distance + "KM", Toast.LENGTH_SHORT).show();
+
+                //可在其中解析amapLocation获取相应内容。
+                aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
+                gpsy.add(aMapLocation.getLatitude());//获取纬度
+                gpsx.add(aMapLocation.getLongitude());//获取 经度
+                roadList.add(aMapLocation.getStreet());   //获取街道信息
+
+                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                time.add(df.format(new Date()));   //获取定位时间
+
+            }
+            else {
                 //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError","location Error, ErrCode:"
                         + aMapLocation.getErrorCode() + ", errInfo:"
@@ -222,19 +215,17 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
             mapLocationClient.setLocationOption(mLocationOption);
             mapLocationClient.startLocation();//启动定位
         }
-
     }
 
     @Override
     public void deactivate() {
-
         mListener = null;
         if(mapLocationClient != null){
             mapLocationClient.stopLocation();
             mapLocationClient.onDestroy();
         }
         mapLocationClient = null;
-
+        mLocationOption = null;
     }
 
     private void redrawline() {
@@ -256,11 +247,11 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         options.add(new LatLng(priLocation.getLatitude(), priLocation.getLongitude()));
         //当前的经纬度
         options.add(new LatLng(curLocation.getLatitude(), priLocation.getLongitude()));
-        options.width(10).geodesic(true).color(Color.GREEN);
-        aMap.addPolyline(options);
+        options.width(15).geodesic(true).color(Color.GREEN);
+        mPolyline = aMap.addPolyline(options);
         distance = AMapUtils.calculateLineDistance(
                 new LatLng(priLocation.getLatitude(), priLocation.getLongitude()),
-                new LatLng(curLocation.getLatitude(), priLocation.getLongitude())
+                new LatLng(curLocation.getLatitude(), curLocation.getLongitude())
         );
     }
 

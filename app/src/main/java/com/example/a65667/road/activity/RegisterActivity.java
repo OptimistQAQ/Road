@@ -33,10 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //initView();
-                Intent signInActivity = new Intent(RegisterActivity.this, SignInActivity.class);
-                startActivity(signInActivity);
-                finish();
+                initView();
+//                Intent signInActivity = new Intent(RegisterActivity.this, SignInActivity.class);
+//                startActivity(signInActivity);
+//                finish();
         }
         });
     }
@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
             Map<String, String> param = new HashMap<>();
             param.put("name", euserName1.getText().toString());
             param.put("password", ePassword.getText().toString());
-            OkGo.<String>post("http://192.168.0.107:8080/register")
+            OkGo.<String>post("http://192.168.0.101:8080/register")
                     .params("name", euserName1.getText().toString())
                     .params("password", ePassword.getText().toString())
                     .execute(new StringCallback() {

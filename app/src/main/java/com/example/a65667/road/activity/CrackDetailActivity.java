@@ -12,14 +12,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.a65667.road.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -70,10 +73,10 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         //连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);
         deta_Map.setLocationSource(this);//设置了定位的监听
+
         location();
 
         init();
-
     }
 
     private void init(){
@@ -156,6 +159,10 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
+                //将地图移动到定位点
+                deta_Map.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
+                //点击定位按钮 能够将地图的中心移动到定位点
+                mListener.onLocationChanged(aMapLocation);
 
                 //可在其中解析amapLocation获取相应内容。
                 aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
@@ -164,9 +171,11 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                 aMapLocation.getAccuracy();//获取精度信息
                 aMapLocation.getSpeed();
                 aMapLocation.getBearing();
+
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date(aMapLocation.getTime());
                 df.format(date);//定位时间
+
             }else {
                 //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                 Log.e("AmapError","location Error, ErrCode:"

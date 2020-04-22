@@ -38,7 +38,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity" >
+
+        </activity>
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -71,7 +73,9 @@
         <activity android:name=".activity.CrackDetailActivity" />
         <activity android:name=".activity.CrackListActivity" />
         <activity android:name=".activity.CrackPictureActivity" />
-        <activity android:name=".activity.VideoManageActivity"></activity>
+        <activity android:name=".activity.VideoManageActivity">
+
+        </activity>
     </application>
 
 </manifest>

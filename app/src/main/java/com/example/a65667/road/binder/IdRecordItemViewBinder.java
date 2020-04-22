@@ -46,6 +46,7 @@ public class IdRecordItemViewBinder extends ItemViewBinder<IdRecordItem, IdRecor
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(root.getContext(), AuthorityActivity.class);
+                intent.putExtra("id", idRecordItem.getIcID());
                 root.getContext().startActivity(intent);
             }
         });

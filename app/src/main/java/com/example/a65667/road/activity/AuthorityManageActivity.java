@@ -53,8 +53,8 @@ public class AuthorityManageActivity extends AppCompatActivity {
         nameList.add("李斯");
         idList.add("10000002");
 
-        nameList.add("张三丰");
-        idList.add("10000003");
+        nameList.add("亲加");
+        idList.add("16");
 
         recyclerView = findViewById(R.id.rv_record);
         mAdapter = new MultiTypeAdapter();

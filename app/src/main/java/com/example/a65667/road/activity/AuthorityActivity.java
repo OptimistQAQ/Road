@@ -1,11 +1,13 @@
 package com.example.a65667.road.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.a65667.road.R;
 import com.example.a65667.road.bean.Permission;
 import com.lzy.okgo.OkGo;
@@ -17,7 +19,7 @@ public class AuthorityActivity extends AppCompatActivity {
     private ImageView tc_return;
 
     private ImageView per_base, per_photo, per_video, per_info, per_admin;
-    private String uNo;
+    private String rc_id;
     private boolean pBase = false, pPhoto = false, pVideo = false, pInfo = false, pAdmin = false;
 
     @Override
@@ -28,12 +30,17 @@ public class AuthorityActivity extends AppCompatActivity {
     }
 
     private void init(){
+
         tc_return = (ImageView)findViewById(R.id.tc_return);
         per_base = (ImageView) findViewById(R.id.permission_base);
         per_photo = (ImageView) findViewById(R.id.permission_photo);
         per_video = (ImageView) findViewById(R.id.permission_video);
         per_info = (ImageView) findViewById(R.id.permission_info);
         per_admin = (ImageView) findViewById(R.id.permission_admin);
+
+        Intent rc_name = getIntent();
+        rc_id = rc_name.getStringExtra("id");
+        Log.e("pass_id", rc_id);
 
         tc_return.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,15 +49,19 @@ public class AuthorityActivity extends AppCompatActivity {
             }
         });
 
+        Permission permission = new Permission();
+
         per_base.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (pBase){
                     pBase = false;
+                    permission.setPbase(pBase);
                     per_base.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pBase)
+                            .params("Uno", permission.getUno())
+                            .params("Pbase", permission.getPbase())
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
@@ -60,10 +71,12 @@ public class AuthorityActivity extends AppCompatActivity {
                 }
                 else {
                     pBase = true;
+                    permission.setPbase(pBase);
                     per_base.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pBase)
+                            .params("Pbase", permission.getPbase())
+                            .params("id", permission.getUno())
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
@@ -80,9 +93,9 @@ public class AuthorityActivity extends AppCompatActivity {
                 if (pPhoto){
                     pPhoto = false;
                     per_photo.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
-                            .params("Pphoto_seg", pBase)
+                            .params("Pphoto_seg", pPhoto)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
@@ -93,9 +106,9 @@ public class AuthorityActivity extends AppCompatActivity {
                 else{
                     pPhoto = true;
                     per_photo.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
-                            .params("Pphoto_seg", pBase)
+                            .params("Pphoto_seg", pPhoto)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
@@ -112,7 +125,7 @@ public class AuthorityActivity extends AppCompatActivity {
                 if (pVideo){
                     pVideo = false;
                     per_video.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
                             .params("Pbase", pVideo)
                             .execute(new StringCallback() {
@@ -125,7 +138,7 @@ public class AuthorityActivity extends AppCompatActivity {
                 else {
                     pVideo = true;
                     per_video.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
                             .params("Pbase", pVideo)
                             .execute(new StringCallback() {
@@ -144,7 +157,7 @@ public class AuthorityActivity extends AppCompatActivity {
                 if (pInfo){
                     pInfo = false;
                     per_info.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
                             .params("Pbase", pInfo)
                             .execute(new StringCallback() {
@@ -157,7 +170,7 @@ public class AuthorityActivity extends AppCompatActivity {
                 else {
                     pInfo = true;
                     per_info.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
                             .params("Pbase", pInfo)
                             .execute(new StringCallback() {
@@ -176,7 +189,7 @@ public class AuthorityActivity extends AppCompatActivity {
                 if (pAdmin){
                     pAdmin = false;
                     per_admin.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
                             .params("Pbase", pAdmin)
                             .execute(new StringCallback() {
@@ -189,7 +202,7 @@ public class AuthorityActivity extends AppCompatActivity {
                 else {
                     pAdmin = true;
                     per_admin.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.107:8080/decisionPermission")
+                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
                             .tag(this)
                             .params("Pbase", pAdmin)
                             .execute(new StringCallback() {

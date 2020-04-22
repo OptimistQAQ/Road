@@ -35,11 +35,11 @@ public class SignInActivity extends AppCompatActivity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //initView();
+                initView();
 
-                Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
-                startActivity(main2Activity);
-                finish();
+//                Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
+//                startActivity(main2Activity);
+//                finish();
             }
         });
 
@@ -66,7 +66,7 @@ public class SignInActivity extends AppCompatActivity {
 
         Map<String, String> param = new HashMap<>();
 
-        OkGo.<String>post("http://192.168.0.107:8080/login")
+        OkGo.<String>post("http://192.168.0.101:8080/login")
                 .params("name", bt_name)
                 .params("password", bt_password)
                 .tag(this)

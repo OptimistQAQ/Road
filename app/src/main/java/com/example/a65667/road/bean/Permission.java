@@ -2,46 +2,73 @@ package com.example.a65667.road.bean;
 
 public class Permission {
 
-    String uNo;
-    boolean pBase;
-    boolean pPhoto_seg;
-    boolean pVideo_seg;
-    boolean pInfo_seg;
-    boolean pPermission_admin;
+    private String uno;
 
-    public Permission(boolean pBase, boolean pPhoto_seg, boolean pVideo_seg, boolean pInfo_seg, boolean pPermission_admin){
-        this.pBase = pBase;
-        this.pPhoto_seg = pPhoto_seg;
-        this.pVideo_seg = pVideo_seg;
-        this.pInfo_seg = pInfo_seg;
-        this.pPermission_admin = pPermission_admin;
+    private Boolean pbase;
+
+    private Boolean pphotoSeg;
+
+    private Boolean pvideoSeg;
+
+    private Boolean pinfoCheck;
+
+    private Boolean ppermissionAdmin;
+
+//    public Permission(String uno, Boolean pbase, Boolean pphotoSeg, Boolean pvideoSeg, Boolean pinfoCheck, Boolean ppermissionAdmin){
+//        this.uno = uno;
+//        this.pbase = pbase;
+//        this.pphotoSeg = pphotoSeg;
+//        this.pvideoSeg = pvideoSeg;
+//        this.pinfoCheck = pinfoCheck;
+//        this.ppermissionAdmin = ppermissionAdmin;
+//    }
+
+    public String getUno() {
+        return uno;
     }
 
-    public void setpVideo_seg(boolean pVideo_seg) {
-        this.pVideo_seg = pVideo_seg;
+    public void setUno(String uno) {
+        this.uno = uno;
     }
 
-    public void setpPhoto_seg(boolean pPhoto_seg) {
-        this.pPhoto_seg = pPhoto_seg;
+    public Boolean getPbase() {
+        return pbase;
     }
 
-    public void setpPermission_admin(boolean pPermission_admin) {
-        this.pPermission_admin = pPermission_admin;
+    public void setPbase(Boolean pbase) {
+        this.pbase = pbase;
     }
 
-    public void setpInfo_seg(boolean pInfo_seg) {
-        this.pInfo_seg = pInfo_seg;
+    public Boolean getPphotoSeg() {
+        return pphotoSeg;
     }
 
-    public void setpBase(boolean pBase) {
-        this.pBase = pBase;
+    public void setPphotoSeg(Boolean pphotoSeg) {
+        this.pphotoSeg = pphotoSeg;
     }
 
-    public void setuNo(String uNo) {
-        this.uNo = uNo;
+    public Boolean getPvideoSeg() {
+        return pvideoSeg;
     }
 
-    public String getuNo() {
-        return uNo;
+    public void setPvideoSeg(Boolean pvideoSeg) {
+        this.pvideoSeg = pvideoSeg;
     }
+
+    public Boolean getPinfoCheck() {
+        return pinfoCheck;
+    }
+
+    public void setPinfoCheck(Boolean pinfoCheck) {
+        this.pinfoCheck = pinfoCheck;
+    }
+
+    public Boolean getPpermissionAdmin() {
+        return ppermissionAdmin;
+    }
+
+    public void setPpermissionAdmin(Boolean ppermissionAdmin) {
+        this.ppermissionAdmin = ppermissionAdmin;
+    }
+
 }
