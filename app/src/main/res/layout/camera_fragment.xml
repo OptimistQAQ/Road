@@ -91,7 +91,7 @@
     </android.support.v7.widget.RecyclerView>
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu_red"
+        android:id="@+id/menu_camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
@@ -110,7 +110,7 @@
         fab:menu_labels_singleLine="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab1"
+            android:id="@+id/camera_fab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"

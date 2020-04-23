@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="cn.nodemedia.pusher.view.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="32dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:srcCompat="@drawable/ic_launcher"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textSize="@dimen/sp_40"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Version v1.0.4"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SDK Version v2.4.5"
+            android:textAlignment="center"
+            android:layout_marginBottom="16dp"
+            />
+
+        <View style="@style/common_line" />
+        <TextView
+            android:id="@+id/website"
+            style="@style/common_textview_gray_tiny_button"
+            android:text="WebSite" />
+
+        <View style="@style/common_line" />
+        <TextView
+            android:id="@+id/android_sdk"
+            style="@style/common_textview_gray_tiny_button"
+            android:text="Get NodeMediaClient Android SDK" />
+
+        <View style="@style/common_line" />
+        <TextView
+            android:id="@+id/ios_sdk"
+            style="@style/common_textview_gray_tiny_button"
+            android:text="Get NodeMediaClient iOS SDK" />
+
+        <View style="@style/common_line" />
+
+        <TextView
+            android:id="@+id/node_media_server"
+            style="@style/common_textview_gray_tiny_button"
+            android:text="Get NodeMeidaServer" />
+
+        <View style="@style/common_line" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>

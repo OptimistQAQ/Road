@@ -1,0 +1,296 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<item name="colorAccent">@color/colorAccent</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!--App的背景色-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--防止正式版时启动短暂白屏-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+    </style>
+
+    <style name="AppNoTitleBar" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item> <!-- 设置无标题 -->
+        <!-- 是否填充慢屏幕，引用android:windowNoTitle 的值 ?android:windowNoTitle，取决于android:windowNoTitle的值-->
+        <!--<item name="android:windowFullscreen">?android:windowNoTitle</item>-->
+    </style>
+    <style name="AppNoTitleBarFull" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item> <!-- 设置无标题 -->
+        <!-- 是否填充慢屏幕，引用android:windowNoTitle 的值 ?android:windowNoTitle，取决于android:windowNoTitle的值-->
+        <item name="android:windowFullscreen">?android:windowNoTitle</item>
+    </style>
+    <style name="common_textview_black_big" parent="common_textview">
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/colorDark</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+    </style>
+
+    <style name="common_textview_black" parent="common_textview_black_big">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="common_textview_black_small" parent="common_textview_black_big">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="common_textview_black_tiny" parent="common_textview_black_big">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="common_textview_theme_big" parent="common_textview_black_big">
+        <item name="android:textColor">@color/colorTheme</item>
+    </style>
+
+    <style name="common_textview_theme" parent="common_textview_theme_big">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="common_textview_theme_small" parent="common_textview_theme_big">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="common_textview_theme_tiny" parent="common_textview_theme_big">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="common_textview_white_big" parent="common_textview_black_big">
+        <item name="android:textColor">@color/colorLight</item>
+    </style>
+
+    <style name="common_textview_white" parent="common_textview_white_big">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="common_textview_white_small" parent="common_textview_white_big">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="common_textview_white_tiny" parent="common_textview_white_big">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="common_textview_gray_big" parent="common_textview_black_big">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <style name="common_textview_gray" parent="common_textview_gray_big">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="common_textview_gray_small" parent="common_textview_gray_big">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="common_textview_gray_tiny" parent="common_textview_gray_big">
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+    <style name="common_textview_gray_tiny_button" parent="common_textview_gray_big">
+        <item name="android:textSize">@dimen/sp_20</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="common_edittext_content" parent="common_edittext">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">30</item>
+    </style>
+
+    <style name="common_edittext_content_small" parent="common_edittext">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="common_edittext_password" parent="common_edittext_content">
+        <item name="android:digits">
+            1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
+        </item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:maxLength">18</item>
+        <item name="android:password">true</item>
+    </style>
+
+    <style name="common_button_only" parent="common_button">
+        <item name="android:layout_marginLeft">@dimen/dp_16</item>
+        <item name="android:layout_marginRight">@dimen/dp_16</item>
+    </style>
+
+    <style name="common_rect_row" parent="common_rect_horizontal">
+        <item name="android:layout_height">@dimen/dp_50</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:background">@color/colorLight</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/dp_16</item>
+        <item name="android:paddingRight">@dimen/dp_16</item>
+    </style>
+
+    <style name="user_rect_row" parent="common_rect_row">
+        <item name="android:layout_marginTop">@dimen/dp_0</item>
+    </style>
+
+    <style name="dialog_anim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/view_in_alpha</item>
+        <item name="android:windowExitAnimation">@anim/view_out_alpha</item>
+    </style>
+
+    <!--<style name="dialog_anim_scale" parent="@android:style/Animation">-->
+    <!--<item name="android:windowEnterAnimation">@anim/dialog_in_scale</item>-->
+    <!--<item name="android:windowExitAnimation">@anim/dialog_out_scale</item>-->
+    <!--</style>-->
+
+    <style name="dialog_match_anim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/view_in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/view_out_to_bottom</item>
+    </style>
+
+    <style name="common_action_text" parent="common_textview_theme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/dp_16</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:background">@color/colorLight</item>
+    </style>
+
+    <style name="common_dialog_trans" parent="android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <!--内容背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--窗口背景透明 -->
+        <item name="android:windowFrame">@null</item>
+        <!--边框 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--无标题 -->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--半透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--模糊 -->
+        <item name="android:backgroundDimAmount">0.6</item>
+        <!--半透明背景灰度 -->
+        <!--<item name="android:windowAnimationStyle">@style/dialog_anim</item>-->
+        <!--动画-->
+    </style>
+
+    <style name="hint_dialog" parent="android:style/Theme.Dialog">
+        <!--内容背景 -->
+        <item name="android:background">@drawable/round6_pie_white</item>
+        <!--窗口背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!--半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--<style name="common_dialog_activity" parent="@style/Theme.AppCompat.Dialog">-->
+    <!--<item name="android:background">@android:color/transparent</item>-->
+    <!--&lt;!&ndash;内容背景 &ndash;&gt;-->
+    <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+    <!--&lt;!&ndash;窗口背景透明 &ndash;&gt;-->
+    <!--<item name="android:windowFrame">@null</item>-->
+    <!--&lt;!&ndash;边框 &ndash;&gt;-->
+    <!--<item name="android:windowNoTitle">true</item>-->
+    <!--&lt;!&ndash;边框 &ndash;&gt;-->
+    <!--<item name="windowNoTitle">true</item>-->
+    <!--&lt;!&ndash;无标题 &ndash;&gt;-->
+    <!--<item name="android:windowIsTranslucent">true</item>-->
+    <!--&lt;!&ndash;半透明 &ndash;&gt;-->
+    <!--<item name="android:windowFullscreen">true</item>-->
+    <!--&lt;!&ndash;模糊 &ndash;&gt;-->
+    <!--<item name="android:windowAnimationStyle">@style/dialog_anim_scale</item>-->
+    <!--&lt;!&ndash;动画&ndash;&gt;-->
+    <!--</style>-->
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:paddingLeft">@dimen/dp_20</item>
+        <item name="android:paddingTop">@dimen/dp_16</item>
+        <item name="android:paddingBottom">@dimen/dp_16</item>
+        <item name="android:paddingRight">@dimen/dp_20</item>
+    </style>
+
+    <!--<style name="common_dash_line" parent="@style/common_rect_horizontal">-->
+    <!--<item name="android:background">@drawable/dash_horizon</item>-->
+    <!--<item name="android:layout_height">@dimen/dp_2</item>-->
+    <!--</style>-->
+
+
+    <style name="edit_line_gray" parent="@style/common_textview_black">
+        <item name="android:background">@drawable/round6_line_gray_gray</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <!--<style name="popup_anim" parent="@android:style/Animation">-->
+    <!--<item name="android:windowEnterAnimation">@anim/head_in</item>-->
+    <!--<item name="android:windowExitAnimation">@anim/head_out</item>-->
+    <!--</style>-->
+
+    <style name="common_wheel_view">
+        <item name="android:layout_width">@dimen/dp_100</item>
+        <!--<item name="android:background">@drawable/time_background_line</item>-->
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="common_button_agree">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/common_hollow_theme</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/dp_4</item>
+        <item name="android:paddingLeft">@dimen/dp_11</item>
+        <item name="android:paddingRight">@dimen/dp_11</item>
+        <item name="android:paddingTop">@dimen/dp_4</item>
+        <item name="android:textColor">@color/colorTheme</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="button_line_them" parent="common_button">
+        <item name="android:background">@drawable/oval_line_theme</item>
+        <item name="android:layout_marginLeft">@dimen/dp_50</item>
+        <item name="android:layout_marginRight">@dimen/dp_50</item>
+        <item name="android:layout_marginTop">@dimen/dp_50</item>
+        <item name="android:textColor">@color/colorTheme</item>
+        <item name="android:layout_height">@dimen/dp_42</item>
+    </style>
+
+    <style name="common_dash_line" parent="@style/common_rect_horizontal">
+        <item name="android:background">@drawable/dash_horizon</item>
+        <item name="android:layout_height">@dimen/dp_2</item>
+    </style>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        //Dialog的windowFrame框为无
+        <item name="android:windowFrame">@null</item>
+        //是否浮现在activity之上
+        <item name="android:windowIsFloating">true</item>
+        //是否半透明
+        <item name="android:windowIsTranslucent">true</item>
+        //是否显示title
+        <item name="android:windowNoTitle">true</item>
+        //设置dialog的背景
+        <item name="android:background">@android:color/transparent</item>
+        //显示区域背景是否透明
+        <item name="android:windowBackground">@android:color/transparent</item>
+        //就是用来控制灰度的值，当为1时，界面除了我们的dialog内容是高亮显示的，dialog以外的区域是黑色的，完全看不到其他内容，系统的默认值是0.5
+        <item name="android:backgroundDimAmount">0.5</item>
+        //显示区域以外是否使用黑色半透明背景
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/dialog_anim</item>
+    </style>
+
+</resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nodemedia.pusher.view.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="视频方向" />
+
+        <View style="@style/common_line" />
+
+        <LinearLayout
+            style="@style/common_rect_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_12">
+
+            <RelativeLayout
+                android:id="@+id/direction_horizontal"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/direction_horizontal_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/direction_horizontal_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/direction_horizontal_arrow"
+                    android:text="横屏" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/direction_vertical"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/direction_vertical_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/direction_vertical_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/direction_vertical_arrow"
+                    android:text="竖屏" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View style="@style/common_line" />
+
+    </LinearLayout>
+</ScrollView>

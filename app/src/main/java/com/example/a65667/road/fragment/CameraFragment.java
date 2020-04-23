@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,12 @@ import com.example.a65667.road.Item.MineRecordItem;
 import com.example.a65667.road.activity.MainActivity;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.MineRecordItemViewBinder;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.nodemedia.pusher.view.SourcePushActivity;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
@@ -34,6 +37,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
     private Items mItems;
 
     private ImageView img_map;
+    private FloatingActionButton fab1;
 
 //    MapView mMapView = null;
 //    AMap aMap;   //地图对象
@@ -65,14 +69,10 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
     }
 
     private void initView(){
+        initMenu();
 
         img_map = root.findViewById(R.id.map_view1);
-        img_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(root.getContext(), MainActivity.class));
-            }
-        });
+        img_map.setOnClickListener(this);
 
         List<String> dataTime = new ArrayList<>();
         List<String> lastTime = new ArrayList<>();
@@ -124,8 +124,22 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
         mAdapter.notifyDataSetChanged();
     }
 
+    private void initMenu(){
+        fab1 = root.findViewById(R.id.camera_fab1);
+        fab1.setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.map_view1:
+                startActivity(new Intent(root.getContext(), MainActivity.class));
+                break;
+
+            case R.id.camera_fab1:
+                startActivity(new Intent(root.getContext(), SourcePushActivity.class));
+                break;
+        }
 
     }
 

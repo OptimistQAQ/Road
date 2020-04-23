@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nodemedia.pusher.view.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="识别语言" />
+
+        <View style="@style/common_line" />
+
+        <LinearLayout
+            style="@style/common_rect_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_12">
+
+            <RelativeLayout
+                android:id="@+id/language_close"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/language_close_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/language_close_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/language_close_arrow"
+                    android:text="关闭" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/language_china"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/language_china_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/language_china_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/language_china_arrow"
+                    android:text="中文（普通话-中国）" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/language_cantonese"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/language_cantonese_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/language_cantonese_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/language_cantonese_arrow"
+                    android:text="中文（粤语-中国）" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/language_usa"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/language_usa_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/language_usa_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/language_usa_arrow"
+                    android:text="英语（美国）" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View style="@style/common_line" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionbar"
+    style="@style/common_rect_horizontal"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorLight"
+    android:minHeight="?attr/actionBarSize">
+
+    <ImageView
+        android:id="@+id/actionbar_back"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:padding="@dimen/dp_6"
+        android:scaleType="centerInside"
+        android:src="@drawable/nav_arrowback_2x" />
+
+    <ImageView
+        android:id="@+id/actionbar_tips"
+        style="@style/common_imageview"
+        android:layout_width="@dimen/dp_10"
+        android:layout_height="@dimen/dp_10"
+        android:layout_alignRight="@+id/actionbar_back"
+        android:layout_alignTop="@+id/actionbar_back"
+        android:layout_margin="@dimen/dp_2"
+        android:src="@drawable/common_tip"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/TitleTextStyle"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textColor="@color/colorDark" />
+
+    <LinearLayout
+        android:id="@+id/actionbar_menu"
+        style="@style/common_rect_match"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_4"
+        android:layout_toRightOf="@id/actionbar_title"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal" />
+
+    <View
+        android:id="@+id/actionbar_bottom_line"
+        style="@style/common_line"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

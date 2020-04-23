@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#F9493B</color>-->
+    <!--<color name="colorPrimaryDark">#FF4040</color>-->
+    <!--<color name="colorAccent">#F9493B</color>-->
+
+    <!-- StatusBar Color -->
+    <color name="colorPrimaryDark">#FF4040</color>
+    <!-- Theme Color -->
+    <color name="colorPrimary">#F9493B</color>
+    <!-- App Import Text Color -->
+    <color name="textColorPrimary">#434343</color>
+    <!-- App Subtitle Text Color -->
+    <color name="subtitleTextColor">#646464</color>
+    <!-- System View Default Color -->
+    <color name="colorControlNormal">#DDDDDD</color>
+    <!-- System View Select Color -->
+    <color name="colorAccent">#F9493B</color>
+    <!-- Window Background Color -->
+    <color name="windowBackground">#F0F0F0</color>
+    <!-- Navigation Background Color -->
+    <color name="navigationBarColor">#000000</color>
+    <!-- Popup Background Color -->
+    <color name="popupBackground">#FFFFFF</color>
+    <!-- Popup Text Color -->
+    <color name="popupTextColor">#F9493B</color>
+    <!-- Dialog Background Color -->
+    <color name="dialogBackground">#FFFFFF</color>
+
+    <!-- App Theme Color Dark -->
+    <color name="colorThemeDark">#FF4040</color>
+    <!-- App Theme Color -->
+    <color name="colorTheme">#F9493B</color>
+    <!-- App Light Color -->
+    <color name="colorLight">#FFFFFF</color>
+    <!-- App Gray Color -->
+    <color name="colorGray">#646464</color>
+    <!-- App Dark Color -->
+    <color name="colorDark">#434343</color>
+    <!-- App Hint Text Color -->
+    <color name="colorHint">#8A8A8A</color>
+    <!-- Line Divider Color -->
+    <color name="colorLineDivider">#DDDDDD</color>
+
+</resources>

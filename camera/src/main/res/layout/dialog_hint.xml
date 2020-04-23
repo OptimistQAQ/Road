@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_layout"
+    style="@style/common_rect_horizontal"
+    android:background="@drawable/common_round_rect_pie_light"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/title_layout"
+        style="@style/common_rect_horizontal"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_34"
+        android:paddingRight="@dimen/dp_34"
+        android:paddingTop="@dimen/dp_20"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/title_image"
+            style="@style/common_imageview"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_12"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/dialog_title"
+            style="@style/common_textview_black"
+            android:singleLine="false"
+            android:text="温馨提示" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/dialog_content"
+        style="@style/common_rect_horizontal"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/dialog_content_edit_layout"
+            style="@style/common_rect_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/dialog_content_edit_title"
+                style="@style/common_textview_black"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_20"
+                android:singleLine="false"
+                android:text="@string/app_name" />
+
+            <xyz.tanwb.airship.view.widget.DrawableEditText
+                android:id="@+id/dialog_content_edit"
+                style="@style/common_edittext_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/common_oval_line_gray_light"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dp_12"
+                android:text="@string/app_name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dialog_content_recycler_layout"
+            style="@style/common_rect_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/dialog_content_recycler_title"
+                style="@style/common_textview_black"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_20"
+                android:singleLine="false"
+                android:text="@string/app_name"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/dialog_content_recycler_line"
+                style="@style/common_line"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/dialog_content_recycler"
+                style="@style/common_rect_horizontal"
+                android:overScrollMode="never" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dialog_content_text"
+            style="@style/common_textview_black"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:singleLine="false"
+            android:text="@string/app_name"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_button"
+        style="@style/common_rect_horizontal"
+        android:layout_marginTop="@dimen/dp_20"
+        android:orientation="vertical">
+
+        <View style="@style/common_line" />
+
+        <LinearLayout
+            style="@style/common_rect_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp_18"
+            android:paddingLeft="@dimen/dp_13"
+            android:paddingRight="@dimen/dp_13"
+            android:paddingTop="@dimen/dp_18">
+
+            <TextView
+                android:id="@+id/dialog_button_left"
+                style="@style/common_textview_theme_big"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginRight="@dimen/dp_7"
+                android:layout_weight="1"
+                android:background="@drawable/common_oval_line_theme"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="取消"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/dialog_button_right"
+                style="@style/common_textview_white_big"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginRight="@dimen/dp_7"
+                android:layout_weight="1"
+                android:background="@drawable/common_round_theme"
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="确定" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nodemedia.pusher.view.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="直播名称" />
+
+        <View style="@style/common_line" />
+
+        <xyz.tanwb.airship.view.widget.DrawableEditText
+            android:id="@+id/name"
+            style="@style/common_edittext_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/live_address_arrow"
+            android:background="@null"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_8"
+            android:text="请选择" />
+
+        <View style="@style/common_line" />
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="RTMP地址" />
+
+        <View style="@style/common_line" />
+
+        <xyz.tanwb.airship.view.widget.DrawableEditText
+            android:id="@+id/rtmp"
+            style="@style/common_edittext_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/live_address_arrow"
+            android:background="@null"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_8"
+            android:text="请选择" />
+
+        <View style="@style/common_line" />
+
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="推流码" />
+
+        <View style="@style/common_line" />
+
+        <xyz.tanwb.airship.view.widget.DrawableEditText
+            android:id="@+id/code"
+            style="@style/common_edittext_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/live_address_arrow"
+            android:background="@null"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_8"
+            android:text="请选择" />
+
+        <View style="@style/common_line" />
+
+    </LinearLayout>
+</ScrollView>

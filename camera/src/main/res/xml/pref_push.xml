@@ -1,0 +1,153 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/push_settings">
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="rtmp://"
+            android:inputType="textCapWords"
+            android:key="push_stream_url"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/stream_url" />
+
+        <cn.nodemedia.pusher.widget.ButtonPreference
+            android:key="push_start"
+            android:title="@string/push_start" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/video_settings">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/camera_postion_list_titles"
+            android:entryValues="@array/camera_postion_list_values"
+            android:key="camera_postion"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:summary="@null"
+            android:title="@string/camera_postion" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="camera_front_mirror"
+            android:summary="@null"
+            android:title="@string/camera_front_mirror" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/video_orientation_list_titles"
+            android:entryValues="@array/video_orientation_list_values"
+            android:key="video_orientation"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/video_orientation" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="video_front_mirror"
+            android:summary="@null"
+            android:title="@string/video_front_mirror" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/video_resolution_list_titles"
+            android:entryValues="@array/video_resolution_list_values"
+            android:key="video_resolution"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/video_resolution" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/video_profile_list_titles"
+            android:entryValues="@array/video_profile_list_values"
+            android:key="video_profile"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/video_profile" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/video_keyframe_interval_list_titles"
+            android:entryValues="@array/video_keyframe_interval_list_values"
+            android:key="video_keyframe_interval"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/video_keyframe_interval" />
+
+        <ListPreference
+            android:defaultValue="500000"
+            android:entries="@array/video_bitrate_list_titles"
+            android:entryValues="@array/video_bitrate_list_values"
+            android:key="video_bitrate"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/video_bitrate" />
+
+        <ListPreference
+            android:defaultValue="15"
+            android:entries="@array/video_fps_list_titles"
+            android:entryValues="@array/video_fps_list_values"
+            android:key="video_fps"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/video_fps" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/audio_settings">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/audio_profile_list_titles"
+            android:entryValues="@array/audio_profile_list_values"
+            android:key="audio_profile"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/audio_profile" />
+
+        <ListPreference
+            android:defaultValue="32000"
+            android:entries="@array/audio_bitrate_list_titles"
+            android:entryValues="@array/audio_bitrate_list_values"
+            android:key="audio_bitrate"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/audio_bitrate" />
+
+        <ListPreference
+            android:defaultValue="44100"
+            android:entries="@array/audio_samplerate_list_titles"
+            android:entryValues="@array/audio_samplerate_list_values"
+            android:key="audio_samplerate"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/audio_samplerate" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/advanced_features">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="audio_denoise"
+            android:summary="@null"
+            android:title="@string/audio_denoise" />
+
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="true"-->
+            <!--android:key="auto_hardware_acceleration"-->
+            <!--android:summary="@null"-->
+            <!--android:title="@string/auto_hardware_acceleration" />-->
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/smooth_skin_level_list_titles"
+            android:entryValues="@array/smooth_skin_level_list_values"
+            android:key="smooth_skin_level"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/smooth_skin_level" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

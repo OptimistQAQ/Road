@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nodemedia.pusher.view.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="直播地址" />
+
+        <View style="@style/common_line" />
+
+        <RelativeLayout
+            android:id="@+id/live_address"
+            style="@style/common_rect_horizontal"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_8">
+
+            <ImageView
+                android:id="@+id/live_address_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:src="@drawable/icon_arrow_right" />
+
+            <TextView
+                android:id="@+id/live_address_content"
+                style="@style/common_textview_black"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_toLeftOf="@+id/live_address_arrow"
+                android:text="请选择" />
+
+        </RelativeLayout>
+
+        <View style="@style/common_line" />
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="设备配置" />
+
+        <View style="@style/common_line" />
+
+        <LinearLayout
+            style="@style/common_rect_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_12">
+
+            <RelativeLayout
+                android:id="@+id/live_mode"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/live_mode_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/live_mode_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/live_mode_arrow"
+                    android:text="直播地址" />
+
+                <TextView
+                    android:id="@+id/live_mode_hint"
+                    style="@style/common_textview_black_tiny"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/live_mode_content"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_toLeftOf="@+id/live_mode_arrow"
+                    android:text="直播地址" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/video_quality"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/video_quality_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/video_quality_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/video_quality_arrow"
+                    android:text="视频质量" />
+
+                <TextView
+                    android:id="@+id/video_quality_hint"
+                    style="@style/common_textview_black_tiny"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/video_quality_content"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_toLeftOf="@+id/video_quality_arrow"
+                    android:text="视频质量" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/audio_quality"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/audio_quality_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/audio_quality_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/audio_quality_arrow"
+                    android:text="音频质量" />
+
+                <TextView
+                    android:id="@+id/audio_quality_hint"
+                    style="@style/common_textview_black_tiny"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/audio_quality_content"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_toLeftOf="@+id/audio_quality_arrow"
+                    android:text="音频质量" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <View style="@style/common_line" />
+
+        <TextView
+            style="@style/common_textview_gray_tiny"
+            android:layout_marginBottom="@dimen/dp_4"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="附加功能" />
+
+        <View style="@style/common_line" />
+
+        <LinearLayout
+            style="@style/common_rect_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_12">
+
+            <RelativeLayout
+                android:id="@+id/subtitle"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/subtitle_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/subtitle_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/subtitle_arrow"
+                    android:text="关闭" />
+
+                <TextView
+                    android:id="@+id/subtitle_hint"
+                    style="@style/common_textview_black_tiny"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/subtitle_content"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_toLeftOf="@+id/subtitle_arrow"
+                    android:text="智能语音识别字幕" />
+
+            </RelativeLayout>
+
+            <View style="@style/common_line" />
+
+            <RelativeLayout
+                android:id="@+id/recording"
+                style="@style/common_rect_horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_12"
+                android:paddingTop="@dimen/dp_8">
+
+                <ImageView
+                    android:id="@+id/recording_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_12"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <TextView
+                    android:id="@+id/recording_content"
+                    style="@style/common_textview_black"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="false"
+                    android:layout_toLeftOf="@+id/recording_arrow"
+                    android:text="最大录制时间  05：59：59" />
+
+                <TextView
+                    android:id="@+id/recording_hint"
+                    style="@style/common_textview_black_tiny"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/recording_content"
+                    android:layout_centerVertical="false"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_toLeftOf="@+id/recording_arrow"
+                    android:text="本地录制" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View style="@style/common_line" />
+
+        <View
+            style="@style/common_line"
+            android:layout_marginTop="@dimen/dp_32" />
+
+        <TextView
+            style="@style/common_textview_black"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_8"
+            android:text="进入播放" />
+
+        <View
+            style="@style/common_line"
+            android:layout_marginBottom="@dimen/dp_32" />
+
+    </LinearLayout>
+</ScrollView>

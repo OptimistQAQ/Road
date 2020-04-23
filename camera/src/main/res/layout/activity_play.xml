@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nodemedia.pusher.view.PlayActivity">
+
+    <cn.nodemedia.NodePlayerView
+        android:id="@+id/play_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/play_back"
+        style="@style/common_imageview"
+        android:padding="@dimen/dp_12"
+        app:srcCompat="@drawable/ic_back" />
+
+</RelativeLayout>

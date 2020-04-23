@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cn.nodemedia.pusher.view.SourcePushActivity;
+
 public class MainActivity extends AppCompatActivity implements LocationSource, AMapLocationListener, View.OnClickListener {
 
     MapView mMapView = null;
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         mLocationOption.setInterval(1000);
         mapLocationClient.startLocation();
     }
+
 
     @Override
     protected void onDestroy() {

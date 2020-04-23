@@ -1,0 +1,71 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/play_settings">
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="rtmp://"
+            android:inputType="textCapWords"
+            android:key="play_stream_url"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/stream_url" />
+
+        <cn.nodemedia.pusher.widget.ButtonPreference
+            android:key="play_start"
+
+            android:title="@string/play_start" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/advanced_features">
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="300"
+            android:inputType="number"
+            android:key="buffertime"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/buffertime" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="1000"
+            android:inputType="number"
+            android:key="maxbuffertime"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/maxbuffertime" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/video_scale_mode_list_titles"
+            android:entryValues="@array/video_scale_mode_list_values"
+            android:key="video_scale_mode"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:summary="@null"
+            android:title="@string/video_scale_mode" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="decode_auto_hardware_acceleration"
+            android:summary="@null"
+            android:title="@string/auto_hardware_acceleration" />
+
+        <ListPreference
+            android:defaultValue="tcp"
+            android:entries="@array/rtsp_transport_titles"
+            android:entryValues="@array/rtsp_transport_values"
+            android:key="rtsp_transport"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:summary="@null"
+            android:title="@string/rtsp_transport" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

@@ -1,0 +1,229 @@
+<resources>
+    <string name="app_name">快直播</string>
+    <string name="title_push">推流</string>
+    <string name="title_play">播放</string>
+    <string name="title_conv">串流</string>
+    <string name="title_about">关于</string>
+
+    <string name="app_exit">再点一次退出程序</string>
+    <string name="confirm">确认</string>
+    <string name="retry">重试</string>
+    <string name="cancel">取消</string>
+    <string name="finish">结束</string>
+    <string name="submit">提交</string>
+    <string name="edit">编辑</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="add">添加</string>
+    <string name="more">更多</string>
+    <string name="setting">设置</string>
+    <string name="wait">稍等</string>
+
+    <string name="toast_1000">正在连接服务器</string>
+    <string name="toast_1001">服务器连接成功，开始播放</string>
+    <string name="toast_1002">服务器连接失败，请重试</string>
+    <string name="toast_1003">正在重连服务器</string>
+    <string name="toast_1004">播放结束</string>
+    <string name="toast_1005">播放中途网络异常</string>
+
+    <string name="toast_2000">正在连接服务器</string>
+    <string name="toast_2001">服务器连接成功，开始推流</string>
+    <string name="toast_2002">服务器连接失败，请重试</string>
+    <string name="toast_2003">正在重连服务器</string>
+    <string name="toast_2004">推流结束</string>
+    <string name="toast_2005">推流中途网络异常</string>
+
+    <string name="push_settings">推流设置</string>
+    <string name="stream_url">流地址</string>
+    <string name="push_start">开始推流</string>
+    <string name="push_wait">连接中..</string>
+    <string name="push_stop">停止推流</string>
+    <string name="video_settings">视频参数</string>
+    <string name="camera_postion">摄像头方向</string>
+    <string-array name="camera_postion_list_titles">
+        <item>后置</item>
+        <item>前置</item>
+    </string-array>
+    <string-array name="camera_postion_list_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string name="camera_front_mirror">预览前置镜像</string>
+    <string name="video_orientation">视频方向</string>
+    <string-array name="video_orientation_list_titles">
+        <item>竖屏</item>
+        <item>横屏(Home 在右)</item>
+        <item>横屏(Home 在左)</item>
+    </string-array>
+    <string-array name="video_orientation_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string name="video_front_mirror">视频前置镜像</string>
+    <string name="video_resolution">视频分辨率</string>
+    <string-array name="video_resolution_list_titles">
+        <item>16x9_270</item>
+        <item>16x9_360</item>
+        <item>16x9_480</item>
+        <item>16x9_540</item>
+        <item>16x9_720</item>
+    </string-array>
+    <string-array name="video_resolution_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+
+    <string name="video_profile">视频标准</string>
+    <string-array name="video_profile_list_titles">
+        <item>H.264 Baseline</item>
+        <item>H.264 Main</item>
+        <item>H.264 High</item>
+    </string-array>
+    <string-array name="video_profile_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="video_keyframe_interval">视频关键帧间隔</string>
+    <string-array name="video_keyframe_interval_list_titles">
+        <item>1s</item>
+        <item>2s</item>
+        <item>3s</item>
+        <item>4s</item>
+        <item>5s</item>
+    </string-array>
+    <string-array name="video_keyframe_interval_list_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="video_bitrate">视频码率</string>
+    <string-array name="video_bitrate_list_titles">
+        <item>300 kbps</item>
+        <item>500 kbps</item>
+        <item>600 kbps</item>
+        <item>800 kbps</item>
+        <item>1000 kbps</item>
+    </string-array>
+    <string-array name="video_bitrate_list_values">
+        <item>300000</item>
+        <item>500000</item>
+        <item>600000</item>
+        <item>800000</item>
+        <item>1000000</item>
+    </string-array>
+    <string name="video_fps">视频帧率</string>
+    <string-array name="video_fps_list_titles">
+        <item>15 fps</item>
+        <item>20 fps</item>
+        <item>24 fps</item>
+        <item>30 fps</item>
+    </string-array>
+    <string-array name="video_fps_list_values">
+        <item>15</item>
+        <item>20</item>
+        <item>24</item>
+        <item>30</item>
+    </string-array>
+
+    <string name="audio_settings">音频参数</string>
+    <string name="audio_profile">音频编码</string>
+    <string-array name="audio_profile_list_titles">
+        <item>LCAAC</item>
+        <item>HEAAC</item>
+        <item>SPEEX</item>
+    </string-array>
+    <string-array name="audio_profile_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string name="audio_bitrate">音频码率</string>
+    <string-array name="audio_bitrate_list_titles">
+        <item>32 kbps</item>
+        <item>64 kbps</item>
+        <item>128 kbps</item>
+        <item>192 kbps</item>
+    </string-array>
+    <string-array name="audio_bitrate_list_values">
+        <item>32000</item>
+        <item>64000</item>
+        <item>128000</item>
+        <item>192000</item>
+    </string-array>
+
+    <string name="audio_samplerate">音频采样率</string>
+    <string-array name="audio_samplerate_list_titles">
+        <item>8kHz</item>
+        <item>16kHz</item>
+        <item>32kHz</item>
+        <item>44.1kHz</item>
+        <item>48kHz</item>
+    </string-array>
+    <string-array name="audio_samplerate_list_values">
+        <item>8000</item>
+        <item>16000</item>
+        <item>32000</item>
+        <item>44100</item>
+        <item>48000</item>
+    </string-array>
+
+    <string name="advanced_features">高级特性</string>
+    <string name="audio_denoise">麦克风降噪</string>
+    <string name="auto_hardware_acceleration">自动硬件加速</string>
+    <string name="smooth_skin_level">平滑美颜等级</string>
+    <string-array name="smooth_skin_level_list_titles">
+        <item>off</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="smooth_skin_level_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="play_settings">播放设置</string>
+    <string name="play_start">开始播放</string>
+    <string name="play_stop">停止播放</string>
+    <string name="buffertime">启动缓冲时长</string>
+    <string name="maxbuffertime">最大缓冲时长</string>
+    <string name="video_scale_mode">视频缩放模式</string>
+    <string name="rtsp_transport">RTSP 传输协议</string>
+    <string-array name="video_scale_mode_list_titles">
+        <item>ScaleToFill</item>
+        <item>ScaleAspectFit</item>
+        <item>ScaleAspectFill</item>
+    </string-array>
+    <string-array name="video_scale_mode_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="rtsp_transport_titles">
+        <item>UDP</item>
+        <item>TCP</item>
+        <item>HTTP</item>
+    </string-array>
+    <string-array name="rtsp_transport_values">
+        <item>udp</item>
+        <item>tcp</item>
+        <item>http</item>
+    </string-array>
+
+</resources>
