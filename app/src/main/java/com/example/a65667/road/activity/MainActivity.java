@@ -31,11 +31,9 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.example.a65667.road.R;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import cn.nodemedia.pusher.view.SourcePushActivity;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements LocationSource, AMapLocationListener, View.OnClickListener {
 
@@ -52,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
     private PolylineOptions mPolyoptions, tracePolytion;
     private Polyline mPolyline;
     private double distance;
+    private static double  xGPS = 0, yGPS = 0;
      private Marker markerOwner;  //自己的位置
 
     private List<Double> gpsx;
@@ -172,6 +171,9 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                     isFirstLoc = false;
                 }
 
+                xGPS = aMapLocation.getLatitude();
+                yGPS = aMapLocation.getLongitude();
+
                 //将地图移动到定位点
                 aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
                 //点击定位按钮 能够将地图的中心移动到定位点
@@ -200,6 +202,23 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
             }
         }
     }
+
+    /*
+    *静态类用于返回GPS坐标
+    */
+    public static class Get_GPS{
+
+        static Get_GPS get_gps = new Get_GPS();
+        static Double x, y;
+
+        public static Get_GPS get_Location(){
+            Get_GPS.x = xGPS;
+            Get_GPS.y = yGPS;
+            return get_gps;
+        }
+
+    }
+
 
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
@@ -278,4 +297,5 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
             e.printStackTrace();
         }
     }
+
 }

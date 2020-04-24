@@ -21,14 +21,14 @@
             android:background="@null">
 
             <ImageView
-                android:layout_width="57dp"
+                android:layout_width="70dp"
                 android:layout_height="27dp"
                 android:src="#309153"/>
 
             <TextView
                 android:id="@+id/tv_data"
-                android:layout_width="50dp"
-                android:layout_height="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
                 android:text="12月31日"
