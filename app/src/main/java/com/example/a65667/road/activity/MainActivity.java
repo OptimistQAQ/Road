@@ -29,6 +29,7 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.example.a65667.road.R;
+import com.example.a65667.road.bean.CurrentLocalGPS;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -173,6 +174,8 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
 
                 xGPS = aMapLocation.getLatitude();
                 yGPS = aMapLocation.getLongitude();
+                CurrentLocalGPS.Latitude = xGPS;
+                CurrentLocalGPS.Longitude = yGPS;
 
                 //将地图移动到定位点
                 aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
