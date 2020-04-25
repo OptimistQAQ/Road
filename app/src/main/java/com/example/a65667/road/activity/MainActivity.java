@@ -206,23 +206,6 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         }
     }
 
-    /*
-    *静态类用于返回GPS坐标
-    */
-    public static class Get_GPS{
-
-        static Get_GPS get_gps = new Get_GPS();
-        static Double x, y;
-
-        public static Get_GPS get_Location(){
-            Get_GPS.x = xGPS;
-            Get_GPS.y = yGPS;
-            return get_gps;
-        }
-
-    }
-
-
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
 

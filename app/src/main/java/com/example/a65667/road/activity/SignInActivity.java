@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.example.a65667.road.R;
 import com.example.a65667.road.bean.User;
+import com.example.a65667.road.utils.CurrentUserInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -36,10 +37,6 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 initView();
-
-//                Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
-//                startActivity(main2Activity);
-//                finish();
             }
         });
 
@@ -66,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
 
         Map<String, String> param = new HashMap<>();
 
-        OkGo.<String>post("http://192.168.0.101:8080/login")
+        OkGo.<String>post("http://192.168.0.103:8080/login")
                 .params("name", bt_name)
                 .params("password", bt_password)
                 .tag(this)
@@ -77,6 +74,15 @@ public class SignInActivity extends AppCompatActivity {
                         User user = JSON.parseObject(response.body(), User.class);
                         Log.e("user", response.body());
                         Log.e("user_1", "" + user.getUname() + "-" + user.getUpassword());
+
+                        if (user.getUname() != null) {
+                            CurrentUserInfo.user = user;
+                            CurrentUserInfo.uno = user.getUno();
+                            CurrentUserInfo.name = user.getUname();
+                            CurrentUserInfo.password = user.getUpassword();
+                            Log.e("123", CurrentUserInfo.name);
+                        }
+
                         Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                         Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
                         startActivity(main2Activity);

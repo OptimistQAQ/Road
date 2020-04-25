@@ -56,14 +56,14 @@
 
         <activity android:name=".activity.SignInActivity" />
         <activity android:name=".activity.RegisterActivity">
-
-        </activity>
-        <activity android:name=".activity.Main2Activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.Main2Activity" >
+
         </activity>
         <!-- <activity android:name=".fragment.CameraFragment" /> -->
         <!-- <activity android:name=".fragment.RecordFragment" /> -->
