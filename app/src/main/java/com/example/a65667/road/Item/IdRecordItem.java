@@ -3,7 +3,12 @@ package com.example.a65667.road.Item;
 public class IdRecordItem {
 
     private String icName;
-    private String icID;
+    private Integer icID;
+
+    public IdRecordItem(String icName, Integer icID) {
+        this.icName = icName;
+        this.icID = icID;
+    }
 
     public String getIcName() {
         return icName;
@@ -13,11 +18,11 @@ public class IdRecordItem {
         this.icName = icName;
     }
 
-    public String getIcID() {
+    public Integer getIcID() {
         return icID;
     }
 
-    public void setIcID(String icID) {
+    public void setIcID(Integer icID) {
         this.icID = icID;
     }
 }

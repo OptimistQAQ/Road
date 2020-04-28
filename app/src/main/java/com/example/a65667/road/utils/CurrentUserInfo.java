@@ -7,4 +7,10 @@ public class CurrentUserInfo {
     public static Integer uno = 0;
     public static String name = "";
     public static String password = "";
+
+    public static boolean pbase = true;
+    public static boolean photo = true;
+    public static boolean pvideo = true;
+    public static boolean pinfo = true;
+    public static boolean padmin = true;
 }

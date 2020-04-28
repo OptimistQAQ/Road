@@ -2,6 +2,7 @@ package com.example.a65667.road.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -23,8 +24,10 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mMapView = (MapView)findViewById(R.id.map_view);
@@ -171,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                     Toast.makeText(getApplicationContext(), buffer.toString(), Toast.LENGTH_LONG).show();
                     isFirstLoc = false;
                 }
+                addMarker();
 
                 xGPS = aMapLocation.getLatitude();
                 yGPS = aMapLocation.getLongitude();
@@ -234,6 +239,11 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         }
         mapLocationClient = null;
         mLocationOption = null;
+    }
+
+    private void addMarker() {
+        markerOwner = aMap.addMarker(new MarkerOptions().position(new LatLng(xGPS, yGPS))
+                .icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_car_1))));
     }
 
     private void redrawline() {

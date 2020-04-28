@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
 
         Map<String, String> param = new HashMap<>();
 
-        OkGo.<String>post("http://192.168.0.103:8080/login")
+        OkGo.<String>post("http://39.105.172.22:9596/login")
                 .params("name", bt_name)
                 .params("password", bt_password)
                 .tag(this)

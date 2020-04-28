@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
             Map<String, String> param = new HashMap<>();
             param.put("name", euserName1.getText().toString());
             param.put("password", ePassword.getText().toString());
-            OkGo.<String>post("http://192.168.0.103:8080/register")
+            OkGo.<String>post("http://39.105.172.22:9596/register")
                     .params("name", euserName1.getText().toString())
                     .params("password", ePassword.getText().toString())
                     .execute(new StringCallback() {

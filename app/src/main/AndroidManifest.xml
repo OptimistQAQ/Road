@@ -54,7 +54,9 @@
             android:name="com.amap.api.v2.apikey"
             android:value="191c2c7e4143e82d8b9947282b1fd246" />
 
-        <activity android:name=".activity.SignInActivity" />
+        <activity android:name=".activity.SignInActivity" >
+
+        </activity>
         <activity android:name=".activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

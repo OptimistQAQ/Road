@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.alibaba.fastjson.JSON;
 import com.example.a65667.road.R;
 import com.example.a65667.road.bean.Permission;
+import com.example.a65667.road.utils.CurrentUserInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -20,7 +21,7 @@ public class AuthorityActivity extends AppCompatActivity {
 
     private ImageView per_base, per_photo, per_video, per_info, per_admin;
     private String rc_id;
-    private boolean pBase = false, pPhoto = false, pVideo = false, pInfo = false, pAdmin = false;
+    private Boolean base = false, photoSeg = false, videoSeg = false, infoCheck = false, permissionAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,33 +55,35 @@ public class AuthorityActivity extends AppCompatActivity {
         per_base.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pBase){
-                    pBase = false;
-                    permission.setPbase(pBase);
+                if (base){
+                    base = false;
+                    permission.setPbase(base);
                     per_base.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
                             .params("Uno", permission.getUno())
-                            .params("Pbase", permission.getPbase())
+                            .params("base", permission.getPbase())
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
-                                    Log.e("base", response.body());
+                                    Log.e("pbase", response.body());
+                                    CurrentUserInfo.pbase = base;
                                 }
                             });
                 }
                 else {
-                    pBase = true;
-                    permission.setPbase(pBase);
+                    base = true;
+                    permission.setPbase(base);
                     per_base.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", permission.getPbase())
+                            .params("base", permission.getPbase())
                             .params("id", permission.getUno())
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("base", response.body());
+                                    CurrentUserInfo.pbase = base;
                                 }
                             });
                 }
@@ -90,29 +93,31 @@ public class AuthorityActivity extends AppCompatActivity {
         per_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pPhoto){
-                    pPhoto = false;
+                if (photoSeg){
+                    photoSeg = false;
                     per_photo.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pphoto_seg", pPhoto)
+                            .params("photoSeg", photoSeg)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("photo", response.body());
+                                    CurrentUserInfo.photo = photoSeg;
                                 }
                             });
                 }
                 else{
-                    pPhoto = true;
+                    photoSeg = true;
                     per_photo.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pphoto_seg", pPhoto)
+                            .params("photoSeg", photoSeg)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("photo", response.body());
+                                    CurrentUserInfo.photo = photoSeg;
                                 }
                             });
                 }
@@ -122,29 +127,31 @@ public class AuthorityActivity extends AppCompatActivity {
         per_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pVideo){
-                    pVideo = false;
+                if (videoSeg){
+                    videoSeg = false;
                     per_video.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pVideo)
+                            .params("videoSeg", videoSeg)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("video", response.body());
+                                    CurrentUserInfo.pvideo = videoSeg;
                                 }
                             });
                 }
                 else {
-                    pVideo = true;
+                    videoSeg = true;
                     per_video.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pVideo)
+                            .params("videoSeg", videoSeg)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("video", response.body());
+                                    CurrentUserInfo.pvideo = videoSeg;
                                 }
                             });
                 }
@@ -154,29 +161,31 @@ public class AuthorityActivity extends AppCompatActivity {
         per_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pInfo){
-                    pInfo = false;
+                if (infoCheck){
+                    infoCheck = false;
                     per_info.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pInfo)
+                            .params("infoCheck", infoCheck)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("info", response.body());
+                                    CurrentUserInfo.pinfo = infoCheck;
                                 }
                             });
                 }
                 else {
-                    pInfo = true;
+                    infoCheck = true;
                     per_info.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pInfo)
+                            .params("infoCheck", infoCheck)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("info", response.body());
+                                    CurrentUserInfo.pinfo = infoCheck;
                                 }
                             });
                 }
@@ -186,29 +195,31 @@ public class AuthorityActivity extends AppCompatActivity {
         per_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pAdmin){
-                    pAdmin = false;
+                if (permissionAdmin){
+                    permissionAdmin = false;
                     per_admin.setImageDrawable(getResources().getDrawable(R.drawable.tv_start));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pAdmin)
+                            .params("permissionAdmin", permissionAdmin)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("admin", response.body());
+                                    CurrentUserInfo.padmin = permissionAdmin;
                                 }
                             });
                 }
                 else {
-                    pAdmin = true;
+                    permissionAdmin = true;
                     per_admin.setImageDrawable(getResources().getDrawable(R.drawable.tv_off));
-                    OkGo.<String>post("http://192.168.0.101:8080/decisionPermission")
+                    OkGo.<String>post("http://39.105.172.22:9596/decisionPermission")
                             .tag(this)
-                            .params("Pbase", pAdmin)
+                            .params("permissionAdmin", permissionAdmin)
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(Response<String> response) {
                                     Log.e("admin", response.body());
+                                    CurrentUserInfo.padmin = permissionAdmin;
                                 }
                             });
                 }

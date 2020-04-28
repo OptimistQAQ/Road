@@ -3,12 +3,18 @@ package com.example.a65667.road.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.a65667.road.Item.IdRecordItem;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.IdRecordItemViewBinder;
+import com.example.a65667.road.utils.CurrentUserInfo;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,32 +50,52 @@ public class AuthorityManageActivity extends AppCompatActivity {
 
         ic_arrow_left_w = (ImageView)findViewById(R.id.ic_arrow_left_w);
 
-        List<String> nameList = new ArrayList<>();
-        List<String> idList = new ArrayList<>();
-
-        nameList.add("张三");
-        idList.add("10000001");
-
-        nameList.add("李斯");
-        idList.add("10000002");
-
-        nameList.add("亲加");
-        idList.add("16");
+//        List<String> nameList = new ArrayList<>();
+//        List<String> idList = new ArrayList<>();
+//
+//
+//        nameList.add("张三");
+//        idList.add("10000001");
+//
+//        nameList.add("李斯");
+//        idList.add("10000002");
+//
+//        nameList.add(CurrentUserInfo.name);
+//        idList.add(CurrentUserInfo.uno.toString());
 
         recyclerView = findViewById(R.id.rv_record);
         mAdapter = new MultiTypeAdapter();
         mAdapter.register(IdRecordItem.class, new IdRecordItemViewBinder());
         recyclerView.setAdapter(mAdapter);
 
-        mItems = new Items();
-        for(int i=0; i<nameList.size(); i++){
-            IdRecordItem idRecordItem = new IdRecordItem();
-            idRecordItem.setIcName(nameList.get(i));
-            idRecordItem.setIcID(idList.get(i));
-            mItems.add(idRecordItem);
-        }
+        mItems.add(new IdRecordItem(CurrentUserInfo.name, CurrentUserInfo.uno));
 
-        mAdapter.setItems(mItems);
-        mAdapter.notifyDataSetChanged();
+        OkGo.<String>post("")
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.e("user_list", response.body());
+                        List<IdRecordItem> mList = JSON.parseArray(response.body(), IdRecordItem.class);
+                        Log.e("first_user", mList.get(0).getIcName());
+                        for (IdRecordItem json : mList) {
+                            mItems.add(new IdRecordItem(json.getIcName(), json.getIcID()));
+                        }
+                        mAdapter.setItems(mItems);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
+
+//        mItems = new Items();
+//        for(int i=0; i<nameList.size(); i++){
+//            IdRecordItem idRecordItem = new IdRecordItem();
+//            idRecordItem.setIcName(nameList.get(i));
+//            idRecordItem.setIcID(idList.get(i));
+//            mItems.add(idRecordItem);
+//        }
+//
+//        mAdapter.setItems(mItems);
+//        mAdapter.notifyDataSetChanged();
     }
 }
