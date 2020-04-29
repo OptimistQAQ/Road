@@ -48,7 +48,7 @@ public class CrackListItemViewBinder extends ItemViewBinder<CrackListItem, Crack
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(root.getContext(), CrackPictureActivity.class);
-                intent.putExtra("rcName", crackListItem.getRc_name());
+                intent.putExtra("rcName", rcName.getText().toString());
                 root.getContext().startActivity(intent);
             }
         });

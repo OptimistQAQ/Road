@@ -57,15 +57,16 @@ public class SignInActivity extends AppCompatActivity {
 
         final String bt_name = euserName.getText().toString();
         String bt_password = ePassword.getText().toString();
-        User signIn = new User();
-        signIn.setUname(bt_name);
-        signIn.setUpassword(bt_password);
-
-        Map<String, String> param = new HashMap<>();
+        Integer bt_time = 10;
+        Integer bt_distance = 10;
+        Integer bt_line = 10;
 
         OkGo.<String>post("http://39.105.172.22:9596/login")
                 .params("name", bt_name)
                 .params("password", bt_password)
+                .params("time", bt_time)
+                .params("distance", bt_distance)
+                .params("line", bt_line)
                 .tag(this)
 //                .upString(JSON.toJSONString(param))
                 .execute(new StringCallback() {
@@ -80,6 +81,9 @@ public class SignInActivity extends AppCompatActivity {
                             CurrentUserInfo.uno = user.getUno();
                             CurrentUserInfo.name = user.getUname();
                             CurrentUserInfo.password = user.getUpassword();
+                            CurrentUserInfo.time = bt_time.toString() + "小时";
+                            CurrentUserInfo.distance = bt_distance.toString() + "公里";
+                            CurrentUserInfo.line = bt_line.toString() + "条";
                             Log.e("123", CurrentUserInfo.name);
                         }
 

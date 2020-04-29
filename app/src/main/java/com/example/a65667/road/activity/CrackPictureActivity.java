@@ -1,6 +1,5 @@
 package com.example.a65667.road.activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,7 +38,6 @@ public class CrackPictureActivity extends AppCompatActivity {
     }
 
     private void ductIntent(){
-        Intent recordIntent = getIntent();
-        rc_Name = recordIntent.getStringExtra("rcName");
+        rc_Name = getIntent().getStringExtra("rcName");
     }
 }

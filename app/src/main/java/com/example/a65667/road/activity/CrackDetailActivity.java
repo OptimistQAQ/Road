@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -25,6 +26,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.a65667.road.R;
+import com.example.a65667.road.utils.CurrentUserInfo;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -42,6 +44,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
     private ImageView tc_re;
     private FloatingActionButton fab2;
+    private TextView tc_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,8 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
         tc_re = (ImageView)findViewById(R.id.tc_re);
         fab2 = (FloatingActionButton)findViewById(R.id.fab2);
+        tc_name = (TextView) findViewById(R.id.tc_name);
+        tc_name.setText(CurrentUserInfo.name);
         tc_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.a65667.road.Item.IdRecordItem;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.IdRecordItemViewBinder;
@@ -18,6 +20,7 @@ import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -50,52 +53,44 @@ public class AuthorityManageActivity extends AppCompatActivity {
 
         ic_arrow_left_w = (ImageView)findViewById(R.id.ic_arrow_left_w);
 
-//        List<String> nameList = new ArrayList<>();
-//        List<String> idList = new ArrayList<>();
-//
-//
-//        nameList.add("张三");
-//        idList.add("10000001");
-//
-//        nameList.add("李斯");
-//        idList.add("10000002");
-//
-//        nameList.add(CurrentUserInfo.name);
-//        idList.add(CurrentUserInfo.uno.toString());
+        List<String> nameList = new ArrayList<>();
+        List<String> idList = new ArrayList<>();
+
+        nameList.add(CurrentUserInfo.name);
+        idList.add(CurrentUserInfo.uno.toString());
 
         recyclerView = findViewById(R.id.rv_record);
         mAdapter = new MultiTypeAdapter();
         mAdapter.register(IdRecordItem.class, new IdRecordItemViewBinder());
         recyclerView.setAdapter(mAdapter);
 
-        mItems.add(new IdRecordItem(CurrentUserInfo.name, CurrentUserInfo.uno));
+        Log.e("user", CurrentUserInfo.name + CurrentUserInfo.uno);
 
-        OkGo.<String>post("")
+        OkGo.<String>post("http://39.105.172.22:9596/showLogin")
                 .tag(this)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         Log.e("user_list", response.body());
-                        List<IdRecordItem> mList = JSON.parseArray(response.body(), IdRecordItem.class);
-                        Log.e("first_user", mList.get(0).getIcName());
-                        for (IdRecordItem json : mList) {
-                            mItems.add(new IdRecordItem(json.getIcName(), json.getIcID()));
+                        response.toString();
+                        JSONArray jsonArray = JSON.parseArray(response.body());
+                        for (int i=0; i<jsonArray.size(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            idList.add(jsonObject.getString("ano"));
+                            nameList.add(jsonObject.getString("utitle"));
+                            Log.e("2user", nameList.size() + " " + nameList.get(i+1));
+                        }
+                        mItems = new Items();
+                        for(int i=0; i<nameList.size(); i++){
+                            IdRecordItem idRecordItem = new IdRecordItem();
+                            idRecordItem.setIcName(nameList.get(i));
+                            idRecordItem.setIcID(idList.get(i));
+                            System.out.println(idRecordItem.getIcID() + idRecordItem.getIcName());
+                            mItems.add(idRecordItem);
                         }
                         mAdapter.setItems(mItems);
                         mAdapter.notifyDataSetChanged();
                     }
                 });
-
-
-//        mItems = new Items();
-//        for(int i=0; i<nameList.size(); i++){
-//            IdRecordItem idRecordItem = new IdRecordItem();
-//            idRecordItem.setIcName(nameList.get(i));
-//            idRecordItem.setIcID(idList.get(i));
-//            mItems.add(idRecordItem);
-//        }
-//
-//        mAdapter.setItems(mItems);
-//        mAdapter.notifyDataSetChanged();
     }
 }
