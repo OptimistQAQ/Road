@@ -39,6 +39,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import cn.nodemedia.pusher.ShareBean;
+
+
 public class MainActivity extends AppCompatActivity implements LocationSource, AMapLocationListener, View.OnClickListener {
 
     MapView mMapView = null;
@@ -181,6 +184,9 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                 yGPS = aMapLocation.getLongitude();
                 CurrentLocalGPS.Latitude = xGPS;
                 CurrentLocalGPS.Longitude = yGPS;
+                ShareBean.Latitude = xGPS;
+                ShareBean.Longitude = yGPS;
+
 
                 //将地图移动到定位点
                 aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));

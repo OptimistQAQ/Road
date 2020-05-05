@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -19,6 +20,8 @@ import com.lzy.okgo.model.Response;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.nodemedia.pusher.ShareBean;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -42,15 +45,15 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
-        bt_login = (ImageButton)findViewById(R.id.bt_login);
+    private void init() {
+        bt_login = (ImageButton) findViewById(R.id.bt_login);
         euserName = (EditText) findViewById(R.id.eusername);
         ePassword = (EditText) findViewById(R.id.epassword);
     }
 
-    private void initView(){
+    private void initView() {
 
-        if ("".equals(euserName.getText().toString()) || "".equals(ePassword.getText().toString())){
+        if ("".equals(euserName.getText().toString()) || "".equals(ePassword.getText().toString())) {
             Toast.makeText(this, "请正确输入用户名和密码", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -60,6 +63,9 @@ public class SignInActivity extends AppCompatActivity {
         Integer bt_time = 10;
         Integer bt_distance = 10;
         Integer bt_line = 10;
+
+        // module间信息共享
+
 
         OkGo.<String>post("http://39.105.172.22:9596/login")
                 .params("name", bt_name)
@@ -73,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         User user = JSON.parseObject(response.body(), User.class);
-                        Log.e("user", response.body());
+                        Log.e("user_body", response.body());
                         Log.e("user_1", "" + user.getUname() + "-" + user.getUpassword());
 
                         if (user.getUname() != null) {
@@ -85,6 +91,15 @@ public class SignInActivity extends AppCompatActivity {
                             CurrentUserInfo.distance = bt_distance.toString() + "公里";
                             CurrentUserInfo.line = bt_line.toString() + "条";
                             Log.e("123", CurrentUserInfo.name);
+                            ShareBean.uname = user.getUname();
+                            ShareBean.unickName = user.getUnickName();
+                            ShareBean.uno = user.getUno();
+                            ShareBean.upassword = user.getUpassword();
+                            ShareBean.uprofilePhoto = user.getUprofilePhoto();
+                            ShareBean.utitle = user.getUtitle();
+                            ShareBean.utotalTime = user.getUtotalTime();
+                            ShareBean.utotalDistance = user.getUtotalDistance();
+                            ShareBean.utotalLine = user.getUtotalLine();
                         }
 
                         Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();

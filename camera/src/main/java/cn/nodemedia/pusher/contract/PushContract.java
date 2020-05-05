@@ -4,15 +4,21 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import cn.nodemedia.NodeCameraView;
 import cn.nodemedia.NodePublisher;
 import cn.nodemedia.NodePublisherDelegate;
 import cn.nodemedia.pusher.R;
+import cn.nodemedia.pusher.ShareBean;
 import xyz.tanwb.airship.utils.Log;
 import xyz.tanwb.airship.utils.ToastUtils;
 import xyz.tanwb.airship.view.BasePresenter;
 import xyz.tanwb.airship.view.BaseView;
+
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 public interface PushContract {
 
@@ -35,6 +41,9 @@ public interface PushContract {
         private boolean isStarting;
 
         private boolean isFlashEnable = false;
+        private Handler mHandler = new Handler(); // 控制器
+        private Runnable gpsSenter; // gps发送线程
+        private static int seconds; // 记录秒
 
         @Override
         public void onStart() {
@@ -58,7 +67,7 @@ public interface PushContract {
             boolean autoHardwareAcceleration = getPreferenceValue("auto_hardware_acceleration", true);
             int smoothSkinLevel = getPreferenceValue("smooth_skin_level", "0");
 
-            nodePublisher = new NodePublisher(mContext,"c0KzkWKg5LoyRg+hR+2wtrnf/k61cQuoAibf2T8ghqFObNhHVuBiWqn28RhSSyAmLhcxuLVOXVLUf0Blk/axig==");
+            nodePublisher = new NodePublisher(mContext, "c0KzkWKg5LoyRg+hR+2wtrnf/k61cQuoAibf2T8ghqFObNhHVuBiWqn28RhSSyAmLhcxuLVOXVLUf0Blk/axig==");
             nodePublisher.setNodePublisherDelegate(this);
             nodePublisher.setOutputUrl(streamURL);
             nodePublisher.setCameraPreview(mView.getNodeCameraView(), cameraPostion, camreaFrontMirror);
@@ -81,17 +90,71 @@ public interface PushContract {
             return sp.getBoolean(key, defValue);
         }
 
+        private void startSentGPSTimer() {
+            seconds = 0;
+            gpsSenter = new Runnable() {
+                @Override
+                public void run() {
+                    OkGo.<String>post("http://192.168.31.52:5000/record_location")
+                            .params("Uno", "" + ShareBean.uno)
+                            .params("Lno", "" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1))
+                            .params("Lon", ShareBean.Longitude)
+                            .params("Lat", ShareBean.Latitude)
+                            .params("Seconds", seconds)
+                            .tag(this)
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onSuccess(Response<String> response) {
+                                    Log.e("gps push finsih!" + response.body());
+                                }
+                            });
+                    mHandler.postDelayed(gpsSenter, 1000);  // 延迟1秒
+                    seconds++;
+
+                }
+            };
+
+            mHandler.postDelayed(gpsSenter, 1000);
+        }
+
         public void pushChange() {
             if (isStarting) {
                 nodePublisher.stop();
+                mHandler.removeCallbacks(gpsSenter);    // 停止发送GPS
+                OkGo.<String>post("http://192.168.31.52:5000/finsh_push")
+                        .params("Uno", "" + ShareBean.uno)
+                        .params("Lno", "" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1))
+                        .tag(this)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                Log.e("push finsih!" + response.body());
+                            }
+                        });
             } else {
                 nodePublisher.start();
+                String url = sp.getString("push_stream_url", null); // 推流RTMP地址
+
+
+                OkGo.<String>post("http://192.168.31.52:5000/start_a_Line") // 开始新的线路检测
+                        .params("Uno", ShareBean.uno)
+                        .params("Lno", "" + ShareBean.uno + "_" + ShareBean.utotalLine++)
+                        .params("rtmp_url", url)
+                        .tag(this)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                Log.e("push start!");
+                            }
+                        });
+
+                startSentGPSTimer(); // 定时发送GPS
             }
         }
 
         public int switchCamera() {
             int ret = nodePublisher.switchCamera();
-            if(ret > 0) {
+            if (ret > 0) {
                 mView.flashChange(false);
             }
             return ret;
@@ -129,7 +192,7 @@ public interface PushContract {
                         ToastUtils.show(mContext, mContext.getString(R.string.toast_2000));
                         break;
                     case 2001:
-                       ToastUtils.show(mContext, mContext.getString(R.string.toast_2001));
+                        ToastUtils.show(mContext, mContext.getString(R.string.toast_2001));
                         isStarting = true;
                         if (mView != null) {
                             mView.buttonAvailable(isStarting);
@@ -139,7 +202,7 @@ public interface PushContract {
                         ToastUtils.show(mContext, mContext.getString(R.string.toast_2002));
                         break;
                     case 2004:
-                       ToastUtils.show(mContext, mContext.getString(R.string.toast_2004));
+                        ToastUtils.show(mContext, mContext.getString(R.string.toast_2004));
                         isStarting = false;
                         if (mView != null) {
                             mView.buttonAvailable(isStarting);

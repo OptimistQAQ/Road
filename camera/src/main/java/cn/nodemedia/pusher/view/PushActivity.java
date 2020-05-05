@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import cn.nodemedia.NodeCameraView;
 import cn.nodemedia.pusher.R;
+import cn.nodemedia.pusher.ShareBean;
 import cn.nodemedia.pusher.contract.PushContract;
 import xyz.tanwb.airship.view.BaseActivity;
 
@@ -40,6 +41,7 @@ public class PushActivity extends BaseActivity<PushContract.Presenter> implement
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         assignViews();
+
     }
 
 
