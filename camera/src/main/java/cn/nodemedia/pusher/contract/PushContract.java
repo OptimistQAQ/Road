@@ -95,7 +95,7 @@ public interface PushContract {
             gpsSenter = new Runnable() {
                 @Override
                 public void run() {
-                    OkGo.<String>post("http://192.168.31.52:5000/record_location")
+                    OkGo.<String>post("http://ishero.net:5000/record_location")
                             .params("Uno", "" + ShareBean.uno)
                             .params("Lno", "" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1))
                             .params("Lon", ShareBean.Longitude)
@@ -121,7 +121,7 @@ public interface PushContract {
             if (isStarting) {
                 nodePublisher.stop();
                 mHandler.removeCallbacks(gpsSenter);    // 停止发送GPS
-                OkGo.<String>post("http://192.168.31.52:5000/finsh_push")
+                OkGo.<String>post("http://ishero.net:5000/finsh_push")
                         .params("Uno", "" + ShareBean.uno)
                         .params("Lno", "" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1))
                         .tag(this)
@@ -136,7 +136,7 @@ public interface PushContract {
                 String url = sp.getString("push_stream_url", null); // 推流RTMP地址
 
 
-                OkGo.<String>post("http://192.168.31.52:5000/start_a_Line") // 开始新的线路检测
+                OkGo.<String>post("http://ishero.net:5000/start_a_Line") // 开始新的线路检测
                         .params("Uno", ShareBean.uno)
                         .params("Lno", "" + ShareBean.uno + "_" + ShareBean.utotalLine++)
                         .params("rtmp_url", url)
