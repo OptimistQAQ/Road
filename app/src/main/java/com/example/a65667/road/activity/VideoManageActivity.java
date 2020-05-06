@@ -92,6 +92,5 @@ public class VideoManageActivity extends AppCompatActivity {
 //        });
 //        recyclerView.setAdapter(videoItemAdapter);
 //        recyclerView.setLayoutManager(manager = new GridLayoutManager(this, 2));
-
     }
 }

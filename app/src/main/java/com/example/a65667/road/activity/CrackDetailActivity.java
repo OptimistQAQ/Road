@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -28,6 +30,9 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.example.a65667.road.R;
 import com.example.a65667.road.utils.CurrentUserInfo;
 import com.github.clans.fab.FloatingActionButton;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,6 +50,9 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private ImageView tc_re;
     private FloatingActionButton fab2;
     private TextView tc_name;
+    private TextView tc_data;
+    private String date = "";
+    private String lno = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +93,18 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private void init(){
 
         tc_re = (ImageView)findViewById(R.id.tc_re);
+        tc_data = (TextView) findViewById(R.id.tc_data);
         fab2 = (FloatingActionButton)findViewById(R.id.fab2);
         tc_name = (TextView) findViewById(R.id.tc_name);
         tc_name.setText(CurrentUserInfo.name);
+
         tc_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +112,22 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                 startActivity(intent);
             }
         });
+
+        lno = getIntent().getStringExtra("lno");
+
+        date = getIntent().getStringExtra("tvData");
+        tc_data.setText(date);
+
+        OkGo.<String>post("")
+                .tag(this)
+                .params("lno", lno)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.e("crack_detail", response.body());
+
+                    }
+                });
     }
 
     private void location(){

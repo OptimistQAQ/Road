@@ -4,11 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
 import com.example.a65667.road.Item.CrackListItem;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.CrackListItemViewBinder;
@@ -85,7 +87,7 @@ public class CrackListActivity extends AppCompatActivity {
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             disList.add("距离：1.8公里");
-                            nameList.add(jsonObject.getString("lpushStramName"));
+                            nameList.add(jsonObject.getString("lstreamName"));
                             numList.add(jsonObject.getInteger("uno").toString());
                         }
                         mItems = new Items();
@@ -101,5 +103,4 @@ public class CrackListActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

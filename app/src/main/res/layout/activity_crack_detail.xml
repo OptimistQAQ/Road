@@ -88,7 +88,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingRight="0dp"
         android:paddingBottom="10dp"
         fab:menu_backgroundColor="#ccffffff"
         fab:menu_colorNormal="@color/base_dark"

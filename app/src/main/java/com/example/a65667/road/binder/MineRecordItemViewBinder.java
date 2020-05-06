@@ -24,35 +24,42 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         root = inflater.inflate(R.layout.item_mine_record_item, parent, false);
+        initView();
         return new ViewHolder(root);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull MineRecordItem mineRecordItem) {
+
+        holder.setIsRecyclable(false);
+
         this.mineRecordItem = mineRecordItem;
-        initView();
-    }
-
-    private void initView() {
-
+        tvData.setText(mineRecordItem.getDataTime());
+        tvLast.setText(mineRecordItem.getLastTime());
+        tvHole.setText(mineRecordItem.getHoleCount());
+        tvCrack.setText(mineRecordItem.getCrackCount());
+        tvTravel.setText(mineRecordItem.getTravel());
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println( mineRecordItem.getDataTime());
                 Intent intent = new Intent(root.getContext(), CrackDetailActivity.class);
+                intent.putExtra("tvData", mineRecordItem.getDataTime());
+                intent.putExtra("lno", mineRecordItem.getLno());
                 root.getContext().startActivity(intent);
             }
         });
+
+
+    }
+
+    private void initView() {
 
         tvData = root.findViewById(R.id.tv_data);
         tvLast = root.findViewById(R.id.tv_last_time);
         tvHole = root.findViewById(R.id.tv_hole_count);
         tvCrack = root.findViewById(R.id.tv_crack_count);
         tvTravel = root.findViewById(R.id.tv_travel);
-        tvData.setText(mineRecordItem.getDataTime());
-        tvLast.setText(mineRecordItem.getLastTime());
-        tvHole.setText(mineRecordItem.getHoleCount());
-        tvCrack.setText(mineRecordItem.getCrackCount());
-        tvTravel.setText(mineRecordItem.getTravel());
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

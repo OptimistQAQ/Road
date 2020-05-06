@@ -1,11 +1,21 @@
 package com.example.a65667.road.Item;
 
 public class MineRecordItem {
+
     private String dataTime;
     private String lastTime;
     private String holeCount;
     private String crackCount;
     private String travel;
+    private String lno;
+
+    public void setLno(String lno) {
+        this.lno = lno;
+    }
+
+    public String getLno() {
+        return lno;
+    }
 
     public String getDataTime() {
         return dataTime;

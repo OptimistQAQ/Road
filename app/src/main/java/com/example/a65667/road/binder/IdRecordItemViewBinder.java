@@ -16,8 +16,8 @@ import me.drakeet.multitype.ItemViewBinder;
 
 public class IdRecordItemViewBinder extends ItemViewBinder<IdRecordItem, IdRecordItemViewBinder.ViewHolder> {
 
-    private View root;
     private IdRecordItem idRecordItem;
+    private View root;
 
     private TextView icName, icID;
 
@@ -25,35 +25,37 @@ public class IdRecordItemViewBinder extends ItemViewBinder<IdRecordItem, IdRecor
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         root = inflater.inflate(R.layout.item_manage_item, parent, false);
+        initView();
         return new ViewHolder(root);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull IdRecordItemViewBinder.ViewHolder holder, @NonNull IdRecordItem item) {
-        idRecordItem = item;
-        initView();
+
+        holder.setIsRecyclable(false);
+
+        this.idRecordItem = item;
+
+        icID.setText(item.getIcID());
+        icName.setText(item.getIcName());
+
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(root.getContext(), AuthorityActivity.class);
+                intent.putExtra("id", item.getIcID());
+                root.getContext().startActivity(intent);
+            }
+        });
     }
 
     private void initView()
     {
         icName = root.findViewById(R.id.ic_name);
         icID = root.findViewById(R.id.ic_id);
-
-        icName.setText(idRecordItem.getIcName());
-        icID.setText(idRecordItem.getIcID());
-
-        root.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(root.getContext(), AuthorityActivity.class);
-                intent.putExtra("id", idRecordItem.getIcID());
-                root.getContext().startActivity(intent);
-            }
-        });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
         ViewHolder(View itemView) {
             super(itemView);
         }

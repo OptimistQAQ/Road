@@ -7,6 +7,7 @@ public class CurrentUserInfo {
     public static Integer uno = 0;  //当前用户id
     public static String name = "";
     public static String password = "";
+    public static String profilePhoto = "";//头像url
 
     public static String time = "";   //工作总时长
     public static String distance = ""; //工作总距离

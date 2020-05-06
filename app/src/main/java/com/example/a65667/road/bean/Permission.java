@@ -2,7 +2,7 @@ package com.example.a65667.road.bean;
 
 public class Permission {
 
-    private String uno;
+    private Integer uno;
 
     private Boolean pbase;
 
@@ -23,11 +23,11 @@ public class Permission {
 //        this.ppermissionAdmin = ppermissionAdmin;
 //    }
 
-    public String getUno() {
+    public Integer getUno() {
         return uno;
     }
 
-    public void setUno(String uno) {
+    public void setUno(Integer uno) {
         this.uno = uno;
     }
 

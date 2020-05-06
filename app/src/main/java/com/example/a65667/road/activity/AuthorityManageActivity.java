@@ -71,21 +71,23 @@ public class AuthorityManageActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        mItems = new Items();
+                        mItems.add(new IdRecordItem());
+
                         Log.e("user_list", response.body());
                         response.toString();
                         JSONArray jsonArray = JSON.parseArray(response.body());
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            idList.add(jsonObject.getString("ano"));
-                            nameList.add(jsonObject.getString("utitle"));
-                            Log.e("2user", nameList.size() + " " + nameList.get(i+1));
+                            idList.add(jsonObject.getString("uno"));
+                            nameList.add(jsonObject.getString("uname"));
+//                            Log.e("2user", nameList.size() + " " + nameList.get(i+1));
                         }
                         mItems = new Items();
                         for(int i=0; i<nameList.size(); i++){
                             IdRecordItem idRecordItem = new IdRecordItem();
                             idRecordItem.setIcName(nameList.get(i));
                             idRecordItem.setIcID(idList.get(i));
-                            System.out.println(idRecordItem.getIcID() + idRecordItem.getIcName());
                             mItems.add(idRecordItem);
                         }
                         mAdapter.setItems(mItems);
