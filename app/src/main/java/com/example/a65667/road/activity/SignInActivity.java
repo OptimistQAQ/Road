@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -32,6 +34,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText ePassword;
     private CheckBox remember_key;
     private CheckBox automatic_login;
+    private CheckBox show_password;
 
     private SharedPreferences sp = null;
 
@@ -63,16 +66,17 @@ public class SignInActivity extends AppCompatActivity {
         ePassword = (EditText) findViewById(R.id.epassword);
         remember_key = (CheckBox) findViewById(R.id.remember_key);
         automatic_login = (CheckBox) findViewById(R.id.automatic_login);
+        show_password = (CheckBox) findViewById(R.id.show_password);
 
         rem_isCheck = remember_key.isChecked();
         auto_isCheck = automatic_login.isChecked();
+        show_password.setChecked(true);
 
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -164,6 +168,20 @@ public class SignInActivity extends AppCompatActivity {
                 }
                 else {
                     sp.edit().putBoolean("auto_isCheck", false).commit();
+                }
+            }
+        });
+
+        //监听显示密码多选框事件
+        show_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (show_password.isChecked()) {
+                    //如果选中，显示密码
+                    ePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //否则隐藏密码
+                    ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
