@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class SignInActivity extends AppCompatActivity {
     private CheckBox remember_key;
     private CheckBox automatic_login;
 
-    private SharedPreferences sp;
+    private SharedPreferences sp = null;
 
     private Boolean rem_isCheck = false;
     private Boolean auto_isCheck = false;
@@ -43,6 +44,8 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         init();
+
+        autoSign();
 
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +66,6 @@ public class SignInActivity extends AppCompatActivity {
 
         rem_isCheck = remember_key.isChecked();
         auto_isCheck = automatic_login.isChecked();
-        remember_key.setChecked(true);
 
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +75,16 @@ public class SignInActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void autoSign() {
         //实现自动登录
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        Log.e("auto", rem_isCheck.toString());
         if (sp.getBoolean("rem_isCheck", false)) {
             //设置默认是记录密码的状态
             remember_key.setChecked(true);
+            Log.e("auto", rem_isCheck.toString());
             euserName.setText(sp.getString("user_name", ""));
             ePassword.setText(sp.getString("password", ""));
 
@@ -86,11 +92,81 @@ public class SignInActivity extends AppCompatActivity {
             if (sp.getBoolean("auto_isCheck", false)) {
                 //设置默认为自动登录状态
                 automatic_login.setChecked(true);
+                String bt_name = euserName.getText().toString();
+                String bt_password = ePassword.getText().toString();
+                Integer bt_time = 10;
+                Integer bt_distance = 10;
+                Integer bt_line = 10;
+                // module间信息共享
+                OkGo.<String>post("http://39.105.172.22:9596/login")
+                        .params("name", bt_name)
+                        .params("password", bt_password)
+                        .params("time", bt_time)
+                        .params("distance", bt_distance)
+                        .params("line", bt_line)
+                        .tag(this)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                User user = JSON.parseObject(response.body(), User.class);
+                                Log.e("user_body", response.body());
+                                Log.e("user_1", "" + user.getUname() + "-" + user.getUpassword());
+
+                                if (user.getUname() != null) {
+                                    CurrentUserInfo.user = user;
+                                    CurrentUserInfo.uno = user.getUno();
+                                    CurrentUserInfo.name = user.getUname();
+                                    CurrentUserInfo.password = user.getUpassword();
+                                    CurrentUserInfo.time = bt_time.toString() + "小时";
+                                    CurrentUserInfo.distance = bt_distance.toString() + "公里";
+                                    CurrentUserInfo.line = bt_line.toString() + "条";
+                                    CurrentUserInfo.profilePhoto = user.getUprofilePhoto();
+                                    Log.e("123", CurrentUserInfo.name);
+                                    ShareBean.uname = user.getUname();
+                                    ShareBean.unickName = user.getUnickName();
+                                    ShareBean.uno = user.getUno();
+                                    ShareBean.upassword = user.getUpassword();
+                                    ShareBean.uprofilePhoto = user.getUprofilePhoto();
+                                    ShareBean.utitle = user.getUtitle();
+                                    ShareBean.utotalTime = user.getUtotalTime();
+                                    ShareBean.utotalDistance = user.getUtotalDistance();
+                                    ShareBean.utotalLine = user.getUtotalLine();
+                                    Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
+                                    startActivity(main2Activity);
+                                    finish();
+                                }
+                            }
+                        });
                 Intent intent = new Intent(SignInActivity.this, Main2Activity.class);
                 SignInActivity.this.startActivity(intent);
                 finish();
             }
         }
+
+        //监听记住密码多选框按钮事件
+        remember_key.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (remember_key.isChecked()) {
+                    sp.edit().putBoolean("rem_isCheck", true).commit();
+                }else {
+                    sp.edit().putBoolean("rem_isCheck", false).commit();
+                }
+            }
+        });
+
+        //监听自动登录多选框事件
+        automatic_login.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (automatic_login.isChecked()) {
+                    sp.edit().putBoolean("auto_isCheck", true).commit();
+                }
+                else {
+                    sp.edit().putBoolean("auto_isCheck", false).commit();
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -143,12 +219,21 @@ public class SignInActivity extends AppCompatActivity {
                             ShareBean.utotalLine = user.getUtotalLine();
 
                             Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-                            SharedPreferences.Editor editor = sp.edit();
-                            editor.putString("user_name", bt_name);
-                            editor.putString("password", bt_password);
-                            editor.putBoolean("rem_isCheck", rem_isCheck);
-                            editor.putBoolean("auto_isCheck", auto_isCheck);
-                            editor.commit();
+                            if (remember_key.isChecked()) {
+                                //记住密码
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("user_name", bt_name);
+                                Log.e("auto", sp.getString("user_name", bt_name));
+                                editor.putString("password", bt_password);
+                                editor.commit();
+                            }
+                            else {
+                                //不用记住密码
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("user_name", bt_name);
+                                editor.putString("password", bt_password);
+                                editor.commit();
+                            }
                             Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
                             startActivity(main2Activity);
                             finish();

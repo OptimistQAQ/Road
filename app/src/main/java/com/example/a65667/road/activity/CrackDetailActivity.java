@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -35,7 +36,12 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import cn.jzvd.Jzvd;
+import cn.jzvd.JzvdStd;
 
 public class CrackDetailActivity extends AppCompatActivity implements LocationSource, AMapLocationListener, View.OnClickListener {
 
@@ -53,6 +59,8 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private TextView tc_data;
     private String date = "";
     private String lno = "";
+    private JzvdStd jzvdStd;
+    private String videoUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +103,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         tc_re = (ImageView)findViewById(R.id.tc_re);
         tc_data = (TextView) findViewById(R.id.tc_data);
         fab2 = (FloatingActionButton)findViewById(R.id.fab2);
+        jzvdStd = (JzvdStd) findViewById(R.id.jz_video);
         tc_name = (TextView) findViewById(R.id.tc_name);
         tc_name.setText(CurrentUserInfo.name);
 
@@ -118,14 +127,25 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         date = getIntent().getStringExtra("tvData");
         tc_data.setText(date);
 
-        OkGo.<String>post("")
+        List<String> sourceVideo = new ArrayList<>();
+
+        OkGo.<String>post("http://39.105.172.22:9596/showCrackDetail")
                 .tag(this)
                 .params("lno", lno)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         Log.e("crack_detail", response.body());
-
+                        JSONArray jsonArray = JSON.parseArray(response.body());
+                        for (int i=0; i<jsonArray.size(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            sourceVideo.add(jsonObject.getString("sourceVideo"));
+                        }
+                        videoUrl = "http://ishero.net/hls/" + sourceVideo.get(0);
+                        Log.e("videoUrl", videoUrl);
+                        if (!videoUrl.equals("")) {
+                            jzvdStd.setUp(videoUrl, "路面回放", JzvdStd.SCREEN_NORMAL);
+                        }
                     }
                 });
     }
@@ -162,6 +182,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     protected void onPause() {
         super.onPause();
         detailMap.onPause();
+        Jzvd.releaseAllVideos();
     }
 
     @Override
@@ -244,6 +265,16 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             mapLocationClient.onDestroy();
         }
         mapLocationClient = null;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (Jzvd.backPress()) {
+            return;
+
+        }
+        super.onBackPressed();
     }
 
     //权限申请
