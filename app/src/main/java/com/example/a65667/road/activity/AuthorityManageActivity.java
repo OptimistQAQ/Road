@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.a65667.road.Item.IdRecordItem;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.IdRecordItemViewBinder;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.example.a65667.road.utils.CurrentUserInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -37,6 +38,7 @@ public class AuthorityManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authority_manage);
+        ActivityCollectorUtil.addActivity(this);
         init();
 
         ic_arrow_left_w.setOnClickListener(new View.OnClickListener() {

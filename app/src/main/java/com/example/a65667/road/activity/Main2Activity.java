@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.example.a65667.road.R;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        ActivityCollectorUtil.addActivity(this);
 
         //申请权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

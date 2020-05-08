@@ -33,6 +33,7 @@ import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.example.a65667.road.R;
 import com.example.a65667.road.bean.CurrentLocalGPS;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCollectorUtil.addActivity(this);
         mMapView = (MapView)findViewById(R.id.map_view);
         mMapView.onCreate(savedInstanceState);
 
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
         aMap.setLocationSource(this);//设置了定位的监听
         // 是否显示定位按钮
         settings.setMyLocationButtonEnabled(true);
+        mListener.onLocationChanged(priLocation);
 
         location();
 
@@ -164,7 +168,11 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
             if (aMapLocation.getErrorCode() == 0) {
                 // 如果不设置标志位，此时再拖动地图时，它会不断将地图移动到当前的位置
                 if (isFirstLoc) {
-                     //设置缩放级别
+                    //将地图移动到定位点
+                    aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
+                    //点击定位按钮 能够将地图的中心移动到定位点
+                    mListener.onLocationChanged(aMapLocation);
+                    //设置缩放级别
                     aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
                     //获取定位信息
                     StringBuffer buffer = new StringBuffer();
@@ -186,12 +194,6 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                 CurrentLocalGPS.Longitude = yGPS;
                 ShareBean.Latitude = xGPS;
                 ShareBean.Longitude = yGPS;
-
-
-                //将地图移动到定位点
-                aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
-                //点击定位按钮 能够将地图的中心移动到定位点
-                mListener.onLocationChanged(aMapLocation);
 
                 priLocation = aMapLocation;
                 drawLines(aMapLocation);

@@ -18,7 +18,9 @@ import com.amap.api.maps.LocationSource;
 import com.example.a65667.road.Item.MineRecordItem;
 import com.example.a65667.road.activity.MainActivity;
 import com.example.a65667.road.R;
+import com.example.a65667.road.activity.SignInActivity;
 import com.example.a65667.road.binder.MineRecordItemViewBinder;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 
     private ImageView img_map;
     private FloatingActionButton fab1;
+    private FloatingActionButton fab2;
 
 //    MapView mMapView = null;
 //    AMap aMap;   //地图对象
@@ -127,6 +130,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
     private void initMenu(){
         fab1 = root.findViewById(R.id.camera_fab1);
         fab1.setOnClickListener(this);
+        fab2 = root.findViewById(R.id.camera_fab2);
+        fab2.setOnClickListener(this);
     }
 
     @Override
@@ -139,8 +144,12 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
             case R.id.camera_fab1:
                 startActivity(new Intent(root.getContext(), SourcePushActivity.class));
                 break;
-        }
 
+            case R.id.camera_fab2:
+                ActivityCollectorUtil.finishAllActivity();
+                startActivity(new Intent(root.getContext(), SignInActivity.class));
+                break;
+        }
     }
 
     @Override

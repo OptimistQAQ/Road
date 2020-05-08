@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.a65667.road.Item.CrackListItem;
 import com.example.a65667.road.R;
 import com.example.a65667.road.binder.CrackListItemViewBinder;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.example.a65667.road.utils.CurrentUserInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -36,6 +37,7 @@ public class CrackListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crack_list);
+        ActivityCollectorUtil.addActivity(this);
         init();
     }
 

@@ -70,7 +70,8 @@ public class SignInActivity extends AppCompatActivity {
 
         rem_isCheck = remember_key.isChecked();
         auto_isCheck = automatic_login.isChecked();
-        show_password.setChecked(true);
+
+        ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         bt_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +85,11 @@ public class SignInActivity extends AppCompatActivity {
     private void autoSign() {
         //实现自动登录
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        Log.e("auto", rem_isCheck.toString());
+//        Log.e("auto", rem_isCheck.toString());
         if (sp.getBoolean("rem_isCheck", false)) {
             //设置默认是记录密码的状态
             remember_key.setChecked(true);
-            Log.e("auto", rem_isCheck.toString());
+//            Log.e("auto", rem_isCheck.toString());
             euserName.setText(sp.getString("user_name", ""));
             ePassword.setText(sp.getString("password", ""));
 

@@ -13,6 +13,7 @@ import com.example.a65667.road.R;
 import com.example.a65667.road.adapter.VideoItemAdapter;
 import com.example.a65667.road.bean.SwipeBean;
 import com.example.a65667.road.binder.VideoItemViewBinder;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ public class VideoManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_manage);
+
+        ActivityCollectorUtil.addActivity(this);
 
         init();
 

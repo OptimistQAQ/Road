@@ -121,18 +121,18 @@
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab2"
+            android:id="@+id/camera_fab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"
             android:src="@drawable/ic_stop_record"
             fab:fab_colorNormal="@color/base_dark"
             fab:fab_colorPressed="@color/press_dark"
-            fab:fab_label="停止推流"
+            fab:fab_label="退出登录"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab3"
+            android:id="@+id/camera_fab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_save_local"

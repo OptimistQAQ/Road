@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a65667.road.R;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 
 public class CrackPictureActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class CrackPictureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crack_picture);
+        ActivityCollectorUtil.addActivity(this);
 
         ductIntent();
         init();

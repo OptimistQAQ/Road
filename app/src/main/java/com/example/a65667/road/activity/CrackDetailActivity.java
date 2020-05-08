@@ -29,6 +29,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.example.a65667.road.R;
+import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.example.a65667.road.utils.CurrentUserInfo;
 import com.github.clans.fab.FloatingActionButton;
 import com.lzy.okgo.OkGo;
@@ -61,11 +62,13 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private String lno = "";
     private JzvdStd jzvdStd;
     private String videoUrl = "";
+    private boolean isFirstLoc = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crack_detail);
+        ActivityCollectorUtil.addActivity(this);
 
         detailMap = (MapView)findViewById(R.id.detail_map);
         detailMap.onCreate(savedInstanceState);
@@ -212,10 +215,13 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
         if (aMapLocation != null) {
             if (aMapLocation.getErrorCode() == 0) {
-                //将地图移动到定位点
-                deta_Map.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
-                //点击定位按钮 能够将地图的中心移动到定位点
-                mListener.onLocationChanged(aMapLocation);
+                if (isFirstLoc) {
+                    //将地图移动到定位点
+                    deta_Map.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude())));
+                    //点击定位按钮 能够将地图的中心移动到定位点
+                    mListener.onLocationChanged(aMapLocation);
+                    isFirstLoc = false;
+                }
 
                 //可在其中解析amapLocation获取相应内容。
                 aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表

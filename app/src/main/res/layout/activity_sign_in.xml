@@ -134,9 +134,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bt_login"
         android:text="记住密码"
-        android:textSize="18dp"
+        android:textSize="15dp"
         android:textColor="@color/white"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="60dp"/>
 
     <CheckBox
@@ -144,9 +144,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bt_login"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="自动登录"
-        android:textSize="18dp"
+        android:textSize="15dp"
         android:textColor="@color/white"
         android:layout_marginStart="260dp"/>
 
@@ -158,7 +158,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="#01acfc"
         android:textSize="18dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="没有账号?/  立即注册"/>
 
 </com.zhy.autolayout.AutoRelativeLayout>
