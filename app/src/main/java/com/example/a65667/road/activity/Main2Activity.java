@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -16,6 +17,8 @@ import com.example.a65667.road.R;
 import com.example.a65667.road.utils.ActivityCollectorUtil;
 
 public class Main2Activity extends AppCompatActivity {
+
+    private long time = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,16 @@ public class Main2Activity extends AppCompatActivity {
             window.getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR  );
         }
         requestPermissions();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - time > 2000) {
+            Toast.makeText(Main2Activity.this, "再按一次 退出应用", Toast.LENGTH_SHORT).show();
+            time = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 
     //权限申请

@@ -3,8 +3,12 @@ package com.example.a65667.road.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -22,6 +26,9 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageButton bt_register;
     private EditText euserName1;
     private EditText ePassword, rePassword;
+
+    private CheckBox show_pass;
+    private CheckBox show_pass_again;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,39 @@ public class RegisterActivity extends AppCompatActivity {
         euserName1 = (EditText)findViewById(R.id.eusername1);
         ePassword = (EditText)findViewById(R.id.epassword);
         rePassword = (EditText) findViewById(R.id.repassword);
+        show_pass = (CheckBox) findViewById(R.id.show_pass);
+        show_pass_again = (CheckBox) findViewById(R.id.show_pass_again);
+
+        ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        rePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+        //监听显示密码多选框事件
+        show_pass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (show_pass.isChecked()) {
+                    //如果选中，显示密码
+                    ePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //否则隐藏密码
+                    ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
+        //监听显示密码多选框事件
+        show_pass_again.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (show_pass_again.isChecked()) {
+                    //如果选中，显示密码
+                    ePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //否则隐藏密码
+                    ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
     }
 
     private void initView(){

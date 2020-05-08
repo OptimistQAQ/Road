@@ -74,9 +74,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
     private void initView(){
         initMenu();
 
-        img_map = root.findViewById(R.id.map_view1);
-        img_map.setOnClickListener(this);
-
         List<String> dataTime = new ArrayList<>();
         List<String> lastTime = new ArrayList<>();
         List<String> holeCount = new ArrayList<>();
@@ -128,6 +125,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
     }
 
     private void initMenu(){
+        img_map = root.findViewById(R.id.map_view1);
+        img_map.setOnClickListener(this);
         fab1 = root.findViewById(R.id.camera_fab1);
         fab1.setOnClickListener(this);
         fab2 = root.findViewById(R.id.camera_fab2);
