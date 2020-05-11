@@ -50,11 +50,9 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
             }
         });
 
-
     }
 
     private void initView() {
-
         tvData = root.findViewById(R.id.tv_data);
         tvLast = root.findViewById(R.id.tv_last_time);
         tvHole = root.findViewById(R.id.tv_hole_count);

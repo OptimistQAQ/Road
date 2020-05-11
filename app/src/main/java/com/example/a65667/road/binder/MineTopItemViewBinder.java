@@ -18,6 +18,7 @@ public class MineTopItemViewBinder extends ItemViewBinder<MineTopItem, MineTopIt
     private View root;
     private TextView tv_user_name;
     private TextView tv_ID_number;
+    private TextView tv_count;
 
     @NonNull
     @Override
@@ -34,8 +35,10 @@ public class MineTopItemViewBinder extends ItemViewBinder<MineTopItem, MineTopIt
     private void init() {
         tv_user_name = root.findViewById(R.id.tv_user_name);
         tv_ID_number = root.findViewById(R.id.tv_ID_number);
+        tv_count = root.findViewById(R.id.tv_count);
         tv_user_name.setText(CurrentUserInfo.name);
         tv_ID_number.setText(CurrentUserInfo.uno.toString());
+        tv_count.setText(CurrentUserInfo.line);
     }
 
 

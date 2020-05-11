@@ -12,16 +12,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.LocationSource;
+import com.example.a65667.road.Item.CameraRecordItem;
 import com.example.a65667.road.Item.MineRecordItem;
+import com.example.a65667.road.Item.MineTopItem;
 import com.example.a65667.road.activity.MainActivity;
 import com.example.a65667.road.R;
 import com.example.a65667.road.activity.SignInActivity;
+import com.example.a65667.road.binder.CameraRecordItemViewBinder;
 import com.example.a65667.road.binder.MineRecordItemViewBinder;
 import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.github.clans.fab.FloatingActionButton;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,55 +82,53 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 
     private void initView(){
         initMenu();
-
         List<String> dataTime = new ArrayList<>();
         List<String> lastTime = new ArrayList<>();
         List<String> holeCount = new ArrayList<>();
         List<String> crackCount = new ArrayList<>();
         List<String> travelWay = new ArrayList<>();
-
-        dataTime.add("12月31日");
-        lastTime.add("96分钟");
-        holeCount.add("16.3公里");
-        crackCount.add("10个大问题");
-        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-
-        dataTime.add("1月9号");
-        lastTime.add("80分钟");
-        holeCount.add("13.9公里");
-        crackCount.add("12个大问题");
-        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-
-        dataTime.add("1月20号");
-        lastTime.add("105分钟");
-        holeCount.add("19.4公里");
-        crackCount.add("8个大问题");
-        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-
-        dataTime.add("2月4号");
-        lastTime.add("96分钟");
-        holeCount.add("16.3公里");
-        crackCount.add("10个大问题");
-        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        List<String> lno = new ArrayList<>();
 
         recyclerView = root.findViewById(R.id.rv_video);
         mAdapter = new MultiTypeAdapter();
-        mAdapter.register(MineRecordItem.class, new MineRecordItemViewBinder());
+        mAdapter.register(CameraRecordItem.class, new CameraRecordItemViewBinder());
         recyclerView.setAdapter(mAdapter);
-        mItems = new Items();
 
-        for (int i = 0; i < lastTime.size(); i++) {
-            MineRecordItem mineRecordItem = new MineRecordItem();
-            mineRecordItem.setDataTime(dataTime.get(i));
-            mineRecordItem.setLastTime(lastTime.get(i));
-            mineRecordItem.setHoleCount(holeCount.get(i));
-            mineRecordItem.setCrackCount(crackCount.get(i));
-            mineRecordItem.setTravel(travelWay.get(i));
-            mItems.add(mineRecordItem);
-        }
-
-        mAdapter.setItems(mItems);
-        mAdapter.notifyDataSetChanged();
+        OkGo.<String>post("http://39.105.172.22:9596/showLine")
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        mItems = new Items();
+                        mItems.add(new CameraRecordItem());
+                        Log.e("camera_fragment", response.body());
+                        response.toString();
+                        JSONArray jsonArray = JSON.parseArray(response.body());
+                        for (int i=0; i<jsonArray.size(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            if (!jsonObject.getString("lduration").equals("0")) {
+                                dataTime.add(jsonObject.getString("lbeginDate"));
+                                lastTime.add(jsonObject.getString("lduration") + "分钟");
+                                holeCount.add("20公里");
+                                crackCount.add(jsonObject.getInteger("uno").toString() + "个大问题");
+                                travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+                                lno.add(jsonObject.getString("lno"));
+                            }
+                        }
+                        for (int i = 0; i < lastTime.size(); i++) {
+                            CameraRecordItem cameraRecordItem = new CameraRecordItem();
+                            cameraRecordItem.setDataTime(dataTime.get(i));
+                            cameraRecordItem.setLastTime(lastTime.get(i));
+                            cameraRecordItem.setHoleCount(holeCount.get(i));
+                            cameraRecordItem.setCrackCount(crackCount.get(i));
+                            cameraRecordItem.setTravel(travelWay.get(i));
+                            cameraRecordItem.setLno(lno.get(i));
+                            mItems.add(cameraRecordItem);
+                        }
+                        mAdapter.setItems(mItems);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     private void initMenu(){

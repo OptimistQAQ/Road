@@ -62,7 +62,6 @@ public class MineFragment extends Fragment {
         List<String> travelWay = new ArrayList<>();
         List<String> lno = new ArrayList<>();
 
-
         recyclerView = root.findViewById(R.id.rv_mine);
         mAdaper = new MultiTypeAdapter();
         mAdaper.register(MineTopItem.class, new MineTopItemViewBinder());
@@ -76,18 +75,19 @@ public class MineFragment extends Fragment {
                     public void onSuccess(Response<String> response) {
                         mItems = new Items();
                         mItems.add(new MineTopItem());
-
                         Log.e("minefragment", response.body());
                         response.toString();
                         JSONArray jsonArray = JSON.parseArray(response.body());
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            dataTime.add(jsonObject.getString("lbeginDate"));
-                            lastTime.add(jsonObject.getString("lduration") + "分钟");
-                            holeCount.add("20公里");
-                            crackCount.add(jsonObject.getInteger("uno").toString() + "个大问题");
-                            travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-                            lno.add(jsonObject.getString("lno"));
+                            if (!jsonObject.getString("lduration").equals("0")) {
+                                dataTime.add(jsonObject.getString("lbeginDate"));
+                                lastTime.add(jsonObject.getString("lduration") + "分钟");
+                                holeCount.add("20公里");
+                                crackCount.add(jsonObject.getInteger("uno").toString() + "个大问题");
+                                travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+                                lno.add(jsonObject.getString("lno"));
+                            }
                         }
                         for (int i = 0; i < lastTime.size(); i++) {
                             MineRecordItem mineRecordItem = new MineRecordItem();
@@ -103,6 +103,5 @@ public class MineFragment extends Fragment {
                         mAdaper.notifyDataSetChanged();
                     }
                 });
-
     }
 }

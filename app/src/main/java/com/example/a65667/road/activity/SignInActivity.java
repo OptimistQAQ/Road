@@ -101,14 +101,12 @@ public class SignInActivity extends AppCompatActivity {
                 String bt_password = ePassword.getText().toString();
                 Integer bt_time = 10;
                 Integer bt_distance = 10;
-                Integer bt_line = 10;
                 // module间信息共享
                 OkGo.<String>post("http://39.105.172.22:9596/login")
                         .params("name", bt_name)
                         .params("password", bt_password)
                         .params("time", bt_time)
                         .params("distance", bt_distance)
-                        .params("line", bt_line)
                         .tag(this)
                         .execute(new StringCallback() {
                             @Override
@@ -124,7 +122,7 @@ public class SignInActivity extends AppCompatActivity {
                                     CurrentUserInfo.password = user.getUpassword();
                                     CurrentUserInfo.time = bt_time.toString() + "小时";
                                     CurrentUserInfo.distance = bt_distance.toString() + "公里";
-                                    CurrentUserInfo.line = bt_line.toString() + "条";
+                                    CurrentUserInfo.line = user.getUtotalLine() + "条";
                                     CurrentUserInfo.profilePhoto = user.getUprofilePhoto();
                                     Log.e("123", CurrentUserInfo.name);
                                     ShareBean.uname = user.getUname();
@@ -199,7 +197,6 @@ public class SignInActivity extends AppCompatActivity {
         String bt_password = ePassword.getText().toString();
         Integer bt_time = 10;
         Integer bt_distance = 10;
-        Integer bt_line = 10;
 
         // module间信息共享
         OkGo.<String>post("http://39.105.172.22:9596/login")
@@ -207,7 +204,6 @@ public class SignInActivity extends AppCompatActivity {
                 .params("password", bt_password)
                 .params("time", bt_time)
                 .params("distance", bt_distance)
-                .params("line", bt_line)
                 .tag(this)
 //                .upString(JSON.toJSONString(bt_name))
                 .execute(new StringCallback() {
@@ -224,7 +220,7 @@ public class SignInActivity extends AppCompatActivity {
                             CurrentUserInfo.password = user.getUpassword();
                             CurrentUserInfo.time = bt_time.toString() + "小时";
                             CurrentUserInfo.distance = bt_distance.toString() + "公里";
-                            CurrentUserInfo.line = bt_line.toString() + "条";
+                            CurrentUserInfo.line = user.getUtotalLine() + "条";
                             CurrentUserInfo.profilePhoto = user.getUprofilePhoto();
                             Log.e("123", CurrentUserInfo.name);
                             ShareBean.uname = user.getUname();
@@ -253,6 +249,7 @@ public class SignInActivity extends AppCompatActivity {
                                 editor.putString("password", bt_password);
                                 editor.commit();
                             }
+//                            Log.e("line", CurrentUserInfo.line);
                             Intent main2Activity = new Intent(SignInActivity.this, Main2Activity.class);
                             startActivity(main2Activity);
                             finish();

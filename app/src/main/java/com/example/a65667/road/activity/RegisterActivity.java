@@ -76,10 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (show_pass_again.isChecked()) {
                     //如果选中，显示密码
-                    ePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    rePassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
                     //否则隐藏密码
-                    ePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    rePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
