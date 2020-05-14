@@ -91,6 +91,10 @@ public class PathRecord {
         this.mData = data;
     }
 
+    public void addpoint(AMapLocation point) {
+        mPathLinePoints.add(point);
+    }
+
     @SuppressLint("DefaultLocale")
     @NonNull
     @Override

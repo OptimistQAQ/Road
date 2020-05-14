@@ -43,6 +43,7 @@ public class CameraRecordItemViewBinder extends ItemViewBinder<CameraRecordItem,
                 Intent intent = new Intent(root.getContext(), CrackDetailActivity.class);
                 intent.putExtra("tvData", cameraRecordItem.getDataTime());
                 intent.putExtra("lno", cameraRecordItem.getLno());
+                intent.putExtra("video", cameraRecordItem.getVideoUrl());
                 root.getContext().startActivity(intent);
             }
         });

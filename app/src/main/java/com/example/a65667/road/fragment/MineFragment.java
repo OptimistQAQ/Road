@@ -61,6 +61,39 @@ public class MineFragment extends Fragment {
         List<String> crackCount = new ArrayList<>();
         List<String> travelWay = new ArrayList<>();
         List<String> lno = new ArrayList<>();
+        List<String> videoUrl = new ArrayList<>();
+
+        dataTime.add("2020年3月6日");
+        lastTime.add("14分钟");
+        holeCount.add("20公里");
+        crackCount.add("3个大问题");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        videoUrl.add("cc1d3666-fe5994ae.mov");
+        lno.add("1");
+
+        dataTime.add("2020年3月10日");
+        lastTime.add("20分钟");
+        holeCount.add("33公里");
+        crackCount.add("9个大问题");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        videoUrl.add("cc8d5a50-92a79d46.mov");
+        lno.add("2");
+
+        dataTime.add("2020年3月15日");
+        lastTime.add("14分钟");
+        holeCount.add("20公里");
+        crackCount.add("5个大问题");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        videoUrl.add("cc9d2250-fba65525.mov");
+        lno.add("3");
+
+        dataTime.add("2020年3月20日");
+        lastTime.add("24分钟");
+        holeCount.add("56公里");
+        crackCount.add("11个大问题");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        videoUrl.add("ccd901f5-bfabffd7.mov");
+        lno.add("4");
 
         recyclerView = root.findViewById(R.id.rv_mine);
         mAdaper = new MultiTypeAdapter();
@@ -68,40 +101,57 @@ public class MineFragment extends Fragment {
         mAdaper.register(MineRecordItem.class, new MineRecordItemViewBinder());
         recyclerView.setAdapter(mAdaper);
 
-        OkGo.<String>post("http://39.105.172.22:9596/showLine")
-                .tag(this)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        mItems = new Items();
-                        mItems.add(new MineTopItem());
-                        Log.e("minefragment", response.body());
-                        response.toString();
-                        JSONArray jsonArray = JSON.parseArray(response.body());
-                        for (int i=0; i<jsonArray.size(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            if (!jsonObject.getString("lduration").equals("0")) {
-                                dataTime.add(jsonObject.getString("lbeginDate"));
-                                lastTime.add(jsonObject.getString("lduration") + "分钟");
-                                holeCount.add("20公里");
-                                crackCount.add(jsonObject.getInteger("uno").toString() + "个大问题");
-                                travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-                                lno.add(jsonObject.getString("lno"));
-                            }
-                        }
-                        for (int i = 0; i < lastTime.size(); i++) {
-                            MineRecordItem mineRecordItem = new MineRecordItem();
-                            mineRecordItem.setDataTime(dataTime.get(i));
-                            mineRecordItem.setLastTime(lastTime.get(i));
-                            mineRecordItem.setHoleCount(holeCount.get(i));
-                            mineRecordItem.setCrackCount(crackCount.get(i));
-                            mineRecordItem.setTravel(travelWay.get(i));
-                            mineRecordItem.setLno(lno.get(i));
-                            mItems.add(mineRecordItem);
-                        }
-                        mAdaper.setItems(mItems);
-                        mAdaper.notifyDataSetChanged();
-                    }
-                });
+        mItems = new Items();
+        mItems.add(new MineTopItem());
+        for (int i = 0; i < dataTime.size(); i++) {
+            MineRecordItem mineRecordItem = new MineRecordItem();
+            mineRecordItem.setDataTime(dataTime.get(i));
+            mineRecordItem.setLastTime(lastTime.get(i));
+            mineRecordItem.setHoleCount(holeCount.get(i));
+            mineRecordItem.setCrackCount(crackCount.get(i));
+            mineRecordItem.setTravel(travelWay.get(i));
+            mineRecordItem.setLno(lno.get(i));
+            mineRecordItem.setVideoUrl(videoUrl.get(i));
+            mItems.add(mineRecordItem);
+        }
+        mAdaper.setItems(mItems);
+        mAdaper.notifyDataSetChanged();
+
+
+//        OkGo.<String>post("http://39.105.172.22:9596/showLine")
+//                .tag(this)
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(Response<String> response) {
+//                        mItems = new Items();
+//                        mItems.add(new MineTopItem());
+//                        Log.e("minefragment", response.body());
+//                        response.toString();
+//                        JSONArray jsonArray = JSON.parseArray(response.body());
+//                        for (int i=0; i<jsonArray.size(); i++) {
+//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                            if (!jsonObject.getString("lduration").equals("0")) {
+//                                dataTime.add(jsonObject.getString("lbeginDate"));
+//                                lastTime.add(jsonObject.getString("lduration") + "分钟");
+//                                holeCount.add("20公里");
+//                                crackCount.add(jsonObject.getInteger("uno").toString() + "个大问题");
+//                                travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+//                                lno.add(jsonObject.getString("lno"));
+//                            }
+//                        }
+//                        for (int i = 0; i < lastTime.size(); i++) {
+//                            MineRecordItem mineRecordItem = new MineRecordItem();
+//                            mineRecordItem.setDataTime(dataTime.get(i));
+//                            mineRecordItem.setLastTime(lastTime.get(i));
+//                            mineRecordItem.setHoleCount(holeCount.get(i));
+//                            mineRecordItem.setCrackCount(crackCount.get(i));
+//                            mineRecordItem.setTravel(travelWay.get(i));
+//                            mineRecordItem.setLno(lno.get(i));
+//                            mItems.add(mineRecordItem);
+//                        }
+//                        mAdaper.setItems(mItems);
+//                        mAdaper.notifyDataSetChanged();
+//                    }
+//                });
     }
 }

@@ -7,6 +7,15 @@ public class CameraRecordItem {
     private String crackCount;
     private String travel;
     private String lno;
+    private String videoUrl;
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
 
     public void setLno(String lno) {
         this.lno = lno;

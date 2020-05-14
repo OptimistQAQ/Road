@@ -46,6 +46,7 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
                 Intent intent = new Intent(root.getContext(), CrackDetailActivity.class);
                 intent.putExtra("tvData", mineRecordItem.getDataTime());
                 intent.putExtra("lno", mineRecordItem.getLno());
+                intent.putExtra("video", mineRecordItem.getVideoUrl());
                 root.getContext().startActivity(intent);
             }
         });
