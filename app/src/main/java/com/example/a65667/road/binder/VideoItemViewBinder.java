@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.a65667.road.Item.VideoItem;
 import com.example.a65667.road.R;
 
+import cn.jzvd.JzvdStd;
 import me.drakeet.multitype.ItemViewBinder;
 
 public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemViewBinder.ViewHolder> {
@@ -19,6 +20,9 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     private VideoItem videoItem;
     private TextView fileName;
     private Button btnDelete;
+
+    private JzvdStd jzvdStd;
+    private String videoUrl = "http://ishero.net/share/valvideo/ccd901f5-bfabffd7.mov";
 
     @NonNull
     @Override
@@ -37,6 +41,9 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         fileName = root.findViewById(R.id.file_name);
         fileName.setText(videoItem.getFileName());
         btnDelete = root.findViewById(R.id.btnDelete);
+        jzvdStd = root.findViewById(R.id.file_video);
+
+        jzvdStd.setUp(videoUrl, "路面回放", JzvdStd.SCREEN_NORMAL);
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override

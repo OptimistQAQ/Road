@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Road</string>
+    <string name="app_name">检路</string>
     <string name="title_push">推流</string>
     <string name="title_play">播放</string>
     <string name="title_conv">串流</string>

@@ -49,7 +49,7 @@
         android:id="@+id/rc_yuan_tu"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="#BFBFBF"/>
+        android:background="@drawable/origin"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -63,6 +63,14 @@
         android:id="@+id/rc_fen_ge_tu"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="#BFBFBF"/>
+        android:background="@drawable/chuli"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="破损等级：   低"
+        android:textSize="25dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>

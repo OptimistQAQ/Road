@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CrackMapActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_top1"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:background="#f7f7f7">
+
+        <ImageButton
+            android:id="@+id/ib_back_map"
+            android:layout_width="35dp"
+            android:layout_height="53dp"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="地图查询"
+            android:textColor="@color/text_dark"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/ib_local_me"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_local_me" />
+
+    </RelativeLayout>
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/crack_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/re_top1">
+
+    </com.amap.api.maps.MapView>
+
+</com.zhy.autolayout.AutoRelativeLayout>

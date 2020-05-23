@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -22,6 +23,7 @@ import com.example.a65667.road.Item.CameraRecordItem;
 import com.example.a65667.road.Item.MineRecordItem;
 import com.example.a65667.road.Item.MineTopItem;
 import com.example.a65667.road.activity.CamActivity;
+import com.example.a65667.road.activity.CrackMapActivity;
 import com.example.a65667.road.activity.MainActivity;
 import com.example.a65667.road.R;
 import com.example.a65667.road.activity.SignInActivity;
@@ -52,6 +54,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
     private FloatingActionButton fab1;
     private FloatingActionButton fab2;
     private FloatingActionButton fab3;
+
+    private TextView search_id;
 
 //    MapView mMapView = null;
 //    AMap aMap;   //地图对象
@@ -192,6 +196,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
         fab2.setOnClickListener(this);
         fab3 = root.findViewById(R.id.camera_fab3);
         fab3.setOnClickListener(this);
+        search_id = root.findViewById(R.id.search_id);
+        search_id.setOnClickListener(this);
     }
 
     @Override
@@ -211,6 +217,9 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
                 break;
             case R.id.camera_fab3:
                 startActivity(new Intent(root.getContext(), CamActivity.class));
+                break;
+            case R.id.search_id:
+                startActivity(new Intent(root.getContext(), CrackMapActivity.class));
                 break;
         }
     }
