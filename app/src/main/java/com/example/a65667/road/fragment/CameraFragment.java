@@ -135,7 +135,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
         recyclerView.setAdapter(mAdapter);
 
         mItems = new Items();
-        mItems.add(new CameraRecordItem());
         for (int i = 0; i < dataTime.size(); i++) {
             CameraRecordItem cameraRecordItem = new CameraRecordItem();
             cameraRecordItem.setDataTime(dataTime.get(i));
