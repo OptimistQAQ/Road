@@ -241,7 +241,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         dataid = lno;
         Log.e("dataid", dataid);
 
-        if (dataid.equals("21_2")) {
+        if (dataid.equals("21_0")) {
             mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
             mOriginLatLngList.add(new LatLng(39.9890936910, 116.4206331968));
             mOriginLatLngList.add(new LatLng(39.9890484805, 116.4206385612));
@@ -272,7 +272,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             add_point_in_map(new LatLng(39.9889375093, 116.4206331968), R.drawable.ic_warn_sew);
             add_point_in_map(new LatLng(39.9885963745, 116.4206278324), R.drawable.ic_warn_sew);
 
-        } else if (dataid.equals("3_0")) {
+        } else if (dataid.equals("21_2")) {
             mOriginLatLngList.add(new LatLng(39.9891183512, 116.4138525724));
             mOriginLatLngList.add(new LatLng(39.9891347914, 116.4137881994));
             mOriginLatLngList.add(new LatLng(39.9892005519, 116.4138203859));
@@ -311,7 +311,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             add_point_in_map(new LatLng(39.9895786739, 116.4139169455), R.drawable.ic_warn_sew);
             add_point_in_map(new LatLng(39.9896115539, 116.4135414362), R.drawable.ic_warn_sew);
 
-        } else if (dataid.equals("3")) {
+        } else if (dataid.equals("3_0")) {
             mOriginLatLngList.add(new LatLng(39.9885799342, 116.4206385612));
             mOriginLatLngList.add(new LatLng(39.9886703557, 116.4206385612));
             mOriginLatLngList.add(new LatLng(39.9887114563, 116.4206278324));
@@ -335,7 +335,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             add_point_in_map(new LatLng(39.9886703557, 116.4206385612), R.drawable.ic_warn_sew);
             add_point_in_map(new LatLng(39.9887854374, 116.4206171036), R.drawable.ic_warn_sew);
 
-        } else if (dataid.equals("4")) {
+        } else if (dataid.equals("4_0")) {
             mOriginLatLngList.add(new LatLng(38.0167389718, 112.4465274811));
             mOriginLatLngList.add(new LatLng(38.0167643293, 112.4467635155));
             mOriginLatLngList.add(new LatLng(38.0167601030, 112.4469137192));

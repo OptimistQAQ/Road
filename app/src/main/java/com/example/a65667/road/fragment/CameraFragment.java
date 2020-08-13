@@ -118,7 +118,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 //        holeCount.add("20公里");
 //        crackCount.add("5个大问题");
 //        travelWay.add("途经：中央大道  >  西环路  >  北环  >  东环");
-//        videoUrl.add("cc9d2250-fba65525.mov");
+        videoUrl.add("cc9d2250-fba65525.mov");
 //        lno.add("3");
 //
 //        dataTime.add("2020年3月20日");
@@ -126,7 +126,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 //        holeCount.add("56公里");
 //        crackCount.add("11个大问题");
 //        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-//        videoUrl.add("ccd901f5-bfabffd7.mov");
+        videoUrl.add("ccd901f5-bfabffd7.mov");
 //        lno.add("4");
 
         recyclerView = root.findViewById(R.id.rv_video);

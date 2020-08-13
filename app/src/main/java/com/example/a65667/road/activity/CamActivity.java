@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.example.a65667.road.R;
 import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.example.a65667.road.utils.CameraUtils;
+import com.example.a65667.road.utils.HWPusher;
 import com.example.a65667.road.utils.ImageUtils;
 import com.example.a65667.road.view.MySurfaceView;
 
@@ -45,6 +46,7 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
         mySurfaceView = findViewById(R.id.mSurfaceView);
         btTake = findViewById(R.id.bt_take_pic);
         CameraUtils.startPreview();
+        btTake.setOnClickListener(this);
 
         mySurfaceView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +79,8 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void takePicture() {
+
+        Log.e("123", "take_picture");
 
         CameraUtils.takePicture(new Camera.ShutterCallback() {
             @Override
@@ -119,8 +123,8 @@ public class CamActivity extends AppCompatActivity implements View.OnClickListen
 
                                     @Override
                                     public void onSuccess(File file) {
-//                                        HWPusher hw = new HWPusher();
-//                                        hw.push(file, CamActivity.this);
+                                        HWPusher hw = new HWPusher();
+                                        hw.push(file, CamActivity.this);
 
                                     }
                                     @Override

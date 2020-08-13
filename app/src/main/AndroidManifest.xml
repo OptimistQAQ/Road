@@ -73,6 +73,7 @@
         <activity android:name=".activity.CamActivity" />
         <activity android:name=".activity.CrackMapActivity" />
         <activity android:name=".activity.VideoActivity" />
+        <activity android:name=".activity.HWResultActivity"></activity>
     </application>
 
 </manifest>
