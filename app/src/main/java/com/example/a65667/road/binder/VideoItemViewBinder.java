@@ -28,21 +28,16 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         root = inflater.inflate(R.layout.item_video_item, parent, false);
+        initView();
         return new ViewHolder(root);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull VideoItem item) {
-        videoItem = item;
-        initView();
-    }
+        holder.setIsRecyclable(false);
+        this.videoItem = item;
 
-    private void initView(){
-        fileName = root.findViewById(R.id.file_name);
-        fileName.setText(videoItem.getDuration().toString());
-        btnDelete = root.findViewById(R.id.btnDelete);
-        btnShangchuan = root.findViewById(R.id.btnShangchuan);
-        jzvdStd = root.findViewById(R.id.file_video);
+        fileName.setText(item.getDuration().toString());
 
         jzvdStd.setUp(videoItem.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
 
@@ -59,6 +54,13 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
 
             }
         });
+    }
+
+    private void initView(){
+        fileName = root.findViewById(R.id.file_name);
+        btnDelete = root.findViewById(R.id.btnDelete);
+        btnShangchuan = root.findViewById(R.id.btnShangchuan);
+        jzvdStd = root.findViewById(R.id.file_video);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
