@@ -239,8 +239,9 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private void getLng() {
         PathRecord pathRecord = new PathRecord();
         dataid = lno;
+        Log.e("dataid", dataid);
 
-        if (dataid.equals("1")) {
+        if (dataid.equals("21_2")) {
             mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
             mOriginLatLngList.add(new LatLng(39.9890936910, 116.4206331968));
             mOriginLatLngList.add(new LatLng(39.9890484805, 116.4206385612));
@@ -271,7 +272,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
             add_point_in_map(new LatLng(39.9889375093, 116.4206331968), R.drawable.ic_warn_sew);
             add_point_in_map(new LatLng(39.9885963745, 116.4206278324), R.drawable.ic_warn_sew);
 
-        } else if (dataid.equals("2")) {
+        } else if (dataid.equals("3_0")) {
             mOriginLatLngList.add(new LatLng(39.9891183512, 116.4138525724));
             mOriginLatLngList.add(new LatLng(39.9891347914, 116.4137881994));
             mOriginLatLngList.add(new LatLng(39.9892005519, 116.4138203859));

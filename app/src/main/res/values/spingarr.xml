@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spingarr">
-        <item>太原</item>
         <item>长治</item>
+        <item>太原</item>
         <item>广州</item>
         <item>深圳</item>
     </string-array>

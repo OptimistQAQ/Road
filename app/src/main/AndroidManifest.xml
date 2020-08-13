@@ -72,7 +72,7 @@
         <activity android:name=".activity.VideoManageActivity" />
         <activity android:name=".activity.CamActivity" />
         <activity android:name=".activity.CrackMapActivity" />
-        <activity android:name=".activity.VideoActivity"></activity>
+        <activity android:name=".activity.VideoActivity" />
     </application>
 
 </manifest>

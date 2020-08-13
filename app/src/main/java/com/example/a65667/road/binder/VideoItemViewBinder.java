@@ -39,12 +39,12 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
 
     private void initView(){
         fileName = root.findViewById(R.id.file_name);
-        fileName.setText(videoItem.getFileName());
+        fileName.setText(videoItem.getDuration().toString());
         btnDelete = root.findViewById(R.id.btnDelete);
         btnShangchuan = root.findViewById(R.id.btnShangchuan);
         jzvdStd = root.findViewById(R.id.file_video);
 
-        jzvdStd.setUp(videoUrl, "路面回放", JzvdStd.SCREEN_NORMAL);
+        jzvdStd.setUp(videoItem.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -50,7 +50,6 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
                 root.getContext().startActivity(intent);
             }
         });
-
     }
 
     private void initView() {

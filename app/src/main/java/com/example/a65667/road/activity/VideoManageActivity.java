@@ -1,10 +1,14 @@
 package com.example.a65667.road.activity;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -55,6 +59,7 @@ public class VideoManageActivity extends AppCompatActivity {
         vm_return = (ImageView)findViewById(R.id.vm_return);
 
         List<String> fileName = new ArrayList<>();
+        List<VideoItem> videoItems;
 
         fileName.add("南大桥附近");
 
@@ -67,13 +72,22 @@ public class VideoManageActivity extends AppCompatActivity {
         mAdapter.register(VideoItem.class, new VideoItemViewBinder());
         recyclerView.setAdapter(mAdapter);
 
-        mItems = new Items();
-        for(int i=0; i<fileName.size(); i++){
-            VideoItem videoItem = new VideoItem();
-            videoItem.setFileName(fileName.get(i));
-            mItems.add(videoItem);
-        }
+//        mItems = new Items();
+//        for(int i=0; i<fileName.size(); i++){
+//            VideoItem videoItem = new VideoItem();
+//            videoItem.setFileName(fileName.get(i));
+//            mItems.add(videoItem);
+//        }
+//
+//        mAdapter.setItems(mItems);
+//        mAdapter.notifyDataSetChanged();
 
+        videoItems = getList(VideoManageActivity.this);
+        mItems = new Items();
+        for (int i=0; i<videoItems.size(); i++) {
+            mItems.add(videoItems.get(i));
+        }
+        Log.e("size", String.valueOf(videoItems.size()));
         mAdapter.setItems(mItems);
         mAdapter.notifyDataSetChanged();
 
@@ -95,5 +109,46 @@ public class VideoManageActivity extends AppCompatActivity {
 //        });
 //        recyclerView.setAdapter(videoItemAdapter);
 //        recyclerView.setLayoutManager(manager = new GridLayoutManager(this, 2));
+
     }
+
+    public List<VideoItem> getList(Context context) {
+        List<VideoItem> sysVideoList = new ArrayList<>();
+        // MediaStore.Video.Thumbnails.DATA:视频缩略图的文件路径
+        String[] thumbColumns = {MediaStore.Video.Thumbnails.DATA,
+                MediaStore.Video.Thumbnails.VIDEO_ID};
+        // 视频其他信息的查询条件
+        String[] mediaColumns = {MediaStore.Video.Media._ID,
+                MediaStore.Video.Media.DATA, MediaStore.Video.Media.DURATION};
+
+        Cursor cursor = context.getContentResolver().query(MediaStore.Video.Media
+                        .EXTERNAL_CONTENT_URI,
+                mediaColumns, null, null, null);
+
+        if (cursor == null) {
+            return sysVideoList;
+        }
+        if (cursor.moveToFirst()) {
+            do {
+                VideoItem info = new VideoItem();
+                int id = cursor.getInt(cursor
+                        .getColumnIndex(MediaStore.Video.Media._ID));
+                Cursor thumbCursor = context.getContentResolver().query(
+                        MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI,
+                        thumbColumns, MediaStore.Video.Thumbnails.VIDEO_ID
+                                + "=" + id, null, null);
+                if (thumbCursor.moveToFirst()) {
+                    info.setFileUrl(thumbCursor.getString(thumbCursor
+                            .getColumnIndex(MediaStore.Video.Thumbnails.DATA)));
+                }
+                info.setFileUrl(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media
+                        .DATA)));
+                info.setDuration(cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video
+                        .Media.DURATION)));
+                sysVideoList.add(info);
+            } while (cursor.moveToNext());
+        }
+        return sysVideoList;
+    }
+
 }

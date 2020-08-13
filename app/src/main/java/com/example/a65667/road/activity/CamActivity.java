@@ -24,7 +24,7 @@ import java.io.IOException;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class CamActivity extends AppCompatActivity {
+public class CamActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MySurfaceView mySurfaceView;
     private Button btTake;
@@ -138,4 +138,14 @@ public class CamActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_take_pic:
+                takePicture();
+                break;
+        }
+    }
+
 }
