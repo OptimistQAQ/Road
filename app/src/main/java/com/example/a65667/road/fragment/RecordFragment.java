@@ -12,12 +12,15 @@ import android.widget.ImageView;
 
 import com.example.a65667.road.R;
 import com.example.a65667.road.activity.AuthorityManageActivity;
+import com.example.a65667.road.activity.VideoActivity;
 import com.example.a65667.road.activity.VideoManageActivity;
+
+import cn.nodemedia.pusher.view.SourcePushActivity;
 
 public class RecordFragment extends Fragment {
 
     private View root;
-    private ImageView tv_power, tvVideo;
+    private ImageView tv_power, tvVideo, tv_Photo;
 
     public RecordFragment() {
         // Required empty public constructor
@@ -49,6 +52,13 @@ public class RecordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(root.getContext(), VideoManageActivity.class));
+            }
+        });
+        tv_Photo = root.findViewById(R.id.photo);
+        tv_Photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(root.getContext(), SourcePushActivity.class));
             }
         });
     }

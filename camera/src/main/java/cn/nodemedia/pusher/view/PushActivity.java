@@ -2,10 +2,16 @@ package cn.nodemedia.pusher.view;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
@@ -15,6 +21,7 @@ import cn.nodemedia.NodeCameraView;
 import cn.nodemedia.pusher.R;
 import cn.nodemedia.pusher.ShareBean;
 import cn.nodemedia.pusher.contract.PushContract;
+import cn.nodemedia.pusher.widget.ScreenAboveLollRecordManager;
 import xyz.tanwb.airship.view.BaseActivity;
 
 public class PushActivity extends BaseActivity<PushContract.Presenter> implements PushContract.View, View.OnClickListener {
@@ -22,6 +29,8 @@ public class PushActivity extends BaseActivity<PushContract.Presenter> implement
     private NodeCameraView pushSurface;
     private ImageView pushBack,pushSwitch,pushFlash;
     private TextView pushButton;
+    private ScreenAboveLollRecordManager screenAboveLollRecordManager;
+//    private static final int VIDEO_WITH_CAMERA = 1;
 
     @Override
     public int getLayoutId() {
@@ -42,6 +51,13 @@ public class PushActivity extends BaseActivity<PushContract.Presenter> implement
         }
         assignViews();
 
+        screenAboveLollRecordManager = new ScreenAboveLollRecordManager(PushActivity.this, 600, 600);
+        screenAboveLollRecordManager.startScreenRecorde(PushActivity.this);
+
+//        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+//        intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30);
+//        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+//        startActivityForResult (intent, VIDEO_WITH_CAMERA);
     }
 
 
@@ -81,7 +97,7 @@ public class PushActivity extends BaseActivity<PushContract.Presenter> implement
         } else if (i == R.id.push_button) {
             mPresenter.pushChange();
             pushButton.setText(R.string.push_wait);
-
+            screenAboveLollRecordManager.destroy();
         }
     }
 
@@ -164,5 +180,19 @@ public class PushActivity extends BaseActivity<PushContract.Presenter> implement
         } else {
             pushFlash.setImageResource(R.drawable.ic_flash_off);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        screenAboveLollRecordManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+
+//        try{
+//            if (resultCode == Activity.RESULT_OK && requestCode == VIDEO_WITH_CAMERA) {
+//                Uri uri = data.getData();
+//            }
+//        }catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

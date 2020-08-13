@@ -4,7 +4,7 @@
 
         <EditTextPreference
             android:capitalize="words"
-            android:defaultValue="rtmp://"
+            android:defaultValue="rtmp://47.59.169:1935/hls/"
             android:inputType="textCapWords"
             android:key="push_stream_url"
             android:maxLines="1"

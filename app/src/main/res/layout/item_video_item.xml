@@ -36,6 +36,15 @@
             android:textColor="@android:color/white"
             android:background="#ff0000"/>
 
+        <Button
+            android:id="@+id/btnShangchuan"
+            android:layout_width="100dp"
+            android:layout_height="250dp"
+            android:text="上传"
+            android:textColor="@color/white"
+            android:background="#d72323"
+            />
+
     </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
 
 </RelativeLayout>

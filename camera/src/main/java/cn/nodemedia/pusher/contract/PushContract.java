@@ -92,6 +92,7 @@ public interface PushContract {
 
         private void startSentGPSTimer() {
             seconds = 0;
+            android.util.Log.e("model", String.valueOf(ShareBean.Latitude) + ShareBean.Longitude);
             gpsSenter = new Runnable() {
                 @Override
                 public void run() {

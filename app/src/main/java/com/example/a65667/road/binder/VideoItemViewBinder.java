@@ -19,7 +19,7 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     private View root;
     private VideoItem videoItem;
     private TextView fileName;
-    private Button btnDelete;
+    private Button btnDelete, btnShangchuan;
 
     private JzvdStd jzvdStd;
     private String videoUrl = "http://ishero.net/share/valvideo/ccd901f5-bfabffd7.mov";
@@ -41,11 +41,19 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         fileName = root.findViewById(R.id.file_name);
         fileName.setText(videoItem.getFileName());
         btnDelete = root.findViewById(R.id.btnDelete);
+        btnShangchuan = root.findViewById(R.id.btnShangchuan);
         jzvdStd = root.findViewById(R.id.file_video);
 
         jzvdStd.setUp(videoUrl, "路面回放", JzvdStd.SCREEN_NORMAL);
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnShangchuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

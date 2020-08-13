@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements LocationSource, A
                 CurrentLocalGPS.Longitude = yGPS;
                 ShareBean.Latitude = xGPS;
                 ShareBean.Longitude = yGPS;
+//                Log.e("model", String.valueOf(ShareBean.Latitude) + ShareBean.Longitude);
 
                 priLocation = aMapLocation;
                 drawLines(aMapLocation);
