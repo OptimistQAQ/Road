@@ -241,6 +241,34 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         dataid = lno;
         Log.e("dataid", dataid);
 
+//        List<String> xGPS = new ArrayList<>();
+//        List<String> yGPS = new ArrayList<>();
+//
+//        OkGo.<String>post("")
+//                .params("lno", dataid)
+//                .tag(this)
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onSuccess(Response<String> response) {
+//                        Log.e("crackDetail", response.body());
+//                        response.toString();
+//                        JSONArray jsonArray = JSON.parseArray(response.body());
+//                        for (int i=0; i<jsonArray.size(); i++) {
+//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                            if (!jsonObject.getString("").equals("0.0")) {
+//                                xGPS.add(jsonObject.getString(""));
+//                                yGPS.add(jsonObject.getString(""));
+//                                mOriginLatLngList.add(new LatLng(Double.valueOf(xGPS.toString()), Double.valueOf(yGPS.toString())));
+//                                pathRecord.addpoint(TraceUtil.parseLocation(xGPS.toString() + ", " + yGPS.toString()));
+//                            }
+//                         }
+//                        List<AMapLocation> recordList = pathRecord.getPathline();
+//                        List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//                        LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//                        mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP,CrackDetailActivity.this);
+//                    }
+//                });
+
         if (dataid.equals("21_0")) {
             mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
             mOriginLatLngList.add(new LatLng(39.9890936910, 116.4206331968));
@@ -427,8 +455,6 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         add_point_in_map(new LatLng(38.0169883203, 112.4508565664), R.drawable.ic_warn_sew);
         add_point_in_map(new LatLng(38.0154415003, 112.4531847239), R.drawable.ic_warn_hole);
         add_point_in_map(new LatLng(38.0154372740, 112.4525624514), R.drawable.ic_warn_hole);
-
-
     }
 
     private void add_point_in_map(LatLng lng, int id) {
