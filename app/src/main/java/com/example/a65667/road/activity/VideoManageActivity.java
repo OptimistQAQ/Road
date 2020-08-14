@@ -86,6 +86,7 @@ public class VideoManageActivity extends AppCompatActivity {
         mItems = new Items();
         for (int i=0; i<videoItems.size(); i++) {
             mItems.add(videoItems.get(i));
+            Log.e("url", videoItems.get(i).getFileUrl());
         }
         Log.e("size", String.valueOf(videoItems.size()));
         mAdapter.setItems(mItems);

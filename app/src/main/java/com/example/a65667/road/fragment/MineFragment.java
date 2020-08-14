@@ -67,32 +67,32 @@ public class MineFragment extends Fragment {
 //        lastTime.add("14分钟");
 //        holeCount.add("20公里");
 //        crackCount.add("3个大问题");
-//        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-//        videoUrl.add("cc1d3666-fe5994ae.mov");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        videoUrl.add("cc1d3666-fe5994ae.mov");
 //        lno.add("1");
 //
 //        dataTime.add("2020年3月10日");
 //        lastTime.add("20分钟");
 //        holeCount.add("33公里");
 //        crackCount.add("9个大问题");
-//        travelWay.add("途经：南环路 > 傅山园北街 > 新兰路 > 滨河东路");
-//        videoUrl.add("cc8d5a50-92a79d46.mov");
+        travelWay.add("途经：南环路 > 傅山园北街 > 新兰路 > 滨河东路");
+        videoUrl.add("cc8d5a50-92a79d46.mov");
 //        lno.add("2");
 //
 //        dataTime.add("2020年3月15日");
 //        lastTime.add("14分钟");
 //        holeCount.add("20公里");
 //        crackCount.add("5个大问题");
-//        travelWay.add("途经：中央大道  >  西环路  >  北环  >  东环");
-//        videoUrl.add("cc9d2250-fba65525.mov");
+        travelWay.add("途经：中央大道  >  西环路  >  北环  >  东环");
+        videoUrl.add("cc9d2250-fba65525.mov");
 //        lno.add("3");
 //
 //        dataTime.add("2020年3月20日");
 //        lastTime.add("24分钟");
 //        holeCount.add("56公里");
 //        crackCount.add("11个大问题");
-//        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-//        videoUrl.add("ccd901f5-bfabffd7.mov");
+        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+        videoUrl.add("ccd901f5-bfabffd7.mov");
 //        lno.add("4");
 
         recyclerView = root.findViewById(R.id.rv_mine);
@@ -135,7 +135,7 @@ public class MineFragment extends Fragment {
                                 lastTime.add(jsonObject.getString("lduration") + "分钟");
                                 holeCount.add("20公里");
                                 crackCount.add(jsonObject.getInteger("uno").toString() + "个大问题");
-                                travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
+//                                travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
                                 lno.add(jsonObject.getString("lno"));
                             }
                         }
@@ -147,6 +147,7 @@ public class MineFragment extends Fragment {
                             mineRecordItem.setCrackCount(crackCount.get(i));
                             mineRecordItem.setTravel(travelWay.get(i));
                             mineRecordItem.setLno(lno.get(i));
+                            mineRecordItem.setVideoUrl(videoUrl.get(i));
                             mItems.add(mineRecordItem);
                         }
                         mAdaper.setItems(mItems);

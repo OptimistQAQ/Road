@@ -125,7 +125,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
         init();
 
-        mapControl();
+        getLng();
     }
 
     private void init(){
@@ -212,7 +212,6 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
     private void mapControl() {
         deta_Map.moveCamera(CameraUpdateFactory.zoomBy(16));
-        getLng();
         setUpMap();
         deta_Map.moveCamera(CameraUpdateFactory.changeLatLng(mOriginLatLngList.get(0)));
         int threadPoolSize = Runtime.getRuntime().availableProcessors() * 2 + 3;
@@ -241,206 +240,227 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         dataid = lno;
         Log.e("dataid", dataid);
 
-//        List<String> xGPS = new ArrayList<>();
-//        List<String> yGPS = new ArrayList<>();
+        List<String> xGPS = new ArrayList<>();
+        List<String> yGPS = new ArrayList<>();
+
+        OkGo.<String>post("http://39.105.172.22:9596/showTrackdetail")
+                .params("lno", dataid)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.e("trackDetail", response.body());
+                        response.toString();
+                        JSONArray jsonArray = JSON.parseArray(response.body());
+                        for (int i=0; i<jsonArray.size(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            if (!jsonObject.getString("lat").equals("0.0")) {
+                                xGPS.add(jsonObject.getString("lon"));
+                                yGPS.add(jsonObject.getString("lat"));
+                                mOriginLatLngList.add(new LatLng(Double.valueOf(xGPS.get(i)), Double.valueOf(yGPS.get(i))));
+////                                Log.e("mOrigin", String.valueOf(mOriginLatLngList.get(i).latitude));
+                                pathRecord.addpoint(TraceUtil.parseLocation(xGPS.get(i) + ", " + yGPS.get(i)));
+                            }
+                         }
+                        List<AMapLocation> recordList = pathRecord.getPathline();
+                        List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+                        LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+                        mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP,CrackDetailActivity.this);
+                        mapControl();
+                    }
+                });
+
+        OkGo.<String>post("http://39.105.172.22:9596/showCrackDetail")
+                .params("lno", dataid)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.e("crackDetail", response.body());
+                        response.toString();
+                        JSONArray jsonArray = JSON.parseArray(response.body());
+                        for (int i=0; i<jsonArray.size(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            if (!jsonObject.getString("lat").equals("0.0")) {
+                                add_point_in_map(new LatLng(Double.valueOf(jsonObject.getString("lon")), Double.valueOf(jsonObject.getString("lat"))), R.drawable.ic_warn_sew);
+                            }
+                        }
+                    }
+                });
+
+//        if (dataid.equals("21_0")) {
+//            mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
+//            mOriginLatLngList.add(new LatLng(39.9890936910, 116.4206331968));
+//            mOriginLatLngList.add(new LatLng(39.9890484805, 116.4206385612));
+//            mOriginLatLngList.add(new LatLng(39.9889375093, 116.4206331968));
+//            mOriginLatLngList.add(new LatLng(39.9888429782, 116.4206278324));
+//            mOriginLatLngList.add(new LatLng(39.9888429782, 116.4206278324));
+//            mOriginLatLngList.add(new LatLng(39.9887525569, 116.4206385612));
+//            mOriginLatLngList.add(new LatLng(39.9886662456, 116.4206278324));
+//            mOriginLatLngList.add(new LatLng(39.9885963745, 116.4206278324));
+//            mOriginLatLngList.add(new LatLng(39.9885141730, 116.4206278324));
+//            mOriginLatLngList.add(new LatLng(39.9884319715, 116.4206331968));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9890197102, 116.4206492901"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9890936910, 116.4206331968"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9890484805, 116.4206385612"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9889375093, 116.4206331968"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9888429782, 116.4206278324"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9888429782, 116.4206278324"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9887525569, 116.4206385612"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9886662456, 116.4206278324"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9885963745, 116.4206278324"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9885141730, 116.4206278324"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9884319715, 116.4206331968"));
+//            List<AMapLocation> recordList = pathRecord.getPathline();
+//            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP,this);
+//            add_point_in_map(new LatLng(39.9890197102, 116.4206492901), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(39.9889375093, 116.4206331968), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(39.9885963745, 116.4206278324), R.drawable.ic_warn_sew);
 //
-//        OkGo.<String>post("")
-//                .params("lno", dataid)
-//                .tag(this)
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onSuccess(Response<String> response) {
-//                        Log.e("crackDetail", response.body());
-//                        response.toString();
-//                        JSONArray jsonArray = JSON.parseArray(response.body());
-//                        for (int i=0; i<jsonArray.size(); i++) {
-//                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            if (!jsonObject.getString("").equals("0.0")) {
-//                                xGPS.add(jsonObject.getString(""));
-//                                yGPS.add(jsonObject.getString(""));
-//                                mOriginLatLngList.add(new LatLng(Double.valueOf(xGPS.toString()), Double.valueOf(yGPS.toString())));
-//                                pathRecord.addpoint(TraceUtil.parseLocation(xGPS.toString() + ", " + yGPS.toString()));
-//                            }
-//                         }
-//                        List<AMapLocation> recordList = pathRecord.getPathline();
-//                        List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-//                        LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-//                        mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP,CrackDetailActivity.this);
-//                    }
-//                });
-
-        if (dataid.equals("21_0")) {
-            mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
-            mOriginLatLngList.add(new LatLng(39.9890936910, 116.4206331968));
-            mOriginLatLngList.add(new LatLng(39.9890484805, 116.4206385612));
-            mOriginLatLngList.add(new LatLng(39.9889375093, 116.4206331968));
-            mOriginLatLngList.add(new LatLng(39.9888429782, 116.4206278324));
-            mOriginLatLngList.add(new LatLng(39.9888429782, 116.4206278324));
-            mOriginLatLngList.add(new LatLng(39.9887525569, 116.4206385612));
-            mOriginLatLngList.add(new LatLng(39.9886662456, 116.4206278324));
-            mOriginLatLngList.add(new LatLng(39.9885963745, 116.4206278324));
-            mOriginLatLngList.add(new LatLng(39.9885141730, 116.4206278324));
-            mOriginLatLngList.add(new LatLng(39.9884319715, 116.4206331968));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9890197102, 116.4206492901"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9890936910, 116.4206331968"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9890484805, 116.4206385612"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9889375093, 116.4206331968"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9888429782, 116.4206278324"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9888429782, 116.4206278324"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9887525569, 116.4206385612"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9886662456, 116.4206278324"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9885963745, 116.4206278324"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9885141730, 116.4206278324"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9884319715, 116.4206331968"));
-            List<AMapLocation> recordList = pathRecord.getPathline();
-            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP,this);
-            add_point_in_map(new LatLng(39.9890197102, 116.4206492901), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(39.9889375093, 116.4206331968), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(39.9885963745, 116.4206278324), R.drawable.ic_warn_sew);
-
-        } else if (dataid.equals("21_2")) {
-            mOriginLatLngList.add(new LatLng(39.9891183512, 116.4138525724));
-            mOriginLatLngList.add(new LatLng(39.9891347914, 116.4137881994));
-            mOriginLatLngList.add(new LatLng(39.9892005519, 116.4138203859));
-            mOriginLatLngList.add(new LatLng(39.9893074127, 116.4139115810));
-            mOriginLatLngList.add(new LatLng(39.9893608430, 116.4139491320));
-            mOriginLatLngList.add(new LatLng(39.9894348234, 116.4140027761));
-            mOriginLatLngList.add(new LatLng(39.9894800335, 116.4140188694));
-            mOriginLatLngList.add(new LatLng(39.9895293537, 116.4140456915));
-            mOriginLatLngList.add(new LatLng(39.9895663438, 116.4140349627));
-            mOriginLatLngList.add(new LatLng(39.9895786739, 116.4139169455));
-            mOriginLatLngList.add(new LatLng(39.9896156639, 116.4138257504));
-            mOriginLatLngList.add(new LatLng(39.9896074439, 116.4137023687));
-            mOriginLatLngList.add(new LatLng(39.9896115539, 116.4135414362));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9891183512,116.4138525724"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9891347914,116.4137881994"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9892005519,116.4138203859"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9893074127,116.4139115810"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9893608430,116.4139491320"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9894348234,116.4140027761"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9894800335,116.4140188694"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9895293537,116.4140456915"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9895663438,116.4140349627"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9895786739,116.4139169455"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9896156639,116.4138257504"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9896074439,116.4137023687"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9896115539,116.4135414362"));
-
-            List<AMapLocation> recordList = pathRecord.getPathline();
-            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
-
-            add_point_in_map(new LatLng(39.9891183512, 116.4138525724), R.drawable.ic_red_sew);
-            add_point_in_map(new LatLng(39.9891347914, 116.4137881994), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(39.9894348234, 116.4140027761), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(39.9895786739, 116.4139169455), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(39.9896115539, 116.4135414362), R.drawable.ic_warn_sew);
-
-        } else if (dataid.equals("3_0")) {
-            mOriginLatLngList.add(new LatLng(39.9885799342, 116.4206385612));
-            mOriginLatLngList.add(new LatLng(39.9886703557, 116.4206385612));
-            mOriginLatLngList.add(new LatLng(39.9887114563, 116.4206278324));
-            mOriginLatLngList.add(new LatLng(39.9887854374, 116.4206171036));
-            mOriginLatLngList.add(new LatLng(39.9888183178, 116.4206171036));
-            mOriginLatLngList.add(new LatLng(39.9888265379, 116.4206385612));
-            mOriginLatLngList.add(new LatLng(39.9889909399, 116.4206278324));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9885799342,116.4206385612"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9886703557,116.4206385612"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9887114563,116.4206278324"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9887854374,116.4206171036"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9888183178,116.4206171036"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9888265379,116.4206385612"));
-            pathRecord.addpoint(TraceUtil.parseLocation("39.9889909399,116.4206278324"));
-
-            List<AMapLocation> recordList = pathRecord.getPathline();
-            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
-
-            add_point_in_map(new LatLng(39.9886703557, 116.4206385612), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(39.9887854374, 116.4206171036), R.drawable.ic_warn_sew);
-
-        } else if (dataid.equals("4_0")) {
-            mOriginLatLngList.add(new LatLng(38.0167389718, 112.4465274811));
-            mOriginLatLngList.add(new LatLng(38.0167643293, 112.4467635155));
-            mOriginLatLngList.add(new LatLng(38.0167601030, 112.4469137192));
-            mOriginLatLngList.add(new LatLng(38.0167770081, 112.4471014738));
-            mOriginLatLngList.add(new LatLng(38.0168150443, 112.4474501610));
-            mOriginLatLngList.add(new LatLng(38.0168488543, 112.4478954077));
-            mOriginLatLngList.add(new LatLng(38.0168953430, 112.4487966299));
-            mOriginLatLngList.add(new LatLng(38.0169249267, 112.4492740631));
-            mOriginLatLngList.add(new LatLng(38.0169587367, 112.4498480558));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0167389718,112.4465274811"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0167643293,112.4467635155"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0167601030,112.4469137192"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0167770081,112.4471014738"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0168150443,112.4474501610"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0168488543,112.4478954077"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0168953430,112.4487966299"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0169249267,112.4492740631"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0169587367,112.4498480558"));
-
-            List<AMapLocation> recordList = pathRecord.getPathline();
-            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
-
-            add_point_in_map(new LatLng(38.0167643293, 112.4467635155), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0167601030, 112.4469137192), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0168150443, 112.4474501610), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0168953430, 112.4487966299), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0169587367, 112.4498480558), R.drawable.ic_warn_sew);
-
-        } else if (dataid.equals("5")) {
-            mOriginLatLngList.add(new LatLng(38.0040295241, 112.4446821213));
-            mOriginLatLngList.add(new LatLng(38.0029896780, 112.4451810122));
-            mOriginLatLngList.add(new LatLng(38.0026050157, 112.4453687668));
-            mOriginLatLngList.add(new LatLng(38.0018272309, 112.4457228184));
-            mOriginLatLngList.add(new LatLng(38.0010663465, 112.4460929632));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0040295241,112.4446821213"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0029896780,112.4451810122"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0026050157,112.4453687668"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0018272309,112.4457228184"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0010663465,112.4460929632"));
-            List<AMapLocation> recordList = pathRecord.getPathline();
-            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
-
-            add_point_in_map(new LatLng(38.0040295241, 112.4446821213), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0026050157, 112.4453687668), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0010663465, 112.4460929632), R.drawable.ic_warn_sew);
-
-        } else if (dataid.equals("6")) {
-            mOriginLatLngList.add(new LatLng(38.0068023751, 112.4434214830));
-            mOriginLatLngList.add(new LatLng(38.0070602110, 112.4432712793));
-            mOriginLatLngList.add(new LatLng(38.0073180461, 112.4431639910));
-            mOriginLatLngList.add(new LatLng(38.0077026837, 112.4429923296));
-            mOriginLatLngList.add(new LatLng(38.0081253600, 112.4429011345));
-            mOriginLatLngList.add(new LatLng(38.0084550458, 112.4428206682));
-            mOriginLatLngList.add(new LatLng(38.0087931835, 112.4427723885));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0068023751,112.4434214830"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0070602110,112.4432712793"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0073180461,112.4431639910"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0077026837,112.4429923296"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0081253600,112.4429011345"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0084550458,112.4428206682"));
-            pathRecord.addpoint(TraceUtil.parseLocation("38.0087931835,112.4427723885"));
-
-            List<AMapLocation> recordList = pathRecord.getPathline();
-            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
-            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
-            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
-
-            add_point_in_map(new LatLng(38.0068023751, 112.4434214830), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0073180461, 112.4431639910), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0077026837, 112.4429923296), R.drawable.ic_warn_sew);
-            add_point_in_map(new LatLng(38.0084550458, 112.4428206682), R.drawable.ic_warn_sew);
-
-        }
+//        }
+//        else if (dataid.equals("21_2")) {
+//            mOriginLatLngList.add(new LatLng(39.9891183512, 116.4138525724));
+//            mOriginLatLngList.add(new LatLng(39.9891347914, 116.4137881994));
+//            mOriginLatLngList.add(new LatLng(39.9892005519, 116.4138203859));
+//            mOriginLatLngList.add(new LatLng(39.9893074127, 116.4139115810));
+//            mOriginLatLngList.add(new LatLng(39.9893608430, 116.4139491320));
+//            mOriginLatLngList.add(new LatLng(39.9894348234, 116.4140027761));
+//            mOriginLatLngList.add(new LatLng(39.9894800335, 116.4140188694));
+//            mOriginLatLngList.add(new LatLng(39.9895293537, 116.4140456915));
+//            mOriginLatLngList.add(new LatLng(39.9895663438, 116.4140349627));
+//            mOriginLatLngList.add(new LatLng(39.9895786739, 116.4139169455));
+//            mOriginLatLngList.add(new LatLng(39.9896156639, 116.4138257504));
+//            mOriginLatLngList.add(new LatLng(39.9896074439, 116.4137023687));
+//            mOriginLatLngList.add(new LatLng(39.9896115539, 116.4135414362));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9891183512,116.4138525724"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9891347914,116.4137881994"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9892005519,116.4138203859"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9893074127,116.4139115810"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9893608430,116.4139491320"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9894348234,116.4140027761"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9894800335,116.4140188694"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9895293537,116.4140456915"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9895663438,116.4140349627"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9895786739,116.4139169455"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9896156639,116.4138257504"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9896074439,116.4137023687"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9896115539,116.4135414362"));
+//
+//            List<AMapLocation> recordList = pathRecord.getPathline();
+//            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
+//
+//            add_point_in_map(new LatLng(39.9891183512, 116.4138525724), R.drawable.ic_red_sew);
+//            add_point_in_map(new LatLng(39.9891347914, 116.4137881994), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(39.9894348234, 116.4140027761), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(39.9895786739, 116.4139169455), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(39.9896115539, 116.4135414362), R.drawable.ic_warn_sew);
+//
+//        } else if (dataid.equals("3_0")) {
+//            mOriginLatLngList.add(new LatLng(39.9885799342, 116.4206385612));
+//            mOriginLatLngList.add(new LatLng(39.9886703557, 116.4206385612));
+//            mOriginLatLngList.add(new LatLng(39.9887114563, 116.4206278324));
+//            mOriginLatLngList.add(new LatLng(39.9887854374, 116.4206171036));
+//            mOriginLatLngList.add(new LatLng(39.9888183178, 116.4206171036));
+//            mOriginLatLngList.add(new LatLng(39.9888265379, 116.4206385612));
+//            mOriginLatLngList.add(new LatLng(39.9889909399, 116.4206278324));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9885799342,116.4206385612"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9886703557,116.4206385612"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9887114563,116.4206278324"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9887854374,116.4206171036"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9888183178,116.4206171036"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9888265379,116.4206385612"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("39.9889909399,116.4206278324"));
+//
+//            List<AMapLocation> recordList = pathRecord.getPathline();
+//            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
+//
+//            add_point_in_map(new LatLng(39.9886703557, 116.4206385612), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(39.9887854374, 116.4206171036), R.drawable.ic_warn_sew);
+//
+//        } else if (dataid.equals("4_0")) {
+//            mOriginLatLngList.add(new LatLng(38.0167389718, 112.4465274811));
+//            mOriginLatLngList.add(new LatLng(38.0167643293, 112.4467635155));
+//            mOriginLatLngList.add(new LatLng(38.0167601030, 112.4469137192));
+//            mOriginLatLngList.add(new LatLng(38.0167770081, 112.4471014738));
+//            mOriginLatLngList.add(new LatLng(38.0168150443, 112.4474501610));
+//            mOriginLatLngList.add(new LatLng(38.0168488543, 112.4478954077));
+//            mOriginLatLngList.add(new LatLng(38.0168953430, 112.4487966299));
+//            mOriginLatLngList.add(new LatLng(38.0169249267, 112.4492740631));
+//            mOriginLatLngList.add(new LatLng(38.0169587367, 112.4498480558));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0167389718,112.4465274811"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0167643293,112.4467635155"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0167601030,112.4469137192"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0167770081,112.4471014738"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0168150443,112.4474501610"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0168488543,112.4478954077"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0168953430,112.4487966299"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0169249267,112.4492740631"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0169587367,112.4498480558"));
+//
+//            List<AMapLocation> recordList = pathRecord.getPathline();
+//            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
+//
+//            add_point_in_map(new LatLng(38.0167643293, 112.4467635155), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0167601030, 112.4469137192), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0168150443, 112.4474501610), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0168953430, 112.4487966299), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0169587367, 112.4498480558), R.drawable.ic_warn_sew);
+//
+//        } else if (dataid.equals("5")) {
+//            mOriginLatLngList.add(new LatLng(38.0040295241, 112.4446821213));
+//            mOriginLatLngList.add(new LatLng(38.0029896780, 112.4451810122));
+//            mOriginLatLngList.add(new LatLng(38.0026050157, 112.4453687668));
+//            mOriginLatLngList.add(new LatLng(38.0018272309, 112.4457228184));
+//            mOriginLatLngList.add(new LatLng(38.0010663465, 112.4460929632));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0040295241,112.4446821213"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0029896780,112.4451810122"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0026050157,112.4453687668"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0018272309,112.4457228184"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0010663465,112.4460929632"));
+//            List<AMapLocation> recordList = pathRecord.getPathline();
+//            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
+//
+//            add_point_in_map(new LatLng(38.0040295241, 112.4446821213), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0026050157, 112.4453687668), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0010663465, 112.4460929632), R.drawable.ic_warn_sew);
+//
+//        } else if (dataid.equals("6")) {
+//            mOriginLatLngList.add(new LatLng(38.0068023751, 112.4434214830));
+//            mOriginLatLngList.add(new LatLng(38.0070602110, 112.4432712793));
+//            mOriginLatLngList.add(new LatLng(38.0073180461, 112.4431639910));
+//            mOriginLatLngList.add(new LatLng(38.0077026837, 112.4429923296));
+//            mOriginLatLngList.add(new LatLng(38.0081253600, 112.4429011345));
+//            mOriginLatLngList.add(new LatLng(38.0084550458, 112.4428206682));
+//            mOriginLatLngList.add(new LatLng(38.0087931835, 112.4427723885));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0068023751,112.4434214830"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0070602110,112.4432712793"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0073180461,112.4431639910"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0077026837,112.4429923296"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0081253600,112.4429011345"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0084550458,112.4428206682"));
+//            pathRecord.addpoint(TraceUtil.parseLocation("38.0087931835,112.4427723885"));
+//
+//            List<AMapLocation> recordList = pathRecord.getPathline();
+//            List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
+//            LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());
+//            mTraceClient.queryProcessedTrace(1, mGraspTraceLocationList, LBSTraceClient.TYPE_AMAP, this);
+//
+//            add_point_in_map(new LatLng(38.0068023751, 112.4434214830), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0073180461, 112.4431639910), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0077026837, 112.4429923296), R.drawable.ic_warn_sew);
+//            add_point_in_map(new LatLng(38.0084550458, 112.4428206682), R.drawable.ic_warn_sew);
+//
+//        }
 
         add_point_in_map(new LatLng(38.0140510249, 112.4519723654), R.drawable.ic_red_sew);
         add_point_in_map(new LatLng(38.0151794674, 112.4518007040), R.drawable.ic_warn_sew);
