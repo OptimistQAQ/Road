@@ -288,6 +288,10 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                     }
                 });
 
+
+
+
+
 //        if (dataid.equals("21_0")) {
 //            mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
 //            mOriginLatLngList.add(new LatLng(39.9890936910, 116.4206331968));
