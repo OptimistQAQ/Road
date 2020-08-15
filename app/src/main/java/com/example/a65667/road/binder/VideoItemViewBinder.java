@@ -73,7 +73,6 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("123", "456");
 
             }
         });
