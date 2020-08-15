@@ -1,6 +1,7 @@
 package com.example.a65667.road.binder;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +20,8 @@ public class CameraRecordItemViewBinder extends ItemViewBinder<CameraRecordItem,
 
     private CameraRecordItem cameraRecordItem;
     private View root;
-    private TextView lvData, lvLast, lvHole, lvCrack, lvTravel;
+    private TextView lvData, lvLast, lvHole, lvCrack, lvTravel, lvprocessState;
+    private ImageView lvImage;
 
     @NonNull
     @Override
@@ -38,6 +40,10 @@ public class CameraRecordItemViewBinder extends ItemViewBinder<CameraRecordItem,
         lvHole.setText(cameraRecordItem.getHoleCount());
         lvCrack.setText(cameraRecordItem.getCrackCount());
         lvTravel.setText(cameraRecordItem.getTravel());
+        if (cameraRecordItem.getLprocessState().equals("状态：waiting")) {
+            lvImage.setColorFilter(Color.GRAY);
+        }
+        lvprocessState.setText(cameraRecordItem.getLprocessState());
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +62,8 @@ public class CameraRecordItemViewBinder extends ItemViewBinder<CameraRecordItem,
         lvHole = root.findViewById(R.id.lv_hole_count);
         lvCrack = root.findViewById(R.id.lv_crack_count);
         lvTravel = root.findViewById(R.id.lv_travel);
+        lvprocessState = root.findViewById(R.id.lprocessState);
+        lvImage = root.findViewById(R.id.lv_image);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

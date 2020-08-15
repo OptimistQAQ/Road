@@ -9,6 +9,15 @@ public class MineRecordItem {
     private String travel;
     private String lno;
     private String videoUrl;
+    private String lprocessState;
+
+    public void setLprocessState(String lprocessState) {
+        this.lprocessState = lprocessState;
+    }
+
+    public String getLprocessState() {
+        return lprocessState;
+    }
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;

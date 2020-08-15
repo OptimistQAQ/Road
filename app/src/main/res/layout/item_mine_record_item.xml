@@ -36,6 +36,23 @@
                 android:textSize="13sp"
                 />
 
+            <ImageView
+                android:id="@+id/tv_image"
+                android:layout_width="100dp"
+                android:layout_height="27dp"
+                android:src="#309153"
+                android:layout_marginStart="150dp"/>
+
+            <TextView
+                android:id="@+id/tv_lprocessState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="状态"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="150dp"/>
+
         </RelativeLayout>
 
         <RelativeLayout

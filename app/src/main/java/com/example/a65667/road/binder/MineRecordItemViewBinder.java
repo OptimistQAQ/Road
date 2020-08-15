@@ -1,11 +1,13 @@
 package com.example.a65667.road.binder;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a65667.road.Item.MineRecordItem;
@@ -18,7 +20,9 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
 
     private MineRecordItem mineRecordItem;
     private View root;
-    private TextView tvData, tvLast, tvHole, tvCrack, tvTravel;
+    private TextView tvData, tvLast, tvHole, tvCrack, tvTravel, tv_lprocessState;
+
+    private ImageView tvImage;
 
     @NonNull
     @Override
@@ -39,6 +43,10 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
         tvHole.setText(mineRecordItem.getHoleCount());
         tvCrack.setText(mineRecordItem.getCrackCount());
         tvTravel.setText(mineRecordItem.getTravel());
+        if (mineRecordItem.getLprocessState().equals("状态：waiting")) {
+            tvImage.setColorFilter(Color.GRAY);
+        }
+        tv_lprocessState.setText(mineRecordItem.getLprocessState());
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +66,8 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
         tvHole = root.findViewById(R.id.tv_hole_count);
         tvCrack = root.findViewById(R.id.tv_crack_count);
         tvTravel = root.findViewById(R.id.tv_travel);
+        tv_lprocessState = root.findViewById(R.id.tv_lprocessState);
+        tvImage = root.findViewById(R.id.tv_image);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -81,15 +81,27 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:layout_marginTop="13dp"/>-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/map_view1"
-        android:layout_marginTop="10dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager">
 
-    </android.support.v7.widget.RecyclerView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/map_view1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu_camera"
