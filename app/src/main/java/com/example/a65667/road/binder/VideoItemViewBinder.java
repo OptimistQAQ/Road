@@ -27,6 +27,7 @@ import com.alibaba.sdk.android.oss.model.GetObjectRequest;
 import com.alibaba.sdk.android.oss.model.GetObjectResult;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.bumptech.glide.Glide;
 import com.example.a65667.road.Item.VideoItem;
 import com.example.a65667.road.R;
 
@@ -67,6 +68,8 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
 
         fileName.setText(item.getDuration().toString());
 
+        jzvdStd.seekToInAdvance = 10000;
+        Glide.with(root.getContext()).load(item.getFileImg()).into(jzvdStd.thumbImageView);
         jzvdStd.setUp(item.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
         path = item.getFileUrl();
 

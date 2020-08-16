@@ -146,6 +146,7 @@ public class VideoManageActivity extends AppCompatActivity {
                         .DATA)));
                 info.setDuration(cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video
                         .Media.DURATION)));
+                info.setFileImg(cursor.getString(cursor.getColumnIndex(MediaStore.Video.Thumbnails.DATA)));
                 sysVideoList.add(info);
             } while (cursor.moveToNext());
         }

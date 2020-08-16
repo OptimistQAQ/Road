@@ -88,9 +88,11 @@ public class CrackListActivity extends AppCompatActivity {
                         JSONArray jsonArray = JSON.parseArray(response.body());
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            disList.add("距离：1.8公里");
-                            nameList.add(jsonObject.getString("lstreamName"));
-                            numList.add(jsonObject.getInteger("uno").toString());
+                            if (!jsonObject.getString("lstreamName").equals("")) {
+                                disList.add("距离：1.8公里");
+                                nameList.add(jsonObject.getString("lstreamName"));
+                                numList.add(jsonObject.getInteger("uno").toString());
+                            }
                         }
                         mItems = new Items();
                         for (int i=0; i<nameList.size(); i++) {

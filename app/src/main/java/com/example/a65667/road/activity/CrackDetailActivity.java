@@ -659,6 +659,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        startActivity(new Intent(this, CrackPictureActivity.class));
         return false;
     }
 }

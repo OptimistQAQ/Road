@@ -26,23 +26,17 @@ public class CrackListItemViewBinder extends ItemViewBinder<CrackListItem, Crack
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         root = inflater.inflate(R.layout.item_list_item, parent, false);
+        initView();
         return new ViewHolder(root);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull CrackListItem item) {
+        holder.setIsRecyclable(false);
         crackListItem = item;
-        initView();
-    }
-
-    private void initView(){
-        rcName = root.findViewById(R.id.rc_name);
-        rcDistance = root.findViewById(R.id.rc_distance);
-        rcNum = root.findViewById(R.id.rc_num);
-
-        rcName.setText(crackListItem.getRc_name());
-        rcDistance.setText(crackListItem.getRc_distance());
-        rcNum.setText(crackListItem.getRc_num());
+        rcName.setText(item.getRc_name());
+        rcDistance.setText(item.getRc_distance());
+        rcNum.setText(item.getRc_num());
 
         root.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +46,13 @@ public class CrackListItemViewBinder extends ItemViewBinder<CrackListItem, Crack
                 root.getContext().startActivity(intent);
             }
         });
+    }
+
+    private void initView(){
+        rcName = root.findViewById(R.id.rc_name);
+        rcDistance = root.findViewById(R.id.rc_distance);
+        rcNum = root.findViewById(R.id.rc_num);
+
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
