@@ -1,6 +1,7 @@
 package com.example.a65667.road.binder;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -71,7 +72,6 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         jzvdStd.seekToInAdvance = 10000;
         Glide.with(root.getContext()).load(item.getFileImg()).into(jzvdStd.thumbImageView);
         jzvdStd.setUp(item.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
-        path = item.getFileUrl();
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +83,8 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         btnShangchuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                path = item.getFileUrl();
+                Log.e("path", path);
                 upload();
             }
         });

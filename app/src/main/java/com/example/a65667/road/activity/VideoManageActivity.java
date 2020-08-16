@@ -33,7 +33,6 @@ public class VideoManageActivity extends AppCompatActivity {
 
     private ImageView vm_return;
 
-
 //    private VideoItemAdapter videoItemAdapter;
 //    private List<SwipeBean> mDatas;
 //    private LinearLayoutManager manager;
