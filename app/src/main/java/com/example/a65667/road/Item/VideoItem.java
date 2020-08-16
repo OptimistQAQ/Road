@@ -8,14 +8,14 @@ public class VideoItem {
     private String fileUrl;
     private Date date;
     private Integer duration;   //持续时间
-    private String fileImg;
+    private String uriNumber;
 
-    public void setFileImg(String fileImg) {
-        this.fileImg = fileImg;
+    public String getUriNumber() {
+        return uriNumber;
     }
 
-    public String getFileImg() {
-        return fileImg;
+    public void setUriNumber(String uriNumber) {
+        this.uriNumber = uriNumber;
     }
 
     public String getFileName() {

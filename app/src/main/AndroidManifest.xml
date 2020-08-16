@@ -38,7 +38,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
+        <provider
+            android:name=".utils.MyFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
         <activity android:name=".activity.MainActivity" />
+
+
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -74,6 +85,8 @@
         <activity android:name=".activity.CrackMapActivity" />
         <activity android:name=".activity.VideoActivity" />
         <activity android:name=".activity.HWResultActivity"></activity>
+
+
     </application>
 
 </manifest>

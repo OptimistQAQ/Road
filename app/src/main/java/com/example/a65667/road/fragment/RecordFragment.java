@@ -1,15 +1,23 @@
 package com.example.a65667.road.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.StrictMode;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +25,43 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientConfiguration;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.OSS;
+import com.alibaba.sdk.android.oss.OSSClient;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
+import com.alibaba.sdk.android.oss.common.OSSLog;
+import com.alibaba.sdk.android.oss.common.auth.OSSAuthCredentialsProvider;
+import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
+import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.example.a65667.road.R;
+import com.example.a65667.road.RecordGPSAndUpload;
 import com.example.a65667.road.activity.AuthorityManageActivity;
+import com.example.a65667.road.activity.Main2Activity;
 import com.example.a65667.road.activity.VideoActivity;
 import com.example.a65667.road.activity.VideoManageActivity;
+import com.example.a65667.road.bean.LocalSaveGPSPointJson;
+import com.example.a65667.road.utils.SaveAndLoadLocalFile;
+import com.example.a65667.road.utils.UriToPath;
+
+import java.io.File;
+
+import javax.security.auth.login.LoginException;
 
 import cn.nodemedia.pusher.ShareBean;
 import cn.nodemedia.pusher.view.SourcePushActivity;
 
 public class RecordFragment extends Fragment {
-
+    private static OSS oss;
     private View root;
     private ImageView tv_power, tvVideo, tv_Photo;
     private static final int VIDEO_WITH_CAMERA = 1;
+    private RecordGPSAndUpload recordGPSAndUpload;
 
     public RecordFragment() {
         // Required empty public constructor
@@ -48,7 +80,14 @@ public class RecordFragment extends Fragment {
         return root;
     }
 
-    private void initView(){
+    private void initPhotoError(){
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
+    }
+
+    private void initView() {
         tv_power = root.findViewById(R.id.tv_power);
         tv_power.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +119,24 @@ public class RecordFragment extends Fragment {
                         .setPositiveButton("本地录制视频上传", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                // TODO: 开启线路准备----------------------
+                                ShareBean.utotalLine++;
+
                                 dialog.dismiss();
                                 Toast.makeText(root.getContext(), "本地录制视频上传", Toast.LENGTH_SHORT).show();
+                                recordGPSAndUpload = new RecordGPSAndUpload();
+                                recordGPSAndUpload.start();
                                 Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                                Toast.makeText(root.getContext(), ShareBean.Latitude + " " + ShareBean.Longitude, Toast.LENGTH_LONG).show();
                                 intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30);
                                 intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-                                startActivityForResult (intent, VIDEO_WITH_CAMERA);
+                                File file = new File(getContext().getExternalCacheDir(), "gt_" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1) + ".mp4");
+                                Log.e("files_dir", file.getAbsolutePath() + "");
+                                Uri uri = FileProvider.getUriForFile(getContext().getApplicationContext(),
+                                        getContext().getApplicationContext().getPackageName() + ".provider", file);
+
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                                startActivityForResult(intent, VIDEO_WITH_CAMERA);
                             }
                         }).create();
                 dialog.show();
@@ -94,13 +144,27 @@ public class RecordFragment extends Fragment {
         });
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        try{
+        try {
             if (resultCode == Activity.RESULT_OK && requestCode == VIDEO_WITH_CAMERA) {
+                recordGPSAndUpload.interrupt(); // 停止获取位置
                 Uri uri = data.getData();
+                String path = UriToPath.getFilePathFromURI(getContext(), uri);
+                // TODO: 修改位置
+                SaveAndLoadLocalFile saveAndLoadLocalFile = new SaveAndLoadLocalFile(getContext());
+
+                String json = JSON.toJSONString(ShareBean.gpsPoints);
+                String fileKeyName = "gt_" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1) + ".json";
+                saveAndLoadLocalFile.save(json, fileKeyName);
+                Log.e("vmuri", fileKeyName + "***" + uri.toString() + "---" + path + "----" + ShareBean.gpsPoints.size() + "--" + json);
+
+
+//                upload(path, "or_" + ShareBean.uno + "_" + (ShareBean.utotalLine - 1) + ".mp4");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

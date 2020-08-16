@@ -1,7 +1,6 @@
 package com.example.a65667.road.binder;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.OSS;
@@ -28,14 +28,22 @@ import com.alibaba.sdk.android.oss.model.GetObjectRequest;
 import com.alibaba.sdk.android.oss.model.GetObjectResult;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-import com.bumptech.glide.Glide;
 import com.example.a65667.road.Item.VideoItem;
 import com.example.a65667.road.R;
+import com.example.a65667.road.bean.LocalSaveGPSPointJson;
+import com.example.a65667.road.utils.SaveAndLoadLocalFile;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import cn.jzvd.JzvdStd;
+import cn.nodemedia.pusher.GPSPoint;
+import cn.nodemedia.pusher.ShareBean;
 import me.drakeet.multitype.ItemViewBinder;
 
 public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemViewBinder.ViewHolder> {
@@ -44,6 +52,8 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     private VideoItem videoItem;
     private TextView fileName;
     private Button btnDelete, btnShangchuan;
+
+    private String keyFileName;
 
     private JzvdStd jzvdStd;
     private String videoUrl = "http://ishero.net/share/valvideo/ccd901f5-bfabffd7.mov";
@@ -66,12 +76,12 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull VideoItem item) {
         holder.setIsRecyclable(false);
         this.videoItem = item;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        fileName.setText(item.getDuration().toString());
+        fileName.setText(format.format(item.getDate()));
 
-        jzvdStd.seekToInAdvance = 10000;
-        Glide.with(root.getContext()).load(item.getFileImg()).into(jzvdStd.thumbImageView);
         jzvdStd.setUp(item.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
+        path = item.getFileUrl();
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,18 +93,69 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         btnShangchuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                path = item.getFileUrl();
-                Log.e("path", path);
-                upload();
+                SaveAndLoadLocalFile saveAndLoadLocalFile = new SaveAndLoadLocalFile(root.getContext());
+                String data = saveAndLoadLocalFile.load(item.getFileName().replace(".mp4", ".json"));
+                upload(item.getFileUrl(), item.getFileName());
+
+                pushChange(item.getFileName());
+                List<GPSPoint> localSaveGPSPointJson = JSON.parseArray(data, GPSPoint.class);
+                for (int i = 0; i < localSaveGPSPointJson.size(); i++) {
+
+                    Log.e("read_json", localSaveGPSPointJson.size() + "---" + localSaveGPSPointJson.get(i).getLatitude() + "");
+                    OkGo.<String>post("http://ishero.net:5000/record_location")
+                            .params("Uno", "" + ShareBean.uno)
+                            .params("Lno", "" + ShareBean.uno + "_" + ShareBean.utotalLine)
+                            .params("Lon", localSaveGPSPointJson.get(i).getLongitude())
+                            .params("Lat", localSaveGPSPointJson.get(i).getLatitude())
+                            .params("Seconds", i)
+                            .tag(this)
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onSuccess(Response<String> response) {
+                                    Log.e("upload_f", "success upload gps to server");
+
+                                }
+                            });
+
+                }
+
             }
         });
     }
 
-    private void initView(){
+    private void pushChange(String filename) {
+
+
+        String url = "https://road-oss.oss-cn-beijing.aliyuncs.com/" + filename;
+
+
+        OkGo.<String>post("http://ishero.net:5000/online_process") // 开始新的线路检测
+                .params("Uno", "" + ShareBean.uno)
+                .params("Lno", "" + ShareBean.uno + "_" + ShareBean.utotalLine)
+                .params("url", url)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        Log.e("upload_f", "success upload line to server");
+                    }
+                });
+
+    }
+
+    private void initView() {
         fileName = root.findViewById(R.id.file_name);
         btnDelete = root.findViewById(R.id.btnDelete);
         btnShangchuan = root.findViewById(R.id.btnShangchuan);
         jzvdStd = root.findViewById(R.id.file_video);
+    }
+
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 
     @SuppressLint("NewApi")
@@ -117,10 +178,10 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         OSSLog.enableLog();
     }
 
-    public void upload() {
+    private void upload(String local, String ObjectName) {
         // 构造上传请求。
-        PutObjectRequest put = new PutObjectRequest("road-oss", "test.mp4",
-                path);
+        PutObjectRequest put = new PutObjectRequest("road-oss", ObjectName,
+                local);
 
 // 异步上传时可以设置进度回调。
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
@@ -136,7 +197,6 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
                 Log.d("PutObject", "UploadSuccess");
                 Log.d("ETag", result.getETag());
                 Log.d("RequestId", result.getRequestId());
-                Toast.makeText(root.getContext(), "UploadSuccess", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -157,58 +217,5 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         });
 // task.cancel(); // 可以取消任务。
 // task.waitUntilFinished(); // 等待上传完成。
-    }
-
-    private void download() {
-        GetObjectRequest get = new GetObjectRequest("road-oss", "test.mp4");
-//设置下载进度回调
-        get.setProgressListener(new OSSProgressCallback<GetObjectRequest>() {
-            @Override
-            public void onProgress(GetObjectRequest request, long currentSize, long totalSize) {
-                OSSLog.logDebug("getobj_progress: " + currentSize + "  total_size: " + totalSize, false);
-            }
-        });
-        OSSAsyncTask task = oss.asyncGetObject(get, new OSSCompletedCallback<GetObjectRequest, GetObjectResult>() {
-            @Override
-            public void onSuccess(GetObjectRequest request, GetObjectResult result) {
-                // 请求成功
-                InputStream inputStream = result.getObjectContent();
-
-                byte[] buffer = new byte[2048];
-                int len;
-
-                try {
-                    while ((len = inputStream.read(buffer)) != -1) {
-                        // 处理下载的数据
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(GetObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
-                // 请求异常
-                if (clientExcepion != null) {
-                    // 本地异常如网络异常等
-                    clientExcepion.printStackTrace();
-                }
-                if (serviceException != null) {
-                    // 服务异常
-                    Log.e("ErrorCode", serviceException.getErrorCode());
-                    Log.e("RequestId", serviceException.getRequestId());
-                    Log.e("HostId", serviceException.getHostId());
-                    Log.e("RawMessage", serviceException.getRawMessage());
-                }
-            }
-        });
-
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
-        ViewHolder(View itemView) {
-            super(itemView);
-        }
     }
 }

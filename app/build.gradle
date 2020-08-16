@@ -71,4 +71,5 @@ dependencies {
     implementation'com.shizhefei:CoolRefreshView:1.0.4'
     implementation(name: 'airship', ext: 'aar')
     implementation project(':camera')
+    implementation 'com.aliyun.dpa:oss-android-sdk:+'
 }
