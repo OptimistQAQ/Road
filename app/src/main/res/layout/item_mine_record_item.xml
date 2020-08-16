@@ -21,7 +21,7 @@
             android:background="@null">
 
             <ImageView
-                android:layout_width="70dp"
+                android:layout_width="100dp"
                 android:layout_height="27dp"
                 android:src="#309153"/>
 
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:text="12月31日"
+                android:text="2020-05-06"
                 android:textColor="#ffffffff"
                 android:textSize="13sp"
                 />

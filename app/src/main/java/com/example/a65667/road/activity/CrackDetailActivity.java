@@ -205,9 +205,9 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
     private void addPolyline() {
         deta_Map.addPolyline(new PolylineOptions().setCustomTexture(BitmapDescriptorFactory.fromResource(R.drawable.grasp_trace_line))
-        .addAll(mOriginLatLngList)
-        .useGradient(true)
-        .width(30));
+                .addAll(mOriginLatLngList)
+                .useGradient(true)
+                .width(30));
     }
 
     private void mapControl() {
@@ -228,11 +228,11 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         LatLng startPoint = mOriginLatLngList.get(0);
         LatLng endPoint = mOriginLatLngList.get(mOriginLatLngList.size() - 1);
         mGraspStartMarker = deta_Map.addMarker(new MarkerOptions()
-        .position(startPoint)
-        .icon(BitmapDescriptorFactory.fromResource(R.drawable.start)));
+                .position(startPoint)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.start)));
         mGraspEndMarker = deta_Map.addMarker(new MarkerOptions()
-        .position(endPoint)
-        .icon(BitmapDescriptorFactory.fromResource(R.drawable.end)));
+                .position(endPoint)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.end)));
     }
 
     private void getLng() {
@@ -261,7 +261,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 ////                                Log.e("mOrigin", String.valueOf(mOriginLatLngList.get(i).latitude));
                                 pathRecord.addpoint(TraceUtil.parseLocation(xGPS.get(i) + ", " + yGPS.get(i)));
                             }
-                         }
+                        }
                         List<AMapLocation> recordList = pathRecord.getPathline();
                         List<TraceLocation> mGraspTraceLocationList = TraceUtil.parseTraceLocationList(recordList);
                         LBSTraceClient mTraceClient = new LBSTraceClient(getApplicationContext());

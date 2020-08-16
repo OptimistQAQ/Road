@@ -138,7 +138,7 @@ public interface PushContract {
 
 
                 OkGo.<String>post("http://ishero.net:5000/start_a_Line") // 开始新的线路检测
-                        .params("Uno", ShareBean.uno)
+                        .params("Uno", "" + ShareBean.uno)
                         .params("Lno", "" + ShareBean.uno + "_" + ShareBean.utotalLine++)
                         .params("rtmp_url", url)
                         .tag(this)

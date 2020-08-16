@@ -28,6 +28,7 @@ import com.alibaba.sdk.android.oss.model.GetObjectRequest;
 import com.alibaba.sdk.android.oss.model.GetObjectResult;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.bumptech.glide.Glide;
 import com.example.a65667.road.Item.VideoItem;
 import com.example.a65667.road.R;
 import com.example.a65667.road.bean.LocalSaveGPSPointJson;
@@ -79,8 +80,10 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         fileName.setText(format.format(item.getDate()));
-
+        jzvdStd.seekToInAdvance = 10000;
+//        Glide.with(root.getContext()).load(item.getFileImg()).into(jzvdStd.thumbImageView);
         jzvdStd.setUp(item.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
+
         path = item.getFileUrl();
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +96,7 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         btnShangchuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(root.getContext(), "开始上传,请等待", Toast.LENGTH_LONG).show();
                 SaveAndLoadLocalFile saveAndLoadLocalFile = new SaveAndLoadLocalFile(root.getContext());
                 String data = saveAndLoadLocalFile.load(item.getFileName().replace(".mp4", ".json"));
                 upload(item.getFileUrl(), item.getFileName());
@@ -138,6 +142,7 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
                     @Override
                     public void onSuccess(Response<String> response) {
                         Log.e("upload_f", "success upload line to server");
+                        Toast.makeText(root.getContext(), "上传完毕,服务器正在处理", Toast.LENGTH_LONG).show();
                     }
                 });
 

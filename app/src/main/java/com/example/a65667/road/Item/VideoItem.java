@@ -9,6 +9,15 @@ public class VideoItem {
     private Date date;
     private Integer duration;   //持续时间
     private String uriNumber;
+    private String fileImg;
+
+    public void setFileImg(String fileImg) {
+        this.fileImg = fileImg;
+    }
+
+    public String getFileImg() {
+        return fileImg;
+    }
 
     public String getUriNumber() {
         return uriNumber;

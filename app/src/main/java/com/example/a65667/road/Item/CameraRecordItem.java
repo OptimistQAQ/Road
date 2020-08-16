@@ -18,6 +18,7 @@ public class CameraRecordItem {
         return lprocessState;
     }
 
+
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
     }

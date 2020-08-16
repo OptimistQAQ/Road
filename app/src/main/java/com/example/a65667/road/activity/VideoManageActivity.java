@@ -156,6 +156,7 @@ public class VideoManageActivity extends AppCompatActivity {
                 vitem.setFileName(f.getName());
                 vitem.setFileUrl(f.getAbsolutePath());
                 vitem.setDate(new Date(f.lastModified()));
+                vitem.setFileImg("");   // TODO: fix
                 sysVideoList.add(vitem);
             }
         }

@@ -19,6 +19,8 @@ public class MineRecordItem {
         return lprocessState;
     }
 
+
+
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
     }

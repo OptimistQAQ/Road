@@ -1,5 +1,10 @@
 package cn.nodemedia.pusher;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 public class ShareBean {
     public static Integer uno;
 
@@ -21,5 +26,7 @@ public class ShareBean {
 
     public static double Latitude = 0.;
     public static double Longitude = 0.;
+
+    public static List<GPSPoint> gpsPoints = new ArrayList<>();
 
 }
