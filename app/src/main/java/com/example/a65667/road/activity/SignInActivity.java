@@ -120,8 +120,8 @@ public class SignInActivity extends AppCompatActivity {
                                     CurrentUserInfo.uno = user.getUno();
                                     CurrentUserInfo.name = user.getUname();
                                     CurrentUserInfo.password = user.getUpassword();
-                                    CurrentUserInfo.time = bt_time.toString() + "小时";
-                                    CurrentUserInfo.distance = bt_distance.toString() + "公里";
+                                    CurrentUserInfo.time = user.getUtotalTime().toString() + "小时";
+                                    CurrentUserInfo.distance = user.getUtotalDistance().toString() + "公里";
                                     CurrentUserInfo.line = user.getUtotalLine() + "条";
                                     CurrentUserInfo.profilePhoto = user.getUprofilePhoto();
                                     Log.e("123", CurrentUserInfo.name);
@@ -218,8 +218,8 @@ public class SignInActivity extends AppCompatActivity {
                             CurrentUserInfo.uno = user.getUno();
                             CurrentUserInfo.name = user.getUname();
                             CurrentUserInfo.password = user.getUpassword();
-                            CurrentUserInfo.time = bt_time.toString() + "小时";
-                            CurrentUserInfo.distance = bt_distance.toString() + "公里";
+                            CurrentUserInfo.time = user.getUtotalTime().toString() + "小时";
+                            CurrentUserInfo.distance = user.getUtotalDistance().toString() + "公里";
                             CurrentUserInfo.line = user.getUtotalLine() + "条";
                             CurrentUserInfo.profilePhoto = user.getUprofilePhoto();
                             Log.e("123", CurrentUserInfo.name);
