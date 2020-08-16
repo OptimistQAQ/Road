@@ -45,6 +45,15 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
         tvTravel.setText(mineRecordItem.getTravel());
         if (mineRecordItem.getLprocessState().equals("状态：waiting")) {
             tvImage.setColorFilter(Color.GRAY);
+            tv_lprocessState.setText("状态：等待中");
+        } else if (mineRecordItem.getLprocessState().equals("状态：unfinished")) {
+            tvImage.setColorFilter(Color.RED);
+            tv_lprocessState.setText("状态：未完成");
+        } else if (mineRecordItem.getLprocessState().equals("状态：processing")) {
+            tv_lprocessState.setText("状态：处理中");
+            tvImage.setColorFilter(Color.BLUE);
+        } else{
+            tv_lprocessState.setText("状态：已完成");
         }
         tv_lprocessState.setText(mineRecordItem.getLprocessState());
         root.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +64,7 @@ public class MineRecordItemViewBinder extends ItemViewBinder<MineRecordItem, Min
                 intent.putExtra("tvData", mineRecordItem.getDataTime());
                 intent.putExtra("lno", mineRecordItem.getLno());
                 intent.putExtra("video", mineRecordItem.getVideoUrl());
+                intent.putExtra("lduration", mineRecordItem.getLduration());
                 root.getContext().startActivity(intent);
             }
         });

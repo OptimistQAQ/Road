@@ -42,8 +42,17 @@ public class CameraRecordItemViewBinder extends ItemViewBinder<CameraRecordItem,
         lvTravel.setText(cameraRecordItem.getTravel());
         if (cameraRecordItem.getLprocessState().equals("状态：waiting")) {
             lvImage.setColorFilter(Color.GRAY);
+            lvprocessState.setText("状态：等待中");
+        } else if (cameraRecordItem.getLprocessState().equals("状态：unfinished")) {
+            lvImage.setColorFilter(Color.RED);
+            lvprocessState.setText("状态：未完成");
+        } else if (cameraRecordItem.getLprocessState().equals("状态：processing")) {
+            lvprocessState.setText("状态：处理中");
+            lvImage.setColorFilter(Color.BLUE);
+        } else{
+            lvprocessState.setText("状态：已完成");
         }
-        lvprocessState.setText(cameraRecordItem.getLprocessState());
+
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +60,7 @@ public class CameraRecordItemViewBinder extends ItemViewBinder<CameraRecordItem,
                 intent.putExtra("tvData", cameraRecordItem.getDataTime());
                 intent.putExtra("lno", cameraRecordItem.getLno());
                 intent.putExtra("video", cameraRecordItem.getVideoUrl());
+                intent.putExtra("lduration", cameraRecordItem.getLduration());
                 root.getContext().startActivity(intent);
             }
         });

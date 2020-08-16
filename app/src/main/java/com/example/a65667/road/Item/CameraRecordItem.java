@@ -9,6 +9,15 @@ public class CameraRecordItem {
     private String lno;
     private String videoUrl;
     private String lprocessState;
+    private String lduration;
+
+    public void setLduration(String lduration) {
+        this.lduration = lduration;
+    }
+
+    public String getLduration() {
+        return lduration;
+    }
 
     public void setLprocessState(String lprocessState) {
         this.lprocessState = lprocessState;

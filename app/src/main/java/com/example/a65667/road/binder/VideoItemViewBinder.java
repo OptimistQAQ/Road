@@ -60,7 +60,6 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
     private String videoUrl = "http://ishero.net/share/valvideo/ccd901f5-bfabffd7.mov";
     private String video_url = "https://road-oss.oss-cn-beijing.aliyuncs.com/test.mp4";
     private static OSS oss;
-    private String path = "";
 
     @NonNull
     @Override
@@ -83,8 +82,6 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         jzvdStd.seekToInAdvance = 10000;
 //        Glide.with(root.getContext()).load(item.getFileImg()).into(jzvdStd.thumbImageView);
         jzvdStd.setUp(item.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
-
-        path = item.getFileUrl();
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override

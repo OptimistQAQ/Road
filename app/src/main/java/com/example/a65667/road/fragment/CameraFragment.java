@@ -98,13 +98,14 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
         List<String> lno = new ArrayList<>();
         List<String> videoUrl = new ArrayList<>();
         List<String> lprocessState = new ArrayList<>();
+        List<String> lduration = new ArrayList<>();
 
 //        dataTime.add("2020年3月6日");
 //        lastTime.add("14分钟");
 //        holeCount.add("20公里");
 //        crackCount.add("3个大问题");
 //        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-        videoUrl.add("cc1d3666-fe5994ae.mov");
+//        videoUrl.add("cc1d3666-fe5994ae.mov");
 //        lno.add("1");
 //
 //        dataTime.add("2020年3月10日");
@@ -112,7 +113,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 //        holeCount.add("33公里");
 //        crackCount.add("9个大问题");
 //        travelWay.add("途经：南环路 > 傅山园北街 > 新兰路 > 滨河东路");
-        videoUrl.add("cc8d5a50-92a79d46.mov");
+//        videoUrl.add("cc8d5a50-92a79d46.mov");
 //        lno.add("2");
 //
 //        dataTime.add("2020年3月15日");
@@ -120,7 +121,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 //        holeCount.add("20公里");
 //        crackCount.add("5个大问题");
 //        travelWay.add("途经：中央大道  >  西环路  >  北环  >  东环");
-        videoUrl.add("cc9d2250-fba65525.mov");
+//        videoUrl.add("cc9d2250-fba65525.mov");
 //        lno.add("3");
 //
 //        dataTime.add("2020年3月20日");
@@ -128,7 +129,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
 //        holeCount.add("56公里");
 //        crackCount.add("11个大问题");
 //        travelWay.add("途经：G228  >  G94  >  建设南路  >  横琴大桥");
-        videoUrl.add("ccd901f5-bfabffd7.mov");
+//        videoUrl.add("ccd901f5-bfabffd7.mov");
 //        lno.add("4");
 
         recyclerView = root.findViewById(R.id.rv_video);
@@ -165,15 +166,17 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
                         JSONArray jsonArray = JSON.parseArray(response.body());
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            if (!jsonObject.getString("lduration").equals("0")) {
+//                            if (!jsonObject.getString("lduration").equals("0")) {
                                 dataTime.add(jsonObject.getString("lbeginDate"));
                                 lastTime.add(jsonObject.getString("lduration") + "分钟");
                                 holeCount.add("20公里");
+                                videoUrl.add(jsonObject.getString("lpushStramName"));
                                 crackCount.add(jsonObject.getInteger("lproblem").toString() + "个大问题");
                                 travelWay.add("途经：" + jsonObject.getString("lgoby"));
                                 lno.add(jsonObject.getString("lno"));
+                                lduration.add(jsonObject.getString("lduration"));
                                 lprocessState.add("状态：" + jsonObject.getString("lprocessState"));
-                            }
+//                            }
                         }
                         for (int i = 0; i < lastTime.size(); i++) {
                             CameraRecordItem cameraRecordItem = new CameraRecordItem();
@@ -185,13 +188,13 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
                             cameraRecordItem.setVideoUrl(videoUrl.get(i));
                             cameraRecordItem.setLno(lno.get(i));
                             cameraRecordItem.setLprocessState(lprocessState.get(i));
+                            cameraRecordItem.setLduration(lduration.get(i));
                             mItems.add(cameraRecordItem);
                         }
                         mAdapter.setItems(mItems);
                         mAdapter.notifyDataSetChanged();
                     }
                 });
-
     }
 
     private void initMenu(){

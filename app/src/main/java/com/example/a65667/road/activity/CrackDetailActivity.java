@@ -81,6 +81,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private String videoUrl = "http://ishero.net/share/valvideo/";
     private String url = "";
     private boolean isFirstLoc = true;
+    private String lduration = "";
 
     private List<LatLng> mOriginLatLngList = new ArrayList<>();   //原始轨迹
     private List<LatLng> mGraspLatLngList = new ArrayList<>();    //纠偏轨迹
@@ -139,19 +140,20 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
         fab3 = (FloatingActionButton) findViewById(R.id.fab3);
 
         url = getIntent().getStringExtra("video");
+        lduration = getIntent().getStringExtra("lduration");
 
-        jzvdStd.setUp(videoUrl+url, "路面回放", JzvdStd.SCREEN_NORMAL);
+        jzvdStd.setUp(url, "路面回放", JzvdStd.SCREEN_NORMAL);
 
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SmoothMoveMarker smoothMoveMarker = new SmoothMoveMarker(deta_Map);
-                smoothMoveMarker.setDescriptor(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_2));
+                        smoothMoveMarker.setDescriptor(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_2));
 
                 //设置滑动的轨迹左边点
                 smoothMoveMarker.setPoints(mOriginLatLngList);
                 //设置滑动总时间
-                smoothMoveMarker.setTotalDuration(360);
+                smoothMoveMarker.setTotalDuration(Integer.parseInt(lduration));
                 //开始滑动
                 smoothMoveMarker.startSmoothMove();
 
@@ -255,8 +257,8 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             if (!jsonObject.getString("lat").equals("0.0")) {
-                                xGPS.add(jsonObject.getString("lon"));
-                                yGPS.add(jsonObject.getString("lat"));
+                                xGPS.add(jsonObject.getString("lat"));
+                                yGPS.add(jsonObject.getString("lon"));
                                 mOriginLatLngList.add(new LatLng(Double.valueOf(xGPS.get(i)), Double.valueOf(yGPS.get(i))));
 ////                                Log.e("mOrigin", String.valueOf(mOriginLatLngList.get(i).latitude));
                                 pathRecord.addpoint(TraceUtil.parseLocation(xGPS.get(i) + ", " + yGPS.get(i)));
@@ -287,10 +289,6 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                         }
                     }
                 });
-
-
-
-
 
 //        if (dataid.equals("21_0")) {
 //            mOriginLatLngList.add(new LatLng(39.9890197102, 116.4206492901));
