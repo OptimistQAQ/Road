@@ -168,8 +168,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Lo
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 //                            if (!jsonObject.getString("lduration").equals("0")) {
                                 dataTime.add(jsonObject.getString("lbeginDate"));
-                                lastTime.add(jsonObject.getString("lduration") + "分钟");
-                                holeCount.add("20公里");
+                                lastTime.add(jsonObject.getString("lduration") + "秒");
+                                holeCount.add("1公里");
                                 videoUrl.add(jsonObject.getString("lpushStramName"));
                                 crackCount.add(jsonObject.getInteger("lproblem").toString() + "个大问题");
                                 travelWay.add("途经：" + jsonObject.getString("lgoby"));

@@ -44,6 +44,7 @@ import com.example.a65667.road.R;
 import com.example.a65667.road.bean.PathRecord;
 import com.example.a65667.road.utils.ActivityCollectorUtil;
 import com.example.a65667.road.utils.CurrentUserInfo;
+import com.example.a65667.road.utils.GPSUtil;
 import com.example.a65667.road.utils.TraceUtil;
 import com.github.clans.fab.FloatingActionButton;
 import com.lzy.okgo.OkGo;
@@ -89,6 +90,15 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
     private ExecutorService mThreadPool;
     private Marker mGraspStartMarker, mGraspEndMarker, mGraspRoleMarker;
     private String dataid = "";
+    private List<String> lat = new ArrayList<>();
+    private List<String> sourceVideo = new ArrayList<>();
+    private List<String> sourceLen = new ArrayList<>();
+    private List<String> sourceWidth = new ArrayList<>();
+    private List<String> sourceHole = new ArrayList<>();
+    private String source = "";
+    private String source_len = "";
+    private String source_width = "";
+    private String source_hole = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -257,6 +267,7 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             if (!jsonObject.getString("lat").equals("0.0")) {
+//                                double[] tmp = GPSUtil.bd09_To_gps84(Double.valueOf(jsonObject.getString("lat")), Double.valueOf(jsonObject.getString("lon")));
                                 xGPS.add(jsonObject.getString("lat"));
                                 yGPS.add(jsonObject.getString("lon"));
                                 mOriginLatLngList.add(new LatLng(Double.valueOf(xGPS.get(i)), Double.valueOf(yGPS.get(i))));
@@ -284,7 +295,16 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
                         for (int i=0; i<jsonArray.size(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             if (!jsonObject.getString("lat").equals("0.0")) {
-                                add_point_in_map(new LatLng(Double.valueOf(jsonObject.getString("lon")), Double.valueOf(jsonObject.getString("lat"))), R.drawable.ic_warn_sew);
+                                lat.add(jsonObject.getString("lat"));
+                                sourceVideo.add(jsonObject.getString("sourceVideo"));
+                                sourceLen.add(jsonObject.getString("crackLength"));
+                                sourceWidth.add(jsonObject.getString("crackMaxWidth"));
+                                sourceHole.add(jsonObject.getString("crackType"));
+                                if (jsonObject.getString("crackType").equals("single_crack")) {
+                                    add_point_in_map(new LatLng(Double.valueOf(jsonObject.getString("lat")), Double.valueOf(jsonObject.getString("lon"))), R.drawable.ic_warn_sew);
+                                } else {
+                                    add_point_in_map(new LatLng(Double.valueOf(jsonObject.getString("lat")), Double.valueOf(jsonObject.getString("lon"))), R.drawable.ic_warn_hole);
+                                }
                             }
                         }
                     }
@@ -657,7 +677,20 @@ public class CrackDetailActivity extends AppCompatActivity implements LocationSo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        startActivity(new Intent(this, CrackPictureActivity.class));
+        for (int i=0; i < lat.size(); i++) {
+            if (Double.valueOf(lat.get(i)) == marker.getPosition().latitude) {
+                source = sourceVideo.get(i);
+                source_len = sourceLen.get(i);
+                source_width = sourceWidth.get(i);
+                source_hole = sourceHole.get(i);
+            }
+        }
+        Intent intent = new Intent(CrackDetailActivity.this, PictureActivity.class);
+        intent.putExtra("source", source);
+        intent.putExtra("sourceLen", source_len);
+        intent.putExtra("sourceWidth", source_width);
+        intent.putExtra("sourceHole", source_hole);
+        startActivity(intent);
         return false;
     }
 }

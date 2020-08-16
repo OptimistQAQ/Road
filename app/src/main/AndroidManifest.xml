@@ -47,9 +47,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
+
         <activity android:name=".activity.MainActivity" />
-
-
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -84,9 +83,8 @@
         <activity android:name=".activity.CamActivity" />
         <activity android:name=".activity.CrackMapActivity" />
         <activity android:name=".activity.VideoActivity" />
-        <activity android:name=".activity.HWResultActivity"></activity>
-
-
+        <activity android:name=".activity.HWResultActivity" />
+        <activity android:name=".activity.PictureActivity"></activity>
     </application>
 
 </manifest>

@@ -79,7 +79,7 @@ public class VideoItemViewBinder extends ItemViewBinder<VideoItem, VideoItemView
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         fileName.setText(format.format(item.getDate()));
-        jzvdStd.seekToInAdvance = 10000;
+//        jzvdStd.seekToInAdvance = 10000;
 //        Glide.with(root.getContext()).load(item.getFileImg()).into(jzvdStd.thumbImageView);
         jzvdStd.setUp(item.getFileUrl(), "路面回放", JzvdStd.SCREEN_NORMAL);
 
