@@ -34,5 +34,5 @@
 | app主体功能实现，我们提供了三种<br />推流模式：实时推流、录制本地视频<br />上传、拍照上传。在网络较好的情况<br />下，推荐使用实时推流，如果网络环<br />境较差可以录制本地视频上传，对于<br />普通群众，如果不想录制视频，可以<br />拍照上传得到检测结果。 | <img src="./pictures/11.png" style="zoom: 25%;" /> | <img src="./pictures/14.png" style="zoom: 25%;" /> | <img src="./pictures/13.png" style="zoom: 25%;" /> |
 | 权限管理功能，对于普通用户和管理<br />员我们要区别对待，管理员可查看普<br />通用户的权限信息和路面破损信息，<br />普通用户可以申请成为管理员。 | <img src="./pictures/09.png" style="zoom: 25%;" /> | <img src="./pictures/10.png" style="zoom: 25%;" /> | <img src="./pictures/08.png" style="zoom: 25%;" /> |
 | 路面破损信息查看，我们结合GPS定<br />位，将坐标与视频的对应位置嵌合，<br />可以通过播放回放查看路面破损情况，<br />对于破损点的处理后结果，点击小图<br />标也可查看。 | <img src="./pictures/03.png" style="zoom: 25%;" /> | <img src="./pictures/04.png" style="zoom: 25%;" /> | <img src="./pictures/05.png" style="zoom: 25%;" /> |
-| 本地拍摄的视频会被保存再本地以供<br />查看，管理员可以查看所有的路径的<br />破损信息，实时推流界面如图所示。 | <img src="./pictures/15.jpg" style="zoom: 13%;" /> | <img src="./pictures/06.png" style="zoom: 25%;" /> | <img src="./pictures/12.png" style="zoom:25%;" />  |
+| 本地拍摄的视频会被保存再本地以供<br />查看，管理员可以查看所有的路径的<br />破损信息，实时推流界面如图所示。 | <img src="./pictures/15.png" style="zoom: 25%;" /> | <img src="./pictures/06.png" style="zoom: 25%;" /> | <img src="./pictures/12.png" style="zoom:25%;" />  |
 
