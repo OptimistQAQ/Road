@@ -27,11 +27,11 @@
 
 
 
-| 作品功能 |                     效果示意图                     |                     效果示意图                     |                     效果示意图                     |
-| -------- | :------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: |
-| 待完善   | <img src="./pictures/01.jpg" style="zoom: 25%;" /> | <img src="./pictures/02.jpg" style="zoom: 25%;" /> | <img src="./pictures/03.jpg" style="zoom: 25%;" /> |
-|          | <img src="./pictures/04.jpg" style="zoom: 25%;" /> | <img src="./pictures/05.jpg" style="zoom: 25%;" /> | <img src="./pictures/06.jpg" style="zoom: 25%;" /> |
-|          | <img src="./pictures/07.jpg" style="zoom: 25%;" /> | <img src="./pictures/08.jpg" style="zoom: 25%;" /> | <img src="./pictures/09.jpg" style="zoom: 25%;" /> |
-|          | <img src="./pictures/10.jpg" style="zoom: 25%;" /> | <img src="./pictures/11.jpg" style="zoom: 25%;" /> | <img src="./pictures/12.jpg" style="zoom: 25%;" /> |
-|          | <img src="./pictures/13.jpg" style="zoom: 25%;" /> | <img src="./pictures/14.jpg" style="zoom: 25%;" /> |                                                    |
+|                           作品功能                           |                     效果示意图                     |                     效果示意图                     |                     效果示意图                     |
+| :----------------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: |
+| 登录注册界面实现，沐界面之浩气，承设计之灵光，我们app设计出了美观、大方的app界面。 | <img src="./pictures/01.png" style="zoom: 25%;" /> | <img src="./pictures/02.png" style="zoom: 25%;" /> | <img src="./pictures/07.png" style="zoom: 25%;" /> |
+| app主体功能实现，我们提供了三种推流模式：实时推流、录制本地视频上传、拍照上传。在网络较好的情况下，推荐使用实时推流，如果网络环境较差可以录制本地视频上传，对于普通群众，如果不想录制视频，可以拍照上传得到检测结果。 | <img src="./pictures/11.png" style="zoom: 25%;" /> | <img src="./pictures/14.png" style="zoom: 25%;" /> | <img src="./pictures/13.png" style="zoom: 25%;" /> |
+| 权限管理功能，对于普通用户和管理员我们要区别对待，管理员可查看普通用户的权限信息和路面破损信息，普通用户可以申请成为管理员。 | <img src="./pictures/09.png" style="zoom: 25%;" /> | <img src="./pictures/10.png" style="zoom: 25%;" /> | <img src="./pictures/08.png" style="zoom: 25%;" /> |
+| 路面破损信息查看，我们结合GPS定位，将坐标与视频的对应位置嵌合，可以通过播放回放查看路面破损情况，对于破损点的处理后结果，点击小图标也可查看。 | <img src="./pictures/03.png" style="zoom: 25%;" /> | <img src="./pictures/04.png" style="zoom: 25%;" /> | <img src="./pictures/05.png" style="zoom: 25%;" /> |
+| 本地拍摄的视频会被保存再本地以供查看，管理员可以查看所有的路径的破损信息，实时推流界面如图所示。 | <img src="./pictures/15.jpg" style="zoom: 25%;" /> | <img src="./pictures/06.png" style="zoom: 25%;" /> | <img src="./pictures/12.png" style="zoom:25%;" />  |
 

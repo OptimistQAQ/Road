@@ -147,7 +147,7 @@ public class MineFragment extends Fragment {
                                 travelWay.add("途经：" + jsonObject.getString("lgoby"));
                                 lno.add(jsonObject.getString("lno"));
                                 videoUrl.add(jsonObject.getString("lpushStramName"));
-                                lduration.add(jsonObject.getString("luration"));
+                                lduration.add(jsonObject.getString("lduration"));
                                 lprocessState.add("状态：" + jsonObject.getString("lprocessState"));
                             }
                         }
